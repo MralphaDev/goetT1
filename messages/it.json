@@ -1,0 +1,77 @@
+{
+    "HomePage": {
+      "title": "Ciao mondo!",
+      "about": "Vai alla pagina 'Chi siamo'"
+    },
+  
+    "AboutPage": {
+      "title": "Chi siamo",
+      "about": "it"
+    },
+  
+    "Company": {
+      "aboutUs": "Informazioni su di noi:",
+      "companyName": "GoetValve Gmbh",
+      "companyProfile": "Profilo aziendale",
+      "title": "Profilo aziendale",
+      "description": "Goetvalve, fondata da oltre 20 anni, è un'azienda professionale specializzata nel controllo dei fluidi a ultra-bassa temperatura. Dalla sua fondazione, GOETVALVE ha combinato precisione meccanica e tecnologia di controllo innovativa per progettare e sviluppare diversi tipi di valvole a due vie in grado di resistere a media a temperature estremamente basse.\n\nInoltre, la maggior parte dei corpi valvola di GOETVALVE sono realizzati con profili standard.\n\nPer adempiere all'iniziativa di protezione ambientale, GOETVALVE ha omesso appositamente il processo di fusione ad alto consumo energetico e ad alta inquinamento. Anche se ciò comporterà costi di lavorazione aggiuntivi, può ridurre notevolmente l'inventario di prodotti semilavorati e, allo stesso tempo, soddisfare le esigenze urgenti dei clienti per la consegna.\n\nAttualmente, GOETVALVE può fornire vari tipi di valvole solenoidali a due vie, valvole unidirezionali, valvole di sicurezza, filtri, valvole pneumatiche on-off e altri prodotti dedicati ai media criogenici. Nel frattempo, possiamo anche fornire personalizzazioni di valvole criogeniche, manutenzione delle valvole, supporto ingegneristico e altri servizi correlati.\n\nLa nostra filosofia è: progettare e realizzare prodotti di alta qualità, altamente affidabili e convenienti, e fornire ai clienti soluzioni pratiche.",
+      "goetvalve": "Goetvalve",
+      "company": "Azienda",
+      "products": "Prodotti",
+      "applications": "Applicazione",
+      "service": "Servizio e Supporto",
+      "contact": "Contatto"
+    },
+  
+    "Product1": {
+      "finder": "FILTROPRODOTTI",
+      "title": "Valvole Solenoidali",
+      "description": "All'interno di sistemi di tubazioni chiusi, diversi e a volte aggressivi, i media devono essere controllati e gestiti in modo affidabile. Le valvole di chiusura di NieRuf svolgono un ruolo centrale in un tale sistema per garantire il funzionamento affidabile dell'impianto. Le valvole a farfalla vengono utilizzate per fermare completamente il flusso all'interno del sistema di tubazioni, proteggendo così l'impianto o mantenendo un corretto funzionamento. Poiché la portata varia a seconda del sistema di tubazioni, offriamo le nostre valvole a farfalla in dimensioni nominali che vanno da DN25 a DN600.",
+      "Nennweite": "Larghezza nominale",
+      "Baumform": "Design",
+      "Spannung": "Tensione",
+      "Material": "Materiale",
+      "Dichtung": "Tenuta",
+      "Schaltfunktion": "Funzione di commutazione",
+      "Steurung": "Controllo",
+      "Druck": "Pressione",
+      "Typ": "Tipo",
+      "Buynow": "Compra ora",
+      "DeliveryTime": "Tempo di consegna:"
+    },
+    "Pressureactuated": {
+      "title": "Valvola azionata a pressione",
+      "description": "All'interno di sistemi di tubazioni chiusi, è necessario controllare e gestire in modo affidabile diversi media, anche aggressivi. Le valvole di intercettazione della casa NieRuf svolgono un ruolo centrale in tali sistemi per garantire il funzionamento sicuro dell'impianto. Le valvole a farfalla vengono utilizzate per arrestare completamente il flusso all'interno del sistema di tubazioni, proteggendo così l'impianto o garantendone il corretto funzionamento. Poiché la portata varia a seconda del sistema di tubazioni, le nostre valvole a farfalla sono disponibili nei diametri nominali da DN25 a DN600.",
+      "finder": "TROVA PRODOTTO",
+      "Nennweite": "Diametro nominale",
+      "Baumform": "Forma costruttiva",
+      "Spannung": "Tensione",
+      "Material": "Materiale",
+      "Dichtung": "Guarnizione",
+      "Schaltfunktion": "Funzione di commutazione",
+      "Steurung": "Controllo",
+      "Druck": "Pressione",
+      "Typ": "Tipo",
+      "Buynow": "acquista ora",
+      "DeliveryTime": "Tempi di consegna"
+    },
+    "liqniro": {
+  "title": "Valvola di non ritorno per azoto liquido",
+  "description": "All'interno dei sistemi di tubazioni chiusi, è necessario controllare e gestire in modo affidabile diversi fluidi, talvolta anche aggressivi. Le valvole di intercettazione di NieRuf svolgono un ruolo centrale in tali sistemi per garantire il funzionamento affidabile dell'impianto. Le valvole a farfalla vengono utilizzate per arrestare completamente il flusso all'interno del sistema di tubazioni, proteggendo così l’impianto o mantenendone il corretto funzionamento. Poiché la portata varia a seconda del sistema di tubazioni, le nostre valvole a farfalla sono disponibili nei diametri nominali da DN25 a DN600.",
+  "finder": "TROVA PRODOTTO",
+  "Nennweite": "Diametro nominale",
+  "Baumform": "Tipo di costruzione",
+  "Spannung": "Tensione",
+  "Material": "Materiale",
+  "Dichtung": "Guarnizione",
+  "Schaltfunktion": "Funzione di commutazione",
+  "Steurung": "Controllo",
+  "Druck": "Pressione",
+  "Typ": "Tipo",
+  "Buynow": "acquista ora",
+  "DeliveryTime": "Tempi di consegna"
+}
+
+
+  }
+  

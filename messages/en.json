@@ -1,0 +1,79 @@
+{
+    "HomePage": {
+      "title": "Hello world!",
+      "about": "Go to the about page"
+    },
+
+    "AboutPage":{
+      "title": "about us",
+      "about": "en"
+    },
+
+    "Company":{
+      "aboutUs":"About us:",
+      "companyName":"GoetValve Gmbh",
+      "companyProfile":"Company Profile",
+      "title":"Company Profile",
+      "description": "Goetvalve, which has been established for more than 20 years, is a professional company specializing in ultra-low temperature fluid control. Since its establishment, GOETVALVE has combined mechanical precision and innovative control technology seamlessly to design and develop multiple types of two-way valves that can withstand extremely low temperature media. \n\nIn addition, most of the valve bodies from GOETVALVE are made from standard profiles.\n\nIn order to fulfill the environmental protection initiative, GOETVALVE has specially omitted the casting process with high energy consumption and high pollution. Although this will increase additional processing costs, it can greatly reduce the inventory of semi-finished products, and at the same time, it can meet the urgent needs of customers for delivery.\n\nAt present, GOETVALVE can provide various types of two-way solenoid valves, one-way valves, safety valves, filters, pneumatic on-off valves, and other products dedicated to cryogenic media. Meanwhile, we can also provide personalized customization of cryogenic valves, valve maintenance, engineering support, and other related services.\n\nOur philosophy is: design and manufacture high-quality, highly reliable, and cost-effective products, and provide customers with practical solutions.",
+      "goetvalve": "Goetvalve",
+        "company": "Company",
+        "products": "Products",
+        "applications": "Application",
+        "service": "Service & Support",
+        "contact": "Contact"
+    },
+    
+      "Product1": {
+        "finder": "PRODUCTFILTER",
+        "title":"Solenoid Valves",
+        "description":"Within closed pipeline systems, different, and sometimes aggressive, media must be reliably controlled and managed. Shut-off valves from NieRuf play a central role in such a system to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the pipeline system, thereby protecting the plant or maintaining proper operation. Since the flow rate varies depending on the pipeline system, we offer our butterfly valves in nominal sizes ranging from DN25 to DN600.",
+        "Nennweite": "Nominal width",
+        "Baumform": "Design",
+        "Spannung": "Voltage",
+        "Material": "Material",
+        "Dichtung": "Sealing",
+        "Schaltfunktion": "Switching function",
+        "Steurung": "Control",
+        "Druck": "Pressure",
+        "Typ":"Type",
+        "Buynow": "buy now",
+        "DeliveryTime":"Delivery time:"
+      },
+      "Pressureactuated": {
+        "title": "Pressure Actuated Valve",
+        "description": "Within closed piping systems, various—sometimes aggressive—media must be reliably controlled and regulated. Shut-off valves from NieRuf play a central role in such systems to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the piping system, thereby protecting the plant or maintaining proper operation. Since the flow rate varies depending on the piping system, our butterfly valves are available in nominal sizes from DN25 to DN600.",
+        "finder": "PRODUCT FINDER",
+        "Nennweite": "Nominal Size",
+        "Baumform": "Design Type",
+        "Spannung": "Voltage",
+        "Material": "Material",
+        "Dichtung": "Seal",
+        "Schaltfunktion": "Switching Function",
+        "Steurung": "Control",
+        "Druck": "Pressure",
+        "Typ": "Type",
+        "Buynow": "buy now",
+        "DeliveryTime": "Delivery Time"
+      },
+      "liqniro": {
+        "title": "Liquid nitrogen non-return valve",
+        "description": "Within closed piping systems, different and sometimes aggressive media must be reliably controlled and regulated. Shut-off valves from NieRuf play a central role in such systems to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the piping system, thereby protecting the system or maintaining proper operation. Since the flow rate varies depending on the piping system, our butterfly valves are available in nominal sizes from DN25 to DN600.",
+        "finder": "PRODUCT FINDER",
+        "Nennweite": "Nominal Size",
+        "Baumform": "Design Type",
+        "Spannung": "Voltage",
+        "Material": "Material",
+        "Dichtung": "Seal",
+        "Schaltfunktion": "Switching Function",
+        "Steurung": "Control",
+        "Druck": "Pressure",
+        "Typ": "Type",
+        "Buynow": "buy now",
+        "DeliveryTime": "Delivery Time"
+      }
+
+
+    
+    
+
+  }

@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+  scroll-behavior: smooth;
+
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+
+  
+}
+
+.button {
+  background: transparent;
+  color:red;
+  border: solid 1px red;
+  margin: 3px 3px;
+  border-radius: 15px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+}
+
+
+
+.button:hover {
+  background-color: red;
+  color: white;
+
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeUp { animation: fadeUp .4s ease-out; }
+.animate-slideUp { animation: slideUp .3s ease-out; }
+.animate-fadeIn { animation: fadeIn .6s ease-out; }
+
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 6px rgba(0,150,255,0.8));
+}
+.shadow-blue-sm {
+  box-shadow: 0 0 12px rgba(0,150,255,0.2);
+}
+.shadow-glow {
+  box-shadow: 0 0 18px rgba(0,140,255,0.6);
+}
+
+@layer theme {
+  :root {
+    --color-customBlue: #0F4C71;
+    --color-lightBlue: #28A8DE;
+    --font-hind: 'Hind', sans-serif;
+    --font-size-14px: 14px;
+  }
+}
+
+/* Components newly added for v4*/
+@layer components {
+  .btn-custom {
+    @apply px-4 py-2 rounded-md text-white;
+    background-color: var(--color-customBlue);
+  }
+}
+
+@layer components {
+  .bg-lightBlue {
+    background-color: var(--color-lightBlue);
+  }
+}
+
+/* Add these ↓ */
+  .text-customBlue {
+    color: var(--color-customBlue);
+  }
+
+  .text-lightBlue {
+    color: var(--color-lightBlue);
+  }
+
