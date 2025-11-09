@@ -722,25 +722,25 @@ const resetQuantity = (name) => {
                                                     <div className="flex mb-4">
                                                         <div className="flex ">
                                                             <button
-                                    onClick={() => {
-                                    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-                                    const exists = storedCart.find(i => i.name === item.name);
+                                                            onClick={() => {
+                                                            const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+                                                            const exists = storedCart.find(i => i.name === item.name);
 
-                                    if (exists) {
-                                        resetQuantity(item.name);
-                                    } else {
-                                        increaseQuantity(item.name);
-                                    }
-                                    }}
-                                    className={`w-[120px] h-[40px] rounded-lg font-medium text-sm transition-colors duration-200
-                                                ${JSON.parse(localStorage.getItem("cart") || "[]").find(i => i.name === item.name)
-                                                ? "bg-red-500 text-white hover:bg-red-600"
-                                                : "bg-blue-400 text-white hover:bg-blue-700"}`}
-                                >
-                                    {JSON.parse(localStorage.getItem("cart") || "[]").find(i => i.name === item.name)
-                                    ? "Remove item"
-                                    : "Add to Cart"}
-                                </button>
+                                                            if (exists) {
+                                                                resetQuantity(item.name);
+                                                            } else {
+                                                                increaseQuantity(item.name);
+                                                            }
+                                                            }}
+                                                            className={`w-[120px] h-[40px] rounded-lg font-medium text-sm transition-colors duration-200
+                                                                        ${JSON.parse(localStorage.getItem("cart") || "[]").find(i => i.name === item.name)
+                                                                        ? "bg-red-500 text-white hover:bg-red-600"
+                                                                        : "bg-blue-400 text-white hover:bg-blue-700"}`}
+                                                                                    >
+                                                            {JSON.parse(localStorage.getItem("cart") || "[]").find(i => i.name === item.name)
+                                                            ? "Remove item"
+                                                            : "Add to Cart"}
+                                                        </button>
                                                             </div>
                                                         </div>
 

@@ -95,7 +95,7 @@ export default function Home() {
     <div className="font-sans min-h-screen p-8 pb-20 relative flex flex-col items-center justify-center bg-white overflow-hidden">
       {popup && (
         <div
-          className={`absolute top-5 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow ${
+          className={`absolute top-15 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow ${
             popup.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"
           }`}
         >

@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
 
   const flags = {
     en: "🇬🇧",
@@ -37,6 +37,7 @@ export default function BurgerMenu() {
   const pathname = usePathname();
   const segments = pathname.split("/");
   const currentLocale = segments[1] || "en";
+  const checkoutPath = `/${currentLocale}/Product-login/checkout`;
 
   const changeLocale = (locale) => {
     segments[1] = locale;
@@ -44,14 +45,40 @@ export default function BurgerMenu() {
     setLangOpen(false);
   };
 
+  // Load cart from localStorage
   useEffect(() => {
     try {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      setCartCount(cart.length);
+      const stored = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCartItems(stored);
     } catch {
-      setCartCount(0);
+      setCartItems([]);
     }
   }, []);
+
+  // Cart functions
+  const removeItem = (name) => {
+    const updated = cartItems.filter((i) => i.name !== name);
+    setCartItems(updated);
+    localStorage.setItem("cart", JSON.stringify(updated));
+  };
+
+  const increaseQty = (name) => {
+    const updated = cartItems.map((i) =>
+      i.name === name ? { ...i, quantity: i.quantity + 1 } : i
+    );
+    setCartItems(updated);
+    localStorage.setItem("cart", JSON.stringify(updated));
+  };
+
+  const decreaseQty = (name) => {
+    const updated = cartItems.map((i) =>
+      i.name === name && i.quantity > 1 ? { ...i, quantity: i.quantity - 1 } : i
+    );
+    setCartItems(updated);
+    localStorage.setItem("cart", JSON.stringify(updated));
+  };
+
+  const totalItems = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
     <div className="relative z-50">
@@ -82,18 +109,10 @@ export default function BurgerMenu() {
             <motion.div
               className="fixed inset-0 z-40 flex flex-col justify-center items-start bg-white p-12 overflow-hidden"
               initial={{ x: "100%", opacity: 0 }}
-              animate={{
-                x: 0,
-                opacity: 1,
-                transition: { type: "spring", stiffness: 80, damping: 25 },
-              }}
-              exit={{
-                x: "100%",
-                opacity: 0,
-                transition: { type: "spring", stiffness: 80, damping: 25 },
-              }}
+              animate={{ x: 0, opacity: 1, transition: { type: "spring", stiffness: 80, damping: 25 } }}
+              exit={{ x: "100%", opacity: 0, transition: { type: "spring", stiffness: 80, damping: 25 } }}
             >
-              {/* Close Button */}
+              {/* Close button */}
               <motion.button
                 className="absolute top-6 right-6 text-3xl text-customBlue cursor-pointer"
                 onClick={() => setOpen(false)}
@@ -126,24 +145,24 @@ export default function BurgerMenu() {
                 </motion.div>
               ))}
 
-              {/* Bottom-right icons (Lang + Cart) */}
+              {/* Bottom-right icons */}
               <div className="absolute bottom-6 right-6 flex flex-col items-end space-y-4">
-                {/* Cart Icon */}
+                {/* Cart */}
                 <div className="relative">
                   <button
                     className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 transition"
-                    onClick={() => alert('Open cart or go to cart page')}
+                    onClick={() => setOpen(false)} // close menu to see full cart page
                   >
                     🛒
                   </button>
-                  {cartCount > 0 && (
+                  {totalItems > 0 && (
                     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">
-                      {cartCount}
+                      {totalItems}
                     </span>
                   )}
                 </div>
 
-                {/* Lang Switcher */}
+                {/* Language Switcher */}
                 <div className="relative">
                   <button
                     onClick={() => setLangOpen(!langOpen)}
@@ -173,6 +192,33 @@ export default function BurgerMenu() {
                   )}
                 </div>
               </div>
+
+              {/* Mini-cart overlay inside menu */}
+              <AnimatePresence>
+                {cartItems.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    className="absolute bottom-24 right-0 w-64 bg-white rounded-xl shadow-lg p-4 flex flex-col space-y-2 overflow-y-auto max-h-72"
+                  >
+                    {cartItems.map((item) => (
+                      <div key={item.name} className="flex justify-between items-center">
+                        <span>{item.name}</span>
+                        <div className="flex items-center gap-1">
+                          <button onClick={() => decreaseQty(item.name)} className="px-1 bg-gray-200 rounded">−</button>
+                          <span>{item.quantity}</span>
+                          <button onClick={() => increaseQty(item.name)} className="px-1 bg-gray-200 rounded">+</button>
+                          <button onClick={() => removeItem(item.name)} className="px-1 bg-red-500 text-white rounded">×</button>
+                        </div>
+                      </div>
+                    ))}
+                    <Link href={checkoutPath} className="mt-2">
+                      <button className="w-full py-2 bg-blue-600 text-white rounded-lg">Checkout</button>
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
 
             {/* Backdrop */}
