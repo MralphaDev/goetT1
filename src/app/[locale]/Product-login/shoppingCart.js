@@ -60,37 +60,53 @@ const decreaseQuantity = (name) => {
 
   return (
     <>
-      {/* Cart Icon Button */}
-      <div className="fixed right-5 top-1/2 -translate-y-1/2 z-[9999]">
-        <motion.button
-          onHoverStart={() => setOverlayOpen(true)}
-          whileHover={{ scale: 1.1 }}
-          className="relative w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg"
-        >
-          {totalItems > 0 && (
-            <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-[2px] rounded-full">
-              {totalItems}
-            </span>
-          )}
-          {/* Cart Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-7 h-7"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 3h2l3.6 7.59a1 1 0 00.92.59h7.86a1 1 0 00.92-.59L21 6H7"
-            />
-            <circle cx="9" cy="21" r="1" />
-            <circle cx="19" cy="21" r="1" />
-          </svg>
-        </motion.button>
-      </div>
+{/* Cart Icon Button */}
+<div
+  className={`fixed right-5 z-[9999] ${
+    window.innerWidth < 768
+      ? "bottom-5" // bottom-right on mobile
+      : "top-1/2 -translate-y-1/2" // center vertical on desktop
+  }`}
+>
+  {window.innerWidth < 768 ? (
+    <motion.button
+      onClick={() => setOverlayOpen(true)}
+      whileHover={{ scale: 1.1 }}
+      className="relative w-12 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center shadow-lg"
+    >
+      {totalItems > 0 && (
+        <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-[2px] rounded-full">
+          {totalItems}
+        </span>
+      )}
+      <span className="text-2xl">🛒</span>
+    </motion.button>
+  ) : (
+    <button
+      onClick={() => setOverlayOpen(true)}
+      className="w-10 h-10 bg-gray-700 text-white rounded-full flex items-center justify-center shadow-lg"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-7 h-7"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M3 3h2l3.6 7.59a1 1 0 00.92.59h7.86a1 1 0 00.92-.59L21 6H7"
+        />
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="19" cy="21" r="1" />
+      </svg>
+    </button>
+  )}
+</div>
+
+
 
       {/* Cart Curtain */}
           <AnimatePresence>

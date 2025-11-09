@@ -34,21 +34,8 @@ export default function LangSwitcher() {
   }, []);
 
   return (
-    <div className="fixed top-8 right-4 z-50 flex items-center space-x-4">
-      {/* Cart icon */}
-      <div className="relative">
-        <button
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 transition"
-          onClick={() => alert("Open cart or navigate to cart page")}
-        >
-          🛒
-        </button>
-        {cartCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">
-            {cartCount}
-          </span>
-        )}
-      </div>
+    <div className="fixed top- right-4 z-50 flex items-center space-x-4">
+
 
       {/* Language button */}
       <div className="relative">

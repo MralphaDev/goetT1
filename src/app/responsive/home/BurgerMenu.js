@@ -4,16 +4,23 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
+import ShoppingCart from "../../[locale]/Product-login/shoppingCart";
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cart, setCart] = useState([]);
 
-  const flags = {
-    en: "🇬🇧",
-    de: "🇩🇪",
-    it: "🇮🇹",
+  const flags = { en: "🇬🇧", de: "🇩🇪", it: "🇮🇹" };
+  const router = useRouter();
+  const pathname = usePathname();
+  const segments = pathname.split("/");
+  const currentLocale = segments[1] || "en";
+
+  const changeLocale = (locale) => {
+    segments[1] = locale;
+    router.push(segments.join("/"));
+    setLangOpen(false);
   };
 
   const links = [
@@ -33,52 +40,18 @@ export default function BurgerMenu() {
     }),
   };
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const segments = pathname.split("/");
-  const currentLocale = segments[1] || "en";
-  const checkoutPath = `/${currentLocale}/Product-login/checkout`;
-
-  const changeLocale = (locale) => {
-    segments[1] = locale;
-    router.push(segments.join("/"));
-    setLangOpen(false);
-  };
-
-  // Load cart from localStorage
+  // Load cart from localStorage + listen for updates
   useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem("cart") || "[]");
-      setCartItems(stored);
-    } catch {
-      setCartItems([]);
-    }
+    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCart(storedCart);
+
+    const handleStorage = () => {
+      const updatedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCart(updatedCart);
+    };
+    window.addEventListener("cartUpdated", handleStorage);
+    return () => window.removeEventListener("cartUpdated", handleStorage);
   }, []);
-
-  // Cart functions
-  const removeItem = (name) => {
-    const updated = cartItems.filter((i) => i.name !== name);
-    setCartItems(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
-  };
-
-  const increaseQty = (name) => {
-    const updated = cartItems.map((i) =>
-      i.name === name ? { ...i, quantity: i.quantity + 1 } : i
-    );
-    setCartItems(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
-  };
-
-  const decreaseQty = (name) => {
-    const updated = cartItems.map((i) =>
-      i.name === name && i.quantity > 1 ? { ...i, quantity: i.quantity - 1 } : i
-    );
-    setCartItems(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
-  };
-
-  const totalItems = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
     <div className="relative z-50">
@@ -107,12 +80,12 @@ export default function BurgerMenu() {
         {open && (
           <>
             <motion.div
-              className="fixed inset-0 z-40 flex flex-col justify-center items-start bg-white p-12 overflow-hidden"
+              className="fixed inset-0 z-40 flex flex-col justify-center items-start bg-white p-12 overflow-auto"
               initial={{ x: "100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1, transition: { type: "spring", stiffness: 80, damping: 25 } }}
               exit={{ x: "100%", opacity: 0, transition: { type: "spring", stiffness: 80, damping: 25 } }}
             >
-              {/* Close button */}
+              {/* Close Button */}
               <motion.button
                 className="absolute top-6 right-6 text-3xl text-customBlue cursor-pointer"
                 onClick={() => setOpen(false)}
@@ -147,20 +120,8 @@ export default function BurgerMenu() {
 
               {/* Bottom-right icons */}
               <div className="absolute bottom-6 right-6 flex flex-col items-end space-y-4">
-                {/* Cart */}
-                <div className="relative">
-                  <button
-                    className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 transition"
-                    onClick={() => setOpen(false)} // close menu to see full cart page
-                  >
-                    🛒
-                  </button>
-                  {totalItems > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">
-                      {totalItems}
-                    </span>
-                  )}
-                </div>
+                {/* ShoppingCart */}
+                <ShoppingCart cart={cart} />
 
                 {/* Language Switcher */}
                 <div className="relative">
@@ -192,33 +153,6 @@ export default function BurgerMenu() {
                   )}
                 </div>
               </div>
-
-              {/* Mini-cart overlay inside menu */}
-              <AnimatePresence>
-                {cartItems.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    className="absolute bottom-24 right-0 w-64 bg-white rounded-xl shadow-lg p-4 flex flex-col space-y-2 overflow-y-auto max-h-72"
-                  >
-                    {cartItems.map((item) => (
-                      <div key={item.name} className="flex justify-between items-center">
-                        <span>{item.name}</span>
-                        <div className="flex items-center gap-1">
-                          <button onClick={() => decreaseQty(item.name)} className="px-1 bg-gray-200 rounded">−</button>
-                          <span>{item.quantity}</span>
-                          <button onClick={() => increaseQty(item.name)} className="px-1 bg-gray-200 rounded">+</button>
-                          <button onClick={() => removeItem(item.name)} className="px-1 bg-red-500 text-white rounded">×</button>
-                        </div>
-                      </div>
-                    ))}
-                    <Link href={checkoutPath} className="mt-2">
-                      <button className="w-full py-2 bg-blue-600 text-white rounded-lg">Checkout</button>
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </motion.div>
 
             {/* Backdrop */}
