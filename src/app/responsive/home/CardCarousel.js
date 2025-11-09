@@ -9,17 +9,17 @@ const russo = Russo_One({ subsets: ["latin"], weight: "400" });
 const cards = [
   {
     href: "/de/Product-login/Product1",
-    img: "http://www.goetvalve.eu/images/cc1.jpg",
+    img: "/cc1.jpg", // from public/cc1.jpg
     label: "Products",
   },
   {
     href: "/de/Applications",
-    img: "http://www.goetvalve.eu/images/cc2.jpg",
+    img: "/cc2.jpg",
     label: "Applications",
   },
   {
     href: "/de/Service",
-    img: "http://www.goetvalve.eu/images/cc3.jpg",
+    img: "/cc3.jpg",
     label: "Service & Support",
   },
 ];
