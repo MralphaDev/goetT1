@@ -64,7 +64,7 @@ export default function CardCarousel() {
       </AnimatePresence>
 
       {/* Pagination dots */}
-      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex space-x-3">
+      <div className="absolute bottom-30 left-1/2 transform -translate-x-1/2 flex space-x-3">
         {cards.map((_, i) => (
           <button
             key={i}
