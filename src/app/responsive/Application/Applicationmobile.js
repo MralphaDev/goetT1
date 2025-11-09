@@ -17,21 +17,27 @@ const cards = [
 ];
 
 export default function ApplicationMobile() {
-  const [current, setCurrent] = useState(0); // section index
+  const [current, setCurrent] = useState(0);
   const controls = useAnimation();
   const containerRef = useRef(null);
 
   let touchStartY = 0;
   let wheelTimeout = null;
 
-  // full-page swipe
+  // ✅ FIX #1 — disable page scroll when mounted
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = original; };
+  }, []);
+
   const handleTouchStart = (e) => { touchStartY = e.touches[0].clientY; };
   const handleTouchMove = (e) => {
     if (wheelTimeout) return;
     const deltaY = touchStartY - e.touches[0].clientY;
     if (Math.abs(deltaY) < 50) return;
     wheelTimeout = setTimeout(() => (wheelTimeout = null), 800);
-    if (deltaY > 0) setCurrent((p) => Math.min(p + 1, 2)); // 3 sections
+    if (deltaY > 0) setCurrent((p) => Math.min(p + 1, 1)); // ✅ FIX #2 — only 2 sections (0–1)
     else setCurrent((p) => Math.max(p - 1, 0));
     touchStartY = e.touches[0].clientY;
   };
@@ -51,7 +57,6 @@ export default function ApplicationMobile() {
     controls.start({ y: `-${current * 100}vh`, transition: { duration: 0.8, ease: 'easeInOut' } });
   }, [current, controls]);
 
-  // Card carousel
   const [cardIndex, setCardIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const swipeConfidence = 10000;
@@ -66,19 +71,18 @@ export default function ApplicationMobile() {
     <div ref={containerRef} className="h-screen w-screen overflow-hidden relative bg-gray-50">
       <motion.div animate={controls} className="relative h-full">
 
-        {/* Section 0: Big Application Text */}
+        {/* Section 0 */}
         <section
           className="h-screen w-full flex flex-col items-center justify-center text-white bg-cover bg-center"
-          style={{ backgroundImage: "url(https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671)" }}
+          style={{
+            backgroundImage: "url(https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671)",
+          }}
         >
           <h1 className={`text-5xl font-bold text-center ${russo.className}`}>APPLICATIONS</h1>
-          <p className={`text-xl mt-5 text-center ${russo.className}`}>
-            Discover our solutions 
-          </p>
+          <p className={`text-xl mt-5 text-center ${russo.className}`}>Discover our solutions</p>
         </section>
 
-
-        {/* Section 1: Cards */}
+        {/* Section 1 */}
         <section className="h-screen w-full flex items-center justify-center">
           <AnimatePresence mode="wait" initial={false} custom={direction}>
             <motion.div
@@ -108,19 +112,20 @@ export default function ApplicationMobile() {
                 />
               </Link>
               <div className="flex-1 flex items-center justify-center p-4">
-                <h2 className={`text-xl font-semibold text-center ${russo.className}`}>{cards[cardIndex].label}</h2>
+                <h2 className={`text-xl font-semibold text-center ${russo.className}`}>
+                  {cards[cardIndex].label}
+                </h2>
               </div>
             </motion.div>
           </AnimatePresence>
 
           {/* Bouncing Down Arrow */}
-          <div 
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce text-white text-4xl"
-            onClick={() => setCurrent((prev) => Math.min(prev + 1, 2))} // 2 = last section index
+          <div
+            className="absolute bottom-25 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce text-white text-4xl"
+            onClick={() => setCurrent((prev) => Math.min(prev + 1, 1))} // 1 = last section
           >
             &#x2193;
           </div>
-
         </section>
 
       </motion.div>
