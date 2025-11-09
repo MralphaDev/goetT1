@@ -64,7 +64,7 @@ export default function CompanyMobile() {
     <div className="h-screen w-screen relative ">
       <motion.div
         style={{ transform: `translateY(-${current * 100}vh)` }}
-        className="relative h-full w-full transition-transform duration-700 ease-in-out"
+        className="relative h-full w-full transition-transform duration-700 ease-in-out overflow-hidden"
       >
 
         {/* PAGE 1 - Company Name */}
