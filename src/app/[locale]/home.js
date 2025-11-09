@@ -48,25 +48,26 @@ export default function Homepage() {
             </div>
 
             <div className="relative z-10 text-center">
-              <motion.h1
-                initial={{ x: -120, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: 'easeOut' }}
-                className="text-5xl md:text-6xl font-light tracking-[0.15em] text-gray-800 uppercase"
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
-              >
-                Welcome to
-              </motion.h1>
+<motion.h1
+  initial={{ x: -120, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  transition={{ duration: 1, ease: 'easeOut' }}
+  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-gray-800 uppercase"
+  style={{ fontFamily: 'Montserrat, sans-serif' }}
+>
+  Welcome to
+</motion.h1>
 
-              <motion.h2
-                initial={{ x: 120, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
-                className="text-6xl md:text-7xl font-semibold tracking-widest text-black mt-3 uppercase"
-                style={{ fontFamily: 'Orbitron, sans-serif' }}
-              >
-                Goetvalve
-              </motion.h2>
+<motion.h2
+  initial={{ x: 120, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-widest text-black mt-3 uppercase"
+  style={{ fontFamily: 'Orbitron, sans-serif' }}
+>
+  Goetvalve
+</motion.h2>
+
             </div>
           </motion.div>
         )}

@@ -1,6 +1,19 @@
+'use client'
 import React from 'react'
-
+import {useState,useEffect} from 'react'
+import ApplicationMobile from '../../responsive/Application/Applicationmobile'
 function page() {
+const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+   if (isMobile) return <ApplicationMobile />
+
   return (
     <div className="bg-white h-screen w-screen" style={{height:"2000px"}}>
         <div>

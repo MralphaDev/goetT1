@@ -10,7 +10,7 @@ import home2 from '../../../../public/img/home2.png'
 
 const russo = Russo_One({ subsets: ['latin'], weight: '400' })
 
-export default function HomepagePC() {
+export default function HomepageMobile() {
   const sectionsCount = 3
   const [current, setCurrent] = useState(0)
   const controls = useAnimation()
@@ -26,39 +26,34 @@ export default function HomepagePC() {
   let wheelTimeout = null
   let touchStartY = 0
 
-  // desktop scroll
+  // mark mounted
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  // scroll/touch handlers
   const handleWheel = (e) => {
     e.preventDefault()
     if (wheelTimeout) return
     wheelTimeout = setTimeout(() => (wheelTimeout = null), 800)
-    if (e.deltaY > 0) setCurrent((p) => Math.min(p + 1, sectionsCount - 1))
-    else setCurrent((p) => Math.max(p - 1, 0))
+    setCurrent((p) => (e.deltaY > 0 ? Math.min(p + 1, sectionsCount - 1) : Math.max(p - 1, 0)))
   }
 
-  // mobile touch
-  const handleTouchStart = (e) => {
-    touchStartY = e.touches[0].clientY
-  }
-
+  const handleTouchStart = (e) => { touchStartY = e.touches[0].clientY }
   const handleTouchMove = (e) => {
     if (wheelTimeout) return
     const deltaY = touchStartY - e.touches[0].clientY
     if (Math.abs(deltaY) < 40) return
     wheelTimeout = setTimeout(() => (wheelTimeout = null), 800)
-    if (deltaY > 0) setCurrent((p) => Math.min(p + 1, sectionsCount - 1))
-    else setCurrent((p) => Math.max(p - 1, 0))
+    setCurrent((p) => (deltaY > 0 ? Math.min(p + 1, sectionsCount - 1) : Math.max(p - 1, 0)))
     touchStartY = e.touches[0].clientY
   }
 
-  // attach to container, not window
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-
     el.addEventListener('wheel', handleWheel, { passive: false })
     el.addEventListener('touchstart', handleTouchStart, { passive: true })
     el.addEventListener('touchmove', handleTouchMove, { passive: true })
-
     return () => {
       el.removeEventListener('wheel', handleWheel)
       el.removeEventListener('touchstart', handleTouchStart)
@@ -66,61 +61,62 @@ export default function HomepagePC() {
     }
   }, [])
 
+  // scroll animation
   useEffect(() => {
-    controls.start({
-      y: `-${current * 100}vh`,
-      transition: { duration: 0.8, ease: 'easeInOut' },
-    })
-  }, [current])
+    if (!mounted || !containerRef.current) return
+    controls.start({ y: `-${current * 100}vh`, transition: { duration: 0.8, ease: 'easeInOut' } })
+  }, [current, mounted, controls])
 
-  // disable body scroll on desktop only
+  // disable body scroll on desktop
   useEffect(() => {
-    if (window.innerWidth > 768) {
+    if (typeof window !== 'undefined' && window.innerWidth > 768) {
       document.body.style.overflow = 'hidden'
       return () => (document.body.style.overflow = 'auto')
     }
   }, [])
 
-  // intersection observers
-  const setupObserver = (ref, controls) => {
-    useEffect(() => {
-      if (!ref.current) return
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) controls.start('visible')
-          else controls.start('hidden')
-        },
-        { threshold: 0.3 }
-      )
-      obs.observe(ref.current)
-      return () => obs.disconnect()
-    }, [])
-  }
+  // HERO observer
+  useEffect(() => {
+    if (!mounted || !heroRef.current) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) heroTextControls.start('visible')
+      else heroTextControls.start('hidden')
+    }, { threshold: 0.3 })
+    obs.observe(heroRef.current)
+    return () => obs.disconnect()
+  }, [mounted, heroTextControls, heroRef])
 
-  setupObserver(heroRef, heroTextControls)
-  setupObserver(cardRef, cardControls)
-  setupObserver(contactRef, contactControls)
+  // CARD observer
+  useEffect(() => {
+    if (!mounted || !cardRef.current) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) cardControls.start('visible')
+      else cardControls.start('hidden')
+    }, { threshold: 0.3 })
+    obs.observe(cardRef.current)
+    return () => obs.disconnect()
+  }, [mounted, cardControls, cardRef])
 
-  const heroTextVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } },
-  }
+  // CONTACT observer
+  useEffect(() => {
+    if (!mounted || !contactRef.current) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) contactControls.start('visible')
+      else contactControls.start('hidden')
+    }, { threshold: 0.3 })
+    obs.observe(contactRef.current)
+    return () => obs.disconnect()
+  }, [mounted, contactControls, contactRef])
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-  }
-
-  const contactVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-  }
+  const heroTextVariants = { hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } } }
+  const cardVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }
+  const contactVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }
 
   return (
     <div ref={containerRef} className="h-screen w-screen overflow-hidden relative touch-none">
       <motion.div animate={controls} className="relative">
 
-        {/* Section 0 */}
+        {/* Section 0 - Hero */}
         <section ref={heroRef} className="h-screen w-full relative overflow-hidden">
           <img
             src="https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671"
@@ -156,19 +152,20 @@ export default function HomepagePC() {
           </motion.div>
         </section>
 
-        {/* Section 1 */}
+        {/* Section 1 - Cards */}
         <section ref={cardRef} className="h-screen w-full flex items-center justify-center bg-gray-50">
           <motion.div initial="hidden" animate={cardControls} variants={cardVariants} className="w-full max-w-xl">
             <CardCarousel />
           </motion.div>
         </section>
 
-        {/* Section 2 */}
+        {/* Section 2 - Contact */}
         <section ref={contactRef} className="pt-30 h-screen w-full flex items-center justify-center bg-white">
           <motion.div initial="hidden" animate={contactControls} variants={contactVariants} className="w-full max-w-3xl p-8">
             <ContactPage />
           </motion.div>
         </section>
+
       </motion.div>
     </div>
   )
