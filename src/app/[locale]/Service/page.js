@@ -1,6 +1,19 @@
+'use client'
 import React from 'react'
-
+import { useState,useEffect } from 'react'
+import ServiceMobile from '../../responsive/Service/ServiceMobile'
 function page() {
+  const [isMobile, setIsMobile] = useState(false)
+  
+    useEffect(() => {
+      const check = () => setIsMobile(window.innerWidth < 1024)
+      check()
+      window.addEventListener('resize', check)
+      return () => window.removeEventListener('resize', check)
+    }, [])
+  
+     if (isMobile) return <ServiceMobile/>
+
   return (
     <div>
         <div className="bg-cover bg-center w-screen" style={{height:"1150px", backgroundColor: "white"}}>
