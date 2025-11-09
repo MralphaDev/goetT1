@@ -1,52 +1,84 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const flags = {
+  en: "🇬🇧",
+  de: "🇩🇪",
+  it: "🇮🇹",
+};
 
 export default function LangSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const segments = pathname.split("/");
   const currentLocale = segments[1] || "en";
+  const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   const changeLocale = (locale) => {
     segments[1] = locale;
     router.push(segments.join("/"));
+    setOpen(false);
   };
 
+  useEffect(() => {
+    // check cart from localStorage
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCartCount(cart.length);
+    } catch {
+      setCartCount(0);
+    }
+  }, []);
+
   return (
-    <div className="fixed right-5 top-[55%] z-50 flex flex-col items-center group">
-      {/* Globe Button */}
-      <div className=" w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center shadow-lg hover:bg-blue-500 transition-transform transform hover:scale-110 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-7 h-7 text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+    <div className="fixed top-8 right-4 z-50 flex items-center space-x-4">
+      {/* Cart icon */}
+      <div className="relative">
+        <button
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 transition"
+          onClick={() => alert("Open cart or navigate to cart page")}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0v20m0-10H2m20 0h-4m-8 0a6 6 0 0112 0 6 6 0 01-12 0z"
-          />
-        </svg>
+          🛒
+        </button>
+        {cartCount > 0 && (
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">
+            {cartCount}
+          </span>
+        )}
       </div>
 
-      {/* Locale Options - show on hover */}
-      <div className="flex flex-col mt-20 space-y-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity">
-  {["en", "de", "it"].map((loc) => (
-    <button
-      key={loc}
-      onClick={() => changeLocale(loc)}
-      className={`px-4 py-2 rounded-lg font-semibold shadow-md transition 
-        ${currentLocale === loc ? "bg-blue-600 text-white" : "bg-white text-gray-800 hover:bg-gray-100"}`}
-    >
-      {loc.toUpperCase()}
-    </button>
-  ))}
-</div>
+      {/* Language button */}
+      <div className="relative">
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-500 transition"
+        >
+          <span className="text-lg">{flags[currentLocale]}</span>
+          <span className="font-semibold uppercase">{currentLocale}</span>
+        </button>
 
+        {open && (
+          <div className="absolute top-12 right-0 bg-white rounded-lg shadow-lg p-2 flex flex-col space-y-1">
+            {["en", "de", "it"].map((loc) => (
+              <button
+                key={loc}
+                onClick={() => changeLocale(loc)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition ${
+                  currentLocale === loc
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                }`}
+              >
+                <span>{flags[loc]}</span>
+                {loc.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

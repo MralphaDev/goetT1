@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  const flags = {
+    en: "🇬🇧",
+    de: "🇩🇪",
+    it: "🇮🇹",
+  };
 
   const links = [
     { href: "/de/Product-login/Product1", label: "Products" },
@@ -33,7 +41,17 @@ export default function BurgerMenu() {
   const changeLocale = (locale) => {
     segments[1] = locale;
     router.push(segments.join("/"));
+    setLangOpen(false);
   };
+
+  useEffect(() => {
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCartCount(cart.length);
+    } catch {
+      setCartCount(0);
+    }
+  }, []);
 
   return (
     <div className="relative z-50">
@@ -45,6 +63,8 @@ export default function BurgerMenu() {
           className="h-12 cursor-pointer"
           whileHover={{ scale: 1.05 }}
         />
+
+        {/* Burger button */}
         <motion.button
           className="text-3xl font-light cursor-pointer text-customBlue"
           onClick={() => setOpen(!open)}
@@ -62,8 +82,16 @@ export default function BurgerMenu() {
             <motion.div
               className="fixed inset-0 z-40 flex flex-col justify-center items-start bg-white p-12 overflow-hidden"
               initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { type: "spring", stiffness: 80, damping: 25 } }}
-              exit={{ x: "100%", opacity: 0, transition: { type: "spring", stiffness: 80, damping: 25 } }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                transition: { type: "spring", stiffness: 80, damping: 25 },
+              }}
+              exit={{
+                x: "100%",
+                opacity: 0,
+                transition: { type: "spring", stiffness: 80, damping: 25 },
+              }}
             >
               {/* Close Button */}
               <motion.button
@@ -75,7 +103,7 @@ export default function BurgerMenu() {
                 ✕
               </motion.button>
 
-              {/* Links with separators */}
+              {/* Links */}
               {links.map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -98,38 +126,51 @@ export default function BurgerMenu() {
                 </motion.div>
               ))}
 
-              {/* Floating globe language switcher */}
-              <div className="absolute top-25 right-1 group">
-                {/* Globe Button */}
-                <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center shadow-lg hover:bg-blue-500 transition-transform transform hover:scale-110 cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-7 h-7 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+              {/* Bottom-right icons (Lang + Cart) */}
+              <div className="absolute bottom-6 right-6 flex flex-col items-end space-y-4">
+                {/* Cart Icon */}
+                <div className="relative">
+                  <button
+                    className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 transition"
+                    onClick={() => alert('Open cart or go to cart page')}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0v20m0-10H2m20 0h-4m-8 0a6 6 0 0112 0 6 6 0 01-12 0z"
-                    />
-                  </svg>
+                    🛒
+                  </button>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5">
+                      {cartCount}
+                    </span>
+                  )}
                 </div>
 
-                {/* Locale buttons on hover */}
-                <div className="flex flex-col mt-2 space-y-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity">
-                  {["en", "de", "it"].map((loc) => (
-                    <button
-                      key={loc}
-                      onClick={() => changeLocale(loc)}
-                      className={`px-4 py-2 rounded-lg font-semibold shadow-md transition
-                        ${currentLocale === loc ? "bg-blue-600 text-white" : "bg-white text-gray-800 hover:bg-gray-100"}`}
-                    >
-                      {loc.toUpperCase()}
-                    </button>
-                  ))}
+                {/* Lang Switcher */}
+                <div className="relative">
+                  <button
+                    onClick={() => setLangOpen(!langOpen)}
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-500 transition"
+                  >
+                    <span className="text-lg">{flags[currentLocale]}</span>
+                    <span className="font-semibold uppercase">{currentLocale}</span>
+                  </button>
+
+                  {langOpen && (
+                    <div className="absolute bottom-14 right-0 bg-white rounded-lg shadow-lg p-2 flex flex-col space-y-1">
+                      {["en", "de", "it"].map((loc) => (
+                        <button
+                          key={loc}
+                          onClick={() => changeLocale(loc)}
+                          className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition ${
+                            currentLocale === loc
+                              ? "bg-blue-600 text-white"
+                              : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                          }`}
+                        >
+                          <span>{flags[loc]}</span>
+                          {loc.toUpperCase()}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -21,7 +21,7 @@ const pathname = usePathname(); // ✅ inside component
   };
 
   return (
-    <div className="fixed top-8 right-4 z-50">
+    <div className="fixed top-30 right-4 z-50">
       <button
         className="block bg-[#28A8DE] text-white py-2 px-4 rounded shadow hover:bg-blue-500 transition duration-300"
         onClick={handleSignOut}
