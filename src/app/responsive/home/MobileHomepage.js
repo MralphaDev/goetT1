@@ -130,19 +130,19 @@ export default function HomepagePC() {
           <motion.img
             src={homeValve.src}
             alt="valve"
-            className="absolute object-contain z-10 w-90 left-0 top-62"
+            className="absolute object-contain z-10 w-90 left-0 top-55"
             animate={{ rotate: [-2, 1, -2] }}
             transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
           />
           <motion.img
             src={home2.src}
             alt="pipe"
-            className="absolute object-contain z-10 w-30 right-20 bottom-74"
+            className="absolute object-contain z-10 w-30 right-20 bottom-78"
             animate={{ rotate: [-2, 1, -2] }}
             transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
           />
           <motion.div
-            className="absolute left-5 bottom-16 z-20"
+            className="absolute left-5 bottom-23 z-20"
             initial="hidden"
             animate={heroTextControls}
             variants={heroTextVariants}
