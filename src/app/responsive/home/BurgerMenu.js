@@ -120,8 +120,7 @@ export default function BurgerMenu() {
 
               {/* Bottom-right icons */}
               <div className="absolute bottom-6 right-6 flex flex-col items-end space-y-4">
-                {/* ShoppingCart */}
-                <ShoppingCart cart={cart} />
+
 
                 {/* Language Switcher */}
                 <div className="relative">

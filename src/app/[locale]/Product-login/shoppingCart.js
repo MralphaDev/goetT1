@@ -64,7 +64,7 @@ const decreaseQuantity = (name) => {
 <div
   className={`fixed right-5 z-[9999] ${
     window.innerWidth < 768
-      ? "bottom-5" // bottom-right on mobile
+      ? "bottom-20" // bottom-right on mobile
       : "top-1/2 -translate-y-1/2" // center vertical on desktop
   }`}
 >
@@ -72,7 +72,7 @@ const decreaseQuantity = (name) => {
     <motion.button
       onClick={() => setOverlayOpen(true)}
       whileHover={{ scale: 1.1 }}
-      className="relative w-12 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center shadow-lg"
+      className="relative w-12 h-12 bg-gray-200 text-white rounded-full flex items-center justify-center shadow-lg"
     >
       {totalItems > 0 && (
         <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-[2px] rounded-full">
