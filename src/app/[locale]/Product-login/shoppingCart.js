@@ -82,27 +82,36 @@ const decreaseQuantity = (name) => {
       <span className="text-2xl">🛒</span>
     </motion.button>
   ) : (
-    <button
-      onClick={() => setOverlayOpen(true)}
-      className="w-10 h-10 bg-gray-700 text-white rounded-full flex items-center justify-center shadow-lg"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-7 h-7"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 3h2l3.6 7.59a1 1 0 00.92.59h7.86a1 1 0 00.92-.59L21 6H7"
-        />
-        <circle cx="9" cy="21" r="1" />
-        <circle cx="19" cy="21" r="1" />
-      </svg>
-    </button>
+<button
+  onClick={() => setOverlayOpen(true)}
+  className="relative w-15 h-15 bg-blue-700 text-white rounded-full flex items-center justify-center shadow-lg"
+>
+  {/* Red badge */}
+  {totalItems > 0 && (
+    <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-[2px] rounded-full">
+      {totalItems}
+    </span>
+  )}
+
+  {/* Cart SVG */}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-7 h-7"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M3 3h2l3.6 7.59a1 1 0 00.92.59h7.86a1 1 0 00.92-.59L21 6H7"
+    />
+    <circle cx="9" cy="21" r="1" />
+    <circle cx="19" cy="21" r="1" />
+  </svg>
+</button>
+
   )}
 </div>
 
