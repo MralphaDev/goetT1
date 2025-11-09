@@ -9,17 +9,17 @@ const russo = Russo_One({ subsets: ["latin"], weight: "400" });
 const cards = [
   {
     href: "/de/Product-login/Product1",
-    img: "/cc1.jpg", // from public/cc1.jpg
+    img: "/img/cc1.jpg", // from public/cc1.jpg
     label: "Products",
   },
   {
     href: "/de/Applications",
-    img: "/cc2.jpg",
+    img: "/img/cc2.jpg",
     label: "Applications",
   },
   {
     href: "/de/Service",
-    img: "/cc3.jpg",
+    img: "/img/cc3.jpg",
     label: "Service & Support",
   },
 ];
