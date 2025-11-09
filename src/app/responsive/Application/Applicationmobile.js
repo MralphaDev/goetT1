@@ -72,7 +72,11 @@ export default function ApplicationMobile() {
           style={{ backgroundImage: "url(https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671)" }}
         >
           <h1 className={`text-5xl font-bold text-center ${russo.className}`}>APPLICATIONS</h1>
+          <p className={`text-xl mt-5 text-center ${russo.className}`}>
+            Discover our solutions 
+          </p>
         </section>
+
 
         {/* Section 1: Cards */}
         <section className="h-screen w-full flex items-center justify-center">
