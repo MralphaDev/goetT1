@@ -1,13 +1,23 @@
-"use client";
-import React from "react";
+'use client';
+import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import CompanyMobile from '../../responsive/Company/Companymobile'; // import your mobile component
 
 function Page() {
   const t = useTranslations("Company");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024); // <1024px = mobile
+    handleResize(); // check on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (isMobile) return <CompanyMobile />; // render mobile component on small screens
 
   return (
     <div className="bg-white w-full min-h-screen px-4 lg:px-0">
-
       <div className="flex flex-col lg:flex-row my-[5%]">
 
         {/* Left Text */}
@@ -20,7 +30,6 @@ function Page() {
             {t("description")}
           </p>
         </div>
-
 
         {/* Right Image */}
         <div className="lg:w-3/5 w-full relative flex items-center justify-center lg:pr-[5%] h-64 sm:h-80 md:h-96 lg:h-[80vh] mt-4 lg:mt-0">
