@@ -130,14 +130,14 @@ export default function HomepagePC() {
           <motion.img
             src={homeValve.src}
             alt="valve"
-            className="absolute object-contain z-10 w-90 left-0 top-70"
+            className="absolute object-contain z-10 w-90 left-0 top-62"
             animate={{ rotate: [-2, 1, -2] }}
             transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
           />
           <motion.img
             src={home2.src}
             alt="pipe"
-            className="absolute object-contain z-10 w-30 right-20 bottom-65"
+            className="absolute object-contain z-10 w-30 right-20 bottom-74"
             animate={{ rotate: [-2, 1, -2] }}
             transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
           />

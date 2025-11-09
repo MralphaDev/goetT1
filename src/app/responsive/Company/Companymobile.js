@@ -89,7 +89,7 @@ export default function CompanyMobile() {
             whileInView="visible"
             initial="hidden"
             variants={textVariantsLeft}
-            className={`text-7xl sm:text-8xl font-extrabold ${russo.className} text-center mb-4`}
+            className={`text-6xl sm:text-8xl font-extrabold ${russo.className} text-center mb-4`}
           >
             GOETVALVE
           </motion.h1>
