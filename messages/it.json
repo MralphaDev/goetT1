@@ -20,7 +20,8 @@
       "products": "Prodotti",
       "applications": "Applicazione",
       "service": "Servizio e Supporto",
-      "contact": "Contatto"
+      "contact": "Contatto",
+      "type":"Tipo"
     },
   
     "Product1": {

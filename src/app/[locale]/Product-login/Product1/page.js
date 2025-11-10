@@ -53,16 +53,18 @@ const YourPage =  () => {
     let filters6 = ['Federraumbelüftung','NC','NO']
     let filters7 = ['direktgesteuert','servorgesteurt','zwanggesteuert']
     let filters8 = ['0-10','10-20','20-30','30-40','40-50']
+    let filters9 = ['Solenoid','Pressure-actuated','liqnitro']
 
     //filter states
     const [tempFilters, setTempFilters] = useState(filters1) // Initialize with all filters1
     const [tempFilters2,setTempFilters2] = useState(filters2)// Initialize with all filters2
-    const [tempFilters3,setTempFilters3] = useState(filters3)// Initialize with all filters2
-    const [tempFilters4,setTempFilters4] = useState(filters4)// Initialize with all filters2
-    const [tempFilters5,setTempFilters5] = useState(filters5)// Initialize with all filters2
-    const [tempFilters6,setTempFilters6] = useState(filters6)// Initialize with all filters2
-    const [tempFilters7,setTempFilters7] = useState(filters7)// Initialize with all filters2
-    const [tempFilters8,setTempFilters8] = useState(filters8)// Initialize with all filters2
+    const [tempFilters3,setTempFilters3] = useState(filters3)// Initialize with all filters3
+    const [tempFilters4,setTempFilters4] = useState(filters4)// Initialize with all filters4
+    const [tempFilters5,setTempFilters5] = useState(filters5)// Initialize with all filters5
+    const [tempFilters6,setTempFilters6] = useState(filters6)// Initialize with all filters6
+    const [tempFilters7,setTempFilters7] = useState(filters7)// Initialize with all filters7
+    const [tempFilters8,setTempFilters8] = useState(filters8)// Initialize with all filters8
+    const [tempFilters9,setTempFilters9] = useState(filters9)// Initialize with all filters8
 
     //login state
     const [ID,setID] = useState()
@@ -118,38 +120,46 @@ const YourPage =  () => {
             setTempFilters6(filters6)
             setTempFilters7(filters7)
             setTempFilters8(filters8)
+            setTempFilters9(filters9)
 
           
         }else{
-            setSelectedFilters([...selectedFilters,selectedCategory])
-            if(filters1.includes(selectedCategory)){
-                setTempFilters([selectedCategory]); //selectedcategory filter1
-            }
-            if(filters2.includes(selectedCategory)){
-                setTempFilters2([selectedCategory]);
-            }
-            if(filters3.includes(selectedCategory)){
-                setTempFilters3([selectedCategory]); //selectedcategory filter1
-            }
-            if(filters4.includes(selectedCategory)){
-                setTempFilters4([selectedCategory]);
-            }
-            if(filters5.includes(selectedCategory)){
-                setTempFilters5([selectedCategory]); //selectedcategory filter1
-            }
-            if(filters6.includes(selectedCategory)){
-                setTempFilters6([selectedCategory]);
-            }
-            if(filters7.includes(selectedCategory)){
-                setTempFilters7([selectedCategory]); //selectedcategory filter1
-            }
-            if(filters8.includes(selectedCategory)){
-                setTempFilters8([selectedCategory]);
-            }
+            // select logic
+            // clone current filters
+            let updatedFilters = [...selectedFilters];
 
+            // ✅ make sure only one item per filter group is active (remove previous existing filter)
+            if (filters1.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters1.includes(f));
+            if (filters2.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters2.includes(f));
+            if (filters3.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters3.includes(f));
+            if (filters4.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters4.includes(f));
+            if (filters5.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters5.includes(f));
+            if (filters6.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters6.includes(f));
+            if (filters7.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters7.includes(f));
+            if (filters8.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters8.includes(f));
+            if (filters9.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters9.includes(f));
+
+            updatedFilters.push(selectedCategory);
+            setSelectedFilters(updatedFilters);
+
+            // update temp filters
+            if (filters1.includes(selectedCategory)) setTempFilters([selectedCategory]);
+            if (filters2.includes(selectedCategory)) setTempFilters2([selectedCategory]);
+            if (filters3.includes(selectedCategory)) setTempFilters3([selectedCategory]);
+            if (filters4.includes(selectedCategory)) setTempFilters4([selectedCategory]);
+            if (filters5.includes(selectedCategory)) setTempFilters5([selectedCategory]);
+            if (filters6.includes(selectedCategory)) setTempFilters6([selectedCategory]);
+            if (filters7.includes(selectedCategory)) setTempFilters7([selectedCategory]);
+            if (filters8.includes(selectedCategory)) setTempFilters8([selectedCategory]);
+            if (filters9.includes(selectedCategory)) setTempFilters9([selectedCategory]);
         }
         
     }
+
+    const handleCategorySelect = (category) => {
+        handleSelect(category);
+    };
+
 
     const resetFilters = () => {
         setSelectedFilters([]); // Reset the selected filters
@@ -161,6 +171,7 @@ const YourPage =  () => {
         setTempFilters6(filters6)
         setTempFilters7(filters7)
         setTempFilters8(filters8)
+        setTempFilters9(filters9)
 
     };
 
@@ -181,6 +192,7 @@ const YourPage =  () => {
     // Use effect to trigger filter handler
     useEffect(()=> {
         itemFilter();
+        
     },
     [selectedFilters])
     //------------------------------------------------------------------------------------------------------------//
@@ -336,7 +348,7 @@ const resetQuantity = (name) => {
                         // install Swiper modules
                         modules={[Navigation, Pagination, A11y]}
                         spaceBetween={50}
-                        slidesPerView={6}
+                        slidesPerView={5}
                         navigation
                         //pagination={{ clickable: true }}
                         scrollbar={{ draggable: true }}
@@ -345,7 +357,7 @@ const resetQuantity = (name) => {
                         >
 
                         <SwiperSlide>
-                            <div>
+                            <div onClick={() => handleCategorySelect("Solenoid")}>
                             <div className='flex justify-center cursor-pointer'>
                                 <Link href={`/${locale}/Product-login/Product1`}>
                                     <img className='h-32 hover:scale-105 transition-transform duration-200' 
@@ -362,9 +374,9 @@ const resetQuantity = (name) => {
                         
                         
                         <SwiperSlide>
-                            <div>
+                            <div  onClick={() => handleCategorySelect('Pressure-actuated')}>
                             <div className='flex justify-center cursor-pointer'>
-                                <Link href={`/${locale}/Product-login/Product2`}>
+                                <Link href={`/${locale}/Product-login/Product1`}>
                                     <img className='h-32 hover:scale-105 transition-transform duration-200' 
                                     src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478">
                                     </img>
@@ -378,12 +390,12 @@ const resetQuantity = (name) => {
                         </SwiperSlide>
 
                         <SwiperSlide>
-                            <div>
+                            <div onClick={() => handleCategorySelect("liqnitro")}>
                             <div className='flex justify-center cursor-pointer'>
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                category3
+                                liquidnitrogen non return 
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -394,7 +406,7 @@ const resetQuantity = (name) => {
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                    cryogenic
+                                    liquidnitrogen filter
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -405,70 +417,17 @@ const resetQuantity = (name) => {
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                    category4
+                                    safety valves for cryogenic use
                                 </div>
                             </div>
                         </SwiperSlide>
                         
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                category5
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    category6
-                                </div>
-                            </div>
-                        </SwiperSlide>
                         
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    Absperrsvalve
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    Absperrsvalve
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    Absperrsvalve
-                                </div>
-                            </div>
-                        </SwiperSlide>
             
                     </Swiper>        
             </div>
 
-            <Categorydsc/>
+            <Categorydsc tempFilters9={tempFilters9}/>
 
             {/*product filtering section*/}
             <div className="h-auto w-auto pb-[20px] shadow-lg mb-20">
@@ -490,151 +449,172 @@ const resetQuantity = (name) => {
 
 
                 <div className="flex justify-center ml-[4%]">
-  <div>
-    <div className="flex justify-center text-hind text-14px pb-20">
+                    <div>
+                        <div className="flex justify-center text-hind text-14px pb-20">
 
-      <div className="flex flex-col w-[300px] mr-10">
-        <div className="mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-          {t("Nennweite")}
-        </div>
-        <div className="overflow-y-auto h-[120px] w-[100%]">
-          {tempFilters.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="flex flex-col w-[300px] mr-10">
+                            <div className="mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                            {t("Nennweite")}
+                            </div>
+                            <div className="overflow-y-auto h-[120px] w-[100%]">
+                            {tempFilters.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-      <div className="text-hind w-[300px] mr-10">
-        <div className="flex flex-col">
-          <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-            {t("Baumform")}
-          </div>
-          {tempFilters2.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="text-hind w-[300px] mr-10">
+                            <div className="flex flex-col">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Baumform")}
+                            </div>
+                            {tempFilters2.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-      <div className="overflow-y-auto w-[300px] mr-10">
-        <div className="flex flex-col">
-          <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-            {t("Spannung")}
-          </div>
-          {tempFilters3.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2 w-32">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="overflow-y-auto w-[300px] mr-10">
+                            <div className="flex flex-col">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Spannung")}
+                            </div>
+                            {tempFilters3.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2 w-32">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-      <div className="overflow-y-auto w-[300px] mr-20">
-        <div className="flex flex-col">
-          <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-            {t("Material")}
-          </div>
-          {tempFilters4.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="overflow-y-auto w-[300px] mr-20">
+                            <div className="flex flex-col">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Material")}
+                            </div>
+                            {tempFilters4.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-    </div>
+                        </div>
 
-    <div className="flex justify-center text-hind text-14px">
-      <div className="overflow-y-auto mr-10">
-        <div className="flex flex-col w-[300px]">
-          <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-            {t("Dichtung")}
-          </div>
-          {tempFilters5.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="flex justify-center text-hind text-14px">
+                        <div className="overflow-y-auto mr-10">
+                            <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Dichtung")}
+                            </div>
+                            {tempFilters5.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-      <div className="overflow-y-auto mr-10">
-        <div className="flex flex-col w-[300px]">
-          <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-            {t("Schaltfunktion")}
-          </div>
-          {tempFilters6.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="overflow-y-auto mr-10">
+                            <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Schaltfunktion")}
+                            </div>
+                            {tempFilters6.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-      <div className="mr-10">
-        <div className="flex flex-col w-[300px]">
-          <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-            {t("Steurung")}
-          </div>
-          {tempFilters7.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="mr-10">
+                            <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Steurung")}
+                            </div>
+                            {tempFilters7.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-      <div className="mr-20">
-        <div className="flex flex-col w-[300px]">
-          <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-            {t("Druck")}
-          </div>
-          {tempFilters8.map((category,id)=>(
-            <label key={id} className="flex items-center mb-2">
-              <input type="checkbox"
-                     onChange={()=>handleSelect(category)} 
-                     checked={selectedFilters.includes(category)}
-                     className="mr-2" />
-              {category}
-            </label>
-          ))}
-        </div>
-      </div>
+                        <div className="mr-20">
+                            <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Druck")}
+                            </div>
+                            {tempFilters8.map((category,id)=>(
+                                <label key={id} className="flex items-center mb-2">
+                                <input type="checkbox"
+                                        onChange={()=>handleSelect(category)} 
+                                        checked={selectedFilters.includes(category)}
+                                        className="mr-2" />
+                                {category}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
 
-    </div>
-  </div>
-</div>
+
+
+                        </div>
+
+                        <div className="flex justify-left text-hind text-14px">
+                           <div className="overflow-y-auto mr-10">
+                                <div className="flex flex-col w-[300px]">
+                                    <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                        {t("type")}
+                                    </div>
+                                    {tempFilters9.map((category,id)=>(
+                                        <label key={id} className="flex items-center mb-2">
+                                        <input type="checkbox"
+                                                onChange={()=>handleSelect(category)} 
+                                                checked={selectedFilters.includes(category)}
+                                                className="mr-2" />
+                                        {category}
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
                 {/*cancel button*/} 
                 {selectedFilters.length > 0 &&(
@@ -840,451 +820,3 @@ const resetQuantity = (name) => {
 
 export default YourPage;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- {/*    
-    
-          
-            <div className="buttons-container  pb-40 mr-20">
-                    {tempFilters2.map((category,id)=>(
-                        <button className={`button ${
-                        selectedFilters?.includes(category) ? "active" : ""
-                        }`}
-                        onClick={() => handleSelect(category)}
-            >
-                            {category}
-                        </button>
-                    ))}
-                </div>
-            
-    
-    <div className='mb-40 px-[10%] h-[30vh] w-screen flex'>
-                <div className='border-gray-500 border-t-4 border-b-4 h-[30vh] w-screen flex items-center'>
-                    <div className='w-[25%]'>
-
-                    </div>
-
-                    <div className="mt-[5%] w-[45%] h-[125%] border-l-2 border-r-2  border-gray-500" style={{ transform: 'skewX(-15deg)' }}>
-                        
-                    </div>
-
-                    <div>
-                        
-                    </div>
-                </div>
-
-            </div>
-
-            <div className='mb-40 px-[10%] h-[30vh] w-screen flex'>
-                <div className='border-gray-500 border-t-4 border-b-4 h-[30vh] w-screen flex items-center'>
-                    <div className='w-[25%]'>
-
-                    </div>
-
-                    <div className="mt-[5%] w-[45%] h-[125%] border-l-2 border-r-2  border-gray-500" style={{ transform: 'skewX(-15deg)' }}>
-                        
-                    </div>
-
-                    <div>
-                        
-                    </div>
-                </div>
-
-            </div>*/}
-
- {/*
-
-         <div className='mb-60 px-[10%] h-[30vh] w-screen flex '>
-                <div className='h-[30vh] w-screen flex items-center rounded-lg shadow-lg'>
-
-                    <div className="h-[100%] w-[20%] pl-[3%] shadow-lg">
-                        <img 
-                            src="https://i.ibb.co/fH6GNfN/unnamed.jpg" 
-                            alt="Description of image" 
-                            className="w-[60%] h-[100%] object-fit " 
-                        />
-                    </div>
-
-                    <div className="w-[50%] h-[100%]  border-gray-500 bg-lightBlue shadow-lg text-white" style={{ transform: 'skewX(-20deg)' }}>
-                    Innerhalb geschlossener Rohrleitungssysteme müssen unterschiedliche, teilweise auch aggressive Medien zuverlässig kontrolliert und geste
-                    </div>
-
-                    <div className="w-[30%] h-[100%] z-10 pt-[1%]">
-                        <div className="pl-[20%]">
-                            <div className="flex  mb-4">
-                                <button className=" rounded-l px-2">-</button>
-                                <input type="text" value="1" className="w-12 text-center border-t border-b"></input>
-                                <button className=" rounded-r px-2">+</button>
-                            </div>
-                            <div>
-                                <div className="text-4xl  mb-1">49,40 €*</div>
-                                <div className="text-gray-500">58,79 € inkl. Mwst.</div>
-                            </div>
-
-                        </div>
-
-                        <div className="flex items-center pl-[20%]">
-                                <div>
-                                    <div className="mt-4">
-                                        <span className="">Lieferzeit: </span><a href="#" className="text-blue-500">ab Lager</a>
-                                    </div>
-
-                                    <div className="mt-2 flex">
-                                        <span>Expressversand*:</span>
-                                        <svg className="w-5 h-5 text-blue-500 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-
-                                </div>
-                        </div>
-
-                        <div className="mt-6 ">
-                            <button className="w-3/5 bg-blue-500 text-white py-2 rounded mb-2 " style={{ transform: 'skewX(-20deg)' }}>Jetzt bestellen</button>
-                            <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Absperrklappe-AK01-AK02.pdf">
-                                <button className="w-1/3 border py-2 rounded" style={{ transform: 'skewX(-20deg)' }}>Datenblatt</button>
-                            </a>
-                            
-                        </div>
-
-                    </div>
-
-        
-                </div>
-
-
-            
-            </div>
-
-            <div className='mb-40 px-[10%] h-[30vh] w-screen flex '>
-                <div className='h-[30vh] w-screen flex items-center rounded-lg shadow-lg'>
-
-                    <div className="w-[50%] h-[100%]  border-gray-500 bg-lightBlue shadow-lg text-white" style={{ transform: 'skewX(-20deg)' }}>
-                    2Innerhalb geschlossener Rohrleitungssysteme müssen unterschiedliche, teilweise auch aggressive Medien zuverlässig kontrolliert und geste
-                    </div>
-
-                    <div className="pl-[4%] pt-[4%] h-full w-[15%] shadow-lg border-r-2 border-grey-500 " style={{ transform: 'skewX(-20deg)' }}>
-                        <div style={{ transform: 'skewX(20deg)' }}>
-                            <img 
-                                src="https://i.ibb.co/2sspfd5/unnamed-4.jpg" 
-                                alt="Description of image" 
-                                className="w-[55%] h-[50%]" 
-                            />
-                        </div>
-                     </div>
-
-                     <div className="w-[30%] h-[100%] z-10 pt-[1%]">
-                        <div className="pl-[30%]">
-                            <div className="flex  mb-4">
-                                <button className=" rounded-l px-2">-</button>
-                                <input type="text" value="1" className="w-12 text-center border-t border-b"></input>
-                                <button className=" rounded-r px-2">+</button>
-                            </div>
-                            <div>
-                                <div className="text-4xl  mb-1">49,40 €*</div>
-                                <div className="text-gray-500">58,79 € inkl. Mwst.</div>
-                            </div>
-
-                        </div>
-
-                        <div className="flex items-center pl-[30%]">
-                                <div>
-                                    <div className="mt-4">
-                                        <span className="">Lieferzeit: </span><a href="#" className="text-blue-500">ab Lager</a>
-                                    </div>
-
-                                    <div className="mt-2 flex">
-                                        <span>Expressversand*:</span>
-                                        <svg className="w-5 h-5 text-blue-500 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-
-                                </div>
-                        </div>
-
-                        <div className="mt-6 pl-[15%]">
-                            <button className="w-2/3 bg-blue-500 text-white py-2 rounded mb-2  " style={{ transform: 'skewX(-20deg)' }}>Jetzt bestellen</button>
-                            <a href="https://i.ibb.co/n1gqRs9/unnamed-3.jpg">
-                                <button className="w-1/3 border py-2 rounded" style={{ transform: 'skewX(-20deg)' }}>Datenblatt</button>
-                            </a>
-                            
-                        </div>
-                        
-                    </div>
-    
-                </div>
-
-            </div>
-
-            <div className='mb-60 px-[10%] h-[30vh] w-screen flex '>
-                <div className='h-[30vh] w-screen flex items-center rounded-lg shadow-lg'>
-
-                    <div className="pl-[3%] h-[90%] w-[15%] shadow-lg">
-                        <img 
-                            src="https://i.ibb.co/2sspfd5/unnamed-4.jpg" 
-                            alt="Description of image" 
-                            className="w-auto h-full object-cover" 
-                        />
-                    </div>
-
-                    <div className="w-[53%] h-[100%]  border-gray-500 bg-lightBlue shadow-lg text-white" style={{ transform: 'skewX(-20deg)' }}>
-                    3Innerhalb geschlossener Rohrleitungssysteme müssen unterschiedliche, teilweise auch aggressive Medien zuverlässig kontrolliert und geste
-                    </div>
-
-                    <div className="w-[30%] h-[100%] z-10 pt-[1%]">
-                        <div className="pl-[20%]">
-                            <div className="flex  mb-4">
-                                <button className=" rounded-l px-2">-</button>
-                                <input type="text" value="1" className="w-12 text-center border-t border-b"></input>
-                                <button className=" rounded-r px-2">+</button>
-                            </div>
-                            <div>
-                                <div className="text-4xl  mb-1">49,40 €*</div>
-                                <div className="text-gray-500">58,79 € inkl. Mwst.</div>
-                            </div>
-
-                        </div>
-
-                        <div className="flex items-center pl-[20%]">
-                                <div>
-                                    <div className="mt-4">
-                                        <span className="">Lieferzeit: </span><a href="#" className="text-blue-500">ab Lager</a>
-                                    </div>
-
-                                    <div className="mt-2 flex">
-                                        <span>Expressversand*:</span>
-                                        <svg className="w-5 h-5 text-blue-500 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-
-                                </div>
-                        </div>
-
-                        <div className="mt-6 ">
-                            <button className="w-3/5 bg-blue-500 text-white py-2 rounded mb-2 " style={{ transform: 'skewX(-20deg)' }}>Jetzt bestellen</button>
-                            <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Absperrklappe-AK01-AK02.pdf">
-                                <button className="w-1/3 border py-2 rounded" style={{ transform: 'skewX(-20deg)' }}>Datenblatt</button>
-                            </a>
-                            
-                        </div>
-                        
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div className='mb-60 px-[10%] h-[30vh] w-screen flex '>
-                <div className='h-[30vh] w-screen flex items-center rounded-lg shadow-lg'>
-
-                    <div className="h-[100%] w-[20%] pl-[3%] shadow-lg">
-                        <img 
-                            src="https://i.ibb.co/fH6GNfN/unnamed.jpg" 
-                            alt="Description of image" 
-                            className="w-[60%] h-[100%] object-fit " 
-                        />
-                    </div>
-
-                    <div className="w-[50%] h-[100%]  border-gray-500 bg-lightBlue shadow-lg text-white" style={{ transform: 'skewX(-20deg)' }}>
-                    Innerhalb geschlossener Rohrleitungssysteme müssen unterschiedliche, teilweise auch aggressive Medien zuverlässig kontrolliert und geste
-                    </div>
-
-                    <div className="w-[30%] h-[100%] z-10 pt-[1%]">
-                        <div className="pl-[20%]">
-                            <div className="flex  mb-4">
-                                <button className=" rounded-l px-2">-</button>
-                                <input type="text" value="1" className="w-12 text-center border-t border-b"></input>
-                                <button className=" rounded-r px-2">+</button>
-                            </div>
-                            <div>
-                                <div className="text-4xl  mb-1">49,40 €*</div>
-                                <div className="text-gray-500">58,79 € inkl. Mwst.</div>
-                            </div>
-
-                        </div>
-
-                        <div className="flex items-center pl-[20%]">
-                                <div>
-                                    <div className="mt-4">
-                                        <span className="">Lieferzeit: </span><a href="#" className="text-blue-500">ab Lager</a>
-                                    </div>
-
-                                    <div className="mt-2 flex">
-                                        <span>Expressversand*:</span>
-                                        <svg className="w-5 h-5 text-blue-500 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-
-                                </div>
-                        </div>
-
-                        <div className="mt-6 ">
-                            <button className="w-3/5 bg-blue-500 text-white py-2 rounded mb-2 " style={{ transform: 'skewX(-20deg)' }}>Jetzt bestellen</button>
-                            <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Absperrklappe-AK01-AK02.pdf">
-                                <button className="w-1/3 border py-2 rounded" style={{ transform: 'skewX(-20deg)' }}>Datenblatt</button>
-                            </a>
-                            
-                        </div>
-
-                    </div>
-
-        
-                </div>
-
-
-            
-            </div>
-
-            <div className='mb-40 px-[10%] h-[30vh] w-screen flex '>
-                <div className='h-[30vh] w-screen flex items-center rounded-lg shadow-lg'>
-
-                    <div className="w-[50%] h-[100%]  border-gray-500 bg-lightBlue shadow-lg text-white" style={{ transform: 'skewX(-20deg)' }}>
-                    2Innerhalb geschlossener Rohrleitungssysteme müssen unterschiedliche, teilweise auch aggressive Medien zuverlässig kontrolliert und geste
-                    </div>
-
-                    <div className="pl-[4%] pt-[4%] h-full w-[15%] shadow-lg border-r-2 border-grey-500 " style={{ transform: 'skewX(-20deg)' }}>
-                        <div style={{ transform: 'skewX(20deg)' }}>
-                            <img 
-                                src="https://i.ibb.co/2sspfd5/unnamed-4.jpg" 
-                                alt="Description of image" 
-                                className="w-[55%] h-[50%]" 
-                            />
-                        </div>
-                     </div>
-
-                     <div className="w-[30%] h-[100%] z-10 pt-[1%]">
-                        <div className="pl-[30%]">
-                            <div className="flex  mb-4">
-                                <button className=" rounded-l px-2">-</button>
-                                <input type="text" value="1" className="w-12 text-center border-t border-b"></input>
-                                <button className=" rounded-r px-2">+</button>
-                            </div>
-                            <div>
-                                <div className="text-4xl  mb-1">49,40 €*</div>
-                                <div className="text-gray-500">58,79 € inkl. Mwst.</div>
-                            </div>
-
-                        </div>
-
-                        <div className="flex items-center pl-[30%]">
-                                <div>
-                                    <div className="mt-4">
-                                        <span className="">Lieferzeit: </span><a href="#" className="text-blue-500">ab Lager</a>
-                                    </div>
-
-                                    <div className="mt-2 flex">
-                                        <span>Expressversand*:</span>
-                                        <svg className="w-5 h-5 text-blue-500 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-
-                                </div>
-                        </div>
-
-                        <div className="mt-6 pl-[15%]">
-                            <button className="w-2/3 bg-blue-500 text-white py-2 rounded mb-2  " style={{ transform: 'skewX(-20deg)' }}>Jetzt bestellen</button>
-                            <a href="https://i.ibb.co/n1gqRs9/unnamed-3.jpg">
-                                <button className="w-1/3 border py-2 rounded" style={{ transform: 'skewX(-20deg)' }}>Datenblatt</button>
-                            </a>
-                            
-                        </div>
-                        
-                    </div>
-    
-                </div>
-
-            </div>
-
-            <div className='mb-60 px-[10%] h-[30vh] w-screen flex '>
-                <div className='h-[30vh] w-screen flex items-center rounded-lg shadow-lg'>
-
-                    <div className="pl-[3%] h-[90%] w-[15%] shadow-lg">
-                        <img 
-                            src="https://i.ibb.co/2sspfd5/unnamed-4.jpg" 
-                            alt="Description of image" 
-                            className="w-auto h-full object-cover" 
-                        />
-                    </div>
-
-                    <div className="w-[53%] h-[100%]  border-gray-500 bg-lightBlue shadow-lg text-white" style={{ transform: 'skewX(-20deg)' }}>
-                    3Innerhalb geschlossener Rohrleitungssysteme müssen unterschiedliche, teilweise auch aggressive Medien zuverlässig kontrolliert und geste
-                    </div>
-
-                    <div className="w-[30%] h-[100%] z-10 pt-[1%]">
-                        <div className="pl-[20%]">
-                            <div className="flex  mb-4">
-                                <button className=" rounded-l px-2">-</button>
-                                <input type="text" value="1" className="w-12 text-center border-t border-b"></input>
-                                <button className=" rounded-r px-2">+</button>
-                            </div>
-                            <div>
-                                <div className="text-4xl  mb-1">49,40 €*</div>
-                                <div className="text-gray-500">58,79 € inkl. Mwst.</div>
-                            </div>
-
-                        </div>
-
-                        <div className="flex items-center pl-[20%]">
-                                <div>
-                                    <div className="mt-4">
-                                        <span className="">Lieferzeit: </span><a href="#" className="text-blue-500">ab Lager</a>
-                                    </div>
-
-                                    <div className="mt-2 flex">
-                                        <span>Expressversand*:</span>
-                                        <svg className="w-5 h-5 text-blue-500 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-
-                                </div>
-                        </div>
-
-                        <div className="mt-6 ">
-                            <button className="w-3/5 bg-blue-500 text-white py-2 rounded mb-2 " style={{ transform: 'skewX(-20deg)' }}>Jetzt bestellen</button>
-                            <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Absperrklappe-AK01-AK02.pdf">
-                                <button className="w-1/3 border py-2 rounded" style={{ transform: 'skewX(-20deg)' }}>Datenblatt</button>
-                            </a>
-                            
-                        </div>
-                        
-                    </div>
-                </div>
-
-            </div>*/}

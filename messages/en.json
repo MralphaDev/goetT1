@@ -37,7 +37,8 @@
         "Druck": "Pressure",
         "Typ":"Type",
         "Buynow": "buy now",
-        "DeliveryTime":"Delivery time:"
+        "DeliveryTime":"Delivery time:",
+        "type":"Type"
       },
       "Pressureactuated": {
         "title": "Pressure Actuated Valve",
@@ -55,7 +56,7 @@
         "Buynow": "buy now",
         "DeliveryTime": "Delivery Time"
       },
-      "liqniro": {
+      "liqnitro": {
         "title": "Liquid nitrogen non-return valve",
         "description": "Within closed piping systems, different and sometimes aggressive media must be reliably controlled and regulated. Shut-off valves from NieRuf play a central role in such systems to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the piping system, thereby protecting the system or maintaining proper operation. Since the flow rate varies depending on the piping system, our butterfly valves are available in nominal sizes from DN25 to DN600.",
         "finder": "PRODUCT FINDER",

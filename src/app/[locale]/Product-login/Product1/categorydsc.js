@@ -1,8 +1,19 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 
-function CategoryDsc() {
-  const t = useTranslations('Product1'); // Load "Category" namespace
+function CategoryDsc({ tempFilters9 }) {
+  // Convert tempFilters9 object into a string for namespace
+  const activeCategory = String(tempFilters9|| 'Solenoid'); 
+
+  // Map category string to translation namespace
+  const namespaceMap = {
+    'Solenoid': 'Product1',
+    'Pressure-actuated': 'Pressureactuated',
+    'liqnitro':'liqnitro'
+    // add more categories here as needed
+  };
+
+  const t = useTranslations(namespaceMap[activeCategory] || 'Product1');
 
   return (
     <div>

@@ -1,7 +1,7 @@
 export const items = [
     {
         name: "7100 | 2/2 Wege NAMUR-Magnetventil G1/4 Zoll NA01 24V DC",
-        category: ["DN25", "2/2", "12V-DC", "Aluminium", "EPDM", "NC", "direktgesteuert", "0-10"],
+        category: ["DN25", "2/2", "12V-DC", "Aluminium", "EPDM", "NC", "direktgesteuert", "0-10",'Solenoid'],
         src: "https://i.ibb.co/fH6GNfN/unnamed-2.jpg",
         price: "125.1€*",
         priceNum: 125.1,
@@ -31,7 +31,7 @@ export const items = [
     },
     {
         name: "8100 |  2/3 Wege NAMUR-Magnetventil G 1/4 Zoll NA01 24V DC",
-        category: ["DN25", "2/2", "24V-DC", "PA", "FKM", "NO", "servorgesteurt", "10-20"],
+        category: ["DN25", "2/2", "24V-DC", "PA", "FKM", "NO", "servorgesteurt", "10-20",'Solenoid'],
         src: "https://i.ibb.co/2sspfd5/unnamed-2.jpg",
         price: "1520.8€*",
         priceNum: "1520.8",
@@ -62,7 +62,7 @@ export const items = [
     },
     {
         name: "8700 |  2/4 Wege NAMUR-Magnetventil G 1/4 Zoll NA01 24V DC",
-        category: ["DN27", "3/2", "110V", "PP", "FPM", "NC", "zwanggesteuert", "20-30"],
+        category: ["DN27", "3/2", "110V", "PP", "FPM", "NC", "zwanggesteuert", "20-30",'Solenoid'],
         src: "https://i.ibb.co/2sspfd5/unnamed-1.jpg",
         price: "1€*",
         serialNum:"8700",
@@ -92,7 +92,7 @@ export const items = [
     },
     {
         name: "2/5 Wege NAMUR-Magnetventil G 1/4 Zoll NA01 24V DC",
-        category: ["DN27", "3/2", "230V", "PVC", "NBR", "NO", "direktgesteuert", "30-40"],
+        category: ["DN27", "3/2", "230V", "PVC", "NBR", "NO", "direktgesteuert", "30-40",'Pressure-actuated'],
         src: "https://i.ibb.co/2sspfd5/unnamed-2.jpg",
         price: "49.9€*",
         serialNum:"7100",
@@ -121,7 +121,7 @@ export const items = [
     },
     {
         name: "Product5",
-        category: ["DN28", "5/2", "12V-DC", "Aluminium", "EPDM", "Federraumbelüftung", "servorgesteurt", "40-50"],
+        category: ["DN28", "5/2", "12V-DC", "Aluminium", "EPDM", "Federraumbelüftung", "servorgesteurt", "40-50",'Pressure-actuated'],
         src: "https://i.ibb.co/2sspfd5/unnamed-3.jpg",
         price: "49.9€*",
         serialNum:"7100",
@@ -150,7 +150,7 @@ export const items = [
     },
     {
         name: "Product6",
-        category: ["DN29", "5/2", "24V-DC", "PA", "FKM", "NC", "zwanggesteuert", "0-10"],
+        category: ["DN29", "5/2", "24V-DC", "PA", "FKM", "NC", "zwanggesteuert", "0-10",'Pressure-actuated'],
         src: "https://i.ibb.co/2sspfd5/unnamed4.jpg",
         price: "49.9€*",
         serialNum:"7100",
@@ -179,7 +179,7 @@ export const items = [
     },
     {
         name: "Product7",
-        category: ["DN30", "3/2", "110V", "PP", "FPM", "NO", "direktgesteuert", "10-20"],
+        category: ["DN30", "3/2", "110V", "PP", "FPM", "NO", "direktgesteuert", "10-20",'Solenoid'],
         src: "https://i.ibb.co/2sspfd5/unnamed-3.jpg",
         price: "49.9€*",
         serialNum:"7100",
@@ -208,7 +208,7 @@ export const items = [
     },
     {
         name: "Product8",
-        category: ["DN31", "2/2", "230V", "PVC", "NBR", "Federraumbelüftung", "servorgesteurt", "20-30"],
+        category: ["DN31", "2/2", "230V", "PVC", "NBR", "Federraumbelüftung", "servorgesteurt", "20-30",'Solenoid'],
         src: "https://i.ibb.co/2sspfd5/unnamed4.jpg",
         price: "49.9€*",
         serialNum:"7100",
@@ -237,7 +237,7 @@ export const items = [
     },
     {
         name: "7500 | 2/2 Wege NAMUR-Magnetventil G 1/4 Zoll NA01 24V DC",
-        category: ["DN31", "2/2", "230V", "PVC", "NBR", "Federraumbelüftung", "servorgesteurt", "20-30"],
+        category: ["DN31", "2/2", "230V", "PVC", "NBR", "Federraumbelüftung", "servorgesteurt", "20-30",'Pressure-actuated'],
         src: "https://i.ibb.co/2sspfd5/unnamed4.jpg",
         price: "149.9€*",
         serialNum:"7100",
