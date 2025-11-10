@@ -53,7 +53,7 @@ const YourPage =  () => {
     let filters6 = ['Federraumbelüftung','NC','NO']
     let filters7 = ['direktgesteuert','servorgesteurt','zwanggesteuert']
     let filters8 = ['0-10','10-20','20-30','30-40','40-50']
-    let filters9 = ['Solenoid','Pressure-actuated','liqnitro']
+    let filters9 = ['Solenoid','Pressure-actuated','liqnitro','liqnitrofilter','safetyValve']
 
     //filter states
     const [tempFilters, setTempFilters] = useState(filters1) // Initialize with all filters1
@@ -400,7 +400,7 @@ const resetQuantity = (name) => {
                             </div>
                         </SwiperSlide>
                         
-                        <SwiperSlide>
+                        <SwiperSlide onClick={() => handleCategorySelect("liqnitrofilter")}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
@@ -411,7 +411,7 @@ const resetQuantity = (name) => {
                             </div>
                         </SwiperSlide>
 
-                        <SwiperSlide>
+                        <SwiperSlide onClick={() => handleCategorySelect("safetyValve")}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>

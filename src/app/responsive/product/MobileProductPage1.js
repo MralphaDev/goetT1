@@ -19,6 +19,7 @@ const MobileProductPage1 = () => {
     const filters6 = ['Federraumbelüftung','NC','NO'];
     const filters7 = ['direktgesteuert','servorgesteurt','zwanggesteuert'];
     const filters8 = ['0-10','10-20','20-30','30-40','40-50'];
+    let filters9 = ['Solenoid','Pressure-actuated','liqnitro','liqnitrofilter','safetyValve']
 
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filteredItems, setFilteredItems] = useState(items);
@@ -31,6 +32,7 @@ const MobileProductPage1 = () => {
     const [tempFilters6, setTempFilters6] = useState(filters6);
     const [tempFilters7, setTempFilters7] = useState(filters7);
     const [tempFilters8, setTempFilters8] = useState(filters8);
+    const [tempFilters9,setTempFilters9] = useState(filters9)// Initialize with all filters9
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
@@ -65,6 +67,7 @@ const MobileProductPage1 = () => {
         setTempFilters6(filters6);
         setTempFilters7(filters7);
         setTempFilters8(filters8);
+        setTempFilters9(filters9);
     };
 
     useEffect(() => {
@@ -111,6 +114,7 @@ const MobileProductPage1 = () => {
         {label: "Funktion", items: tempFilters6},
         {label: "Steuerung", items: tempFilters7},
         {label: "Durchfluss", items: tempFilters8},
+        {label:"Typ",items:tempFilters9}
     ];
 
     return (

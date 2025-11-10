@@ -31,7 +31,7 @@ export const items = [
     },
     {
         name: "8100 |  2/3 Wege NAMUR-Magnetventil G 1/4 Zoll NA01 24V DC",
-        category: ["DN25", "2/2", "24V-DC", "PA", "FKM", "NO", "servorgesteurt", "10-20",'Solenoid'],
+        category: ["DN25", "2/2", "24V-DC", "PA", "FKM", "NO", "servorgesteurt", "10-20",'safetyValve'],
         src: "https://i.ibb.co/2sspfd5/unnamed-2.jpg",
         price: "1520.8€*",
         priceNum: "1520.8",
@@ -62,7 +62,7 @@ export const items = [
     },
     {
         name: "8700 |  2/4 Wege NAMUR-Magnetventil G 1/4 Zoll NA01 24V DC",
-        category: ["DN27", "3/2", "110V", "PP", "FPM", "NC", "zwanggesteuert", "20-30",'Solenoid'],
+        category: ["DN27", "3/2", "110V", "PP", "FPM", "NC", "zwanggesteuert", "20-30",'liqnitro'],
         src: "https://i.ibb.co/2sspfd5/unnamed-1.jpg",
         price: "1€*",
         serialNum:"8700",
@@ -92,7 +92,7 @@ export const items = [
     },
     {
         name: "2/5 Wege NAMUR-Magnetventil G 1/4 Zoll NA01 24V DC",
-        category: ["DN27", "3/2", "230V", "PVC", "NBR", "NO", "direktgesteuert", "30-40",'Pressure-actuated'],
+        category: ["DN27", "3/2", "230V", "PVC", "NBR", "NO", "direktgesteuert", "30-40",'liqnitrofilter'],
         src: "https://i.ibb.co/2sspfd5/unnamed-2.jpg",
         price: "49.9€*",
         serialNum:"7100",

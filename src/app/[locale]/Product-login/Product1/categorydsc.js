@@ -7,11 +7,13 @@ function CategoryDsc({ tempFilters9 }) {
 
   // Map category string to translation namespace
   const namespaceMap = {
-    'Solenoid': 'Product1',
-    'Pressure-actuated': 'Pressureactuated',
-    'liqnitro':'liqnitro'
-    // add more categories here as needed
+  Solenoid: 'Product1',
+  'Pressure-actuated': 'Pressureactuated',
+  liqnitro: 'liqnitro',
+  liqnitrofilter: 'liqnitrofilter',
+  safetyValve: 'safetyValve'
   };
+
 
   const t = useTranslations(namespaceMap[activeCategory] || 'Product1');
 

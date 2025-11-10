@@ -74,7 +74,41 @@
     "Typ":"Typ",
     "Buynow": "jetzt kaufen",
     "DeliveryTime":"Lieferzeit"
-  }
+  },
+  
+  "liqnitrofilter": {
+    "title": "Flüssigstickstoff-Rückschlagventil",
+    "description": "In geschlossenen Rohrleitungssystemen müssen verschiedene und teilweise aggressive Medien zuverlässig gesteuert und geregelt werden. Absperrventile von NieRuf spielen in solchen Systemen eine zentrale Rolle, um den zuverlässigen Betrieb der Anlage sicherzustellen. Schmetterlingsventile werden eingesetzt, um den Durchfluss im Rohrleitungssystem vollständig zu stoppen, wodurch das System geschützt oder ein ordnungsgemäßer Betrieb gewährleistet wird. Da die Durchflussmenge je nach Rohrleitungssystem variiert, sind unsere Schmetterlingsventile in Nennweiten von DN25 bis DN600 erhältlich.",
+    "finder": "PRODUKTFINDER",
+    "Nennweite": "Nennweite",
+    "Baumform": "Bauform",
+    "Spannung": "Spannung",
+    "Material": "Material",
+    "Dichtung": "Dichtung",
+    "Schaltfunktion": "Schaltfunktion",
+    "Steurung": "Steuerung",
+    "Druck": "Druck",
+    "Typ": "Typ",
+    "Buynow": "Jetzt kaufen",
+    "DeliveryTime": "Lieferzeit"
+},
+"safetyValve": {
+    "title": "Sicherheitsventil für kryogene Anwendungen",
+    "description": "In geschlossenen Rohrleitungssystemen müssen verschiedene und teilweise aggressive Medien zuverlässig gesteuert und geregelt werden. Absperrventile von NieRuf spielen in solchen Systemen eine zentrale Rolle, um den zuverlässigen Betrieb der Anlage sicherzustellen. Schmetterlingsventile werden eingesetzt, um den Durchfluss im Rohrleitungssystem vollständig zu stoppen, wodurch das System geschützt oder ein ordnungsgemäßer Betrieb gewährleistet wird. Da die Durchflussmenge je nach Rohrleitungssystem variiert, sind unsere Schmetterlingsventile in Nennweiten von DN25 bis DN600 erhältlich.",
+    "finder": "PRODUKTFINDER",
+    "Nennweite": "Nennweite",
+    "Baumform": "Bauform",
+    "Spannung": "Spannung",
+    "Material": "Material",
+    "Dichtung": "Dichtung",
+    "Schaltfunktion": "Schaltfunktion",
+    "Steurung": "Steuerung",
+    "Druck": "Druck",
+    "Typ": "Typ",
+    "Buynow": "Jetzt kaufen",
+    "DeliveryTime": "Lieferzeit"
+}
+
 
   
 
