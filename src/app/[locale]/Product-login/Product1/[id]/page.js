@@ -73,9 +73,6 @@ function page({params}) {
         setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1)); // Decrement but not below 1
     };
 
-
-    
-
   useEffect(() => {
     if (view === "viewer") {
         // Only proceed if the ref is available
@@ -170,35 +167,44 @@ function page({params}) {
     <div>
         {isMobile ? (
         // Mobile view
-        <div className="flex flex-col space-y-4">
-          <h1 className="text-2xl font-bold text-[#1D1D1F]">{items[paramid].name}</h1>
-          <p className="text-gray-500 text-sm">Typ: {items[paramid].serialNum}</p>
+<div className="flex flex-col pt-30 px-6 max-w-xl mx-auto space-y-8 font-sans">
+  {/* Product Title */}
+  <div className="space-y-1">
+    <h1 className="text-3xl font-bold text-gray-900 leading-snug">{items[paramid].name}</h1>
+    <p className="text-sm text-gray-500 tracking-wide">Typ: {items[paramid].serialNum}</p>
+  </div>
 
-          <video className="w-full h-auto rounded-xl shadow" controls muted>
-            <source src={`/p${parseInt(paramid) + 1}.mp4`} type="video/mp4" />
-          </video>
+  {/* Video */}
+  <div className="relative w-full overflow-hidden rounded-3xl shadow-xl">
+    <video className="w-full h-auto rounded-3xl object-cover" controls muted>
+      <source src={`/p${parseInt(paramid) + 1}.mp4`} type="video/mp4" />
+    </video>
+    <div className="absolute bottom-3 left-3 bg-white/70 px-3 py-1 rounded-full text-xs font-medium text-gray-700">Preview</div>
+  </div>
 
-          <div className="bg-gray-50 rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold text-lg text-[#1D1D1F] mb-2">Product Details</h2>
-            <table className="w-full text-sm text-gray-700">
-              <tbody>
-                {Object.entries(items[paramid])
-                  .filter(([key]) => !['priceNum', 'src'].includes(key))
-                  .map(([key, value]) => (
-                    <tr key={key} className="border-b border-gray-200">
-                      <td className="font-medium p-2 capitalize">{key}</td>
-                      <td className="p-2">{value}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+  {/* Product Details */}
+  <div className="bg-white rounded-3xl p-6 shadow-md border border-gray-100">
+    <h2 className="text-xl font-semibold text-gray-900 mb-5">Product Details</h2>
+    <div className="grid grid-cols-2 gap-y-4 gap-x-4">
+      {Object.entries(items[paramid])
+        .filter(([key]) => !['priceNum','src'].includes(key))
+        .map(([key,value]) => (
+          <div key={key} className="flex flex-col">
+            <span className="text-gray-500 text-xs font-medium uppercase tracking-wider">{key}</span>
+            <span className="text-gray-900 font-semibold">{value}</span>
           </div>
+        ))}
+    </div>
+  </div>
 
-          <div className="text-center mt-4">
-            <p className="text-2xl font-bold text-[#1D1D1F]">{items[paramid].price} €</p>
-            <p className="text-xs text-gray-500 mt-1">incl. VAT</p>
-          </div>
-        </div>
+  {/* Price */}
+  <div className="text-center">
+    <p className="text-3xl font-bold text-gray-900">{items[paramid].price} €</p>
+    <p className="text-xs text-gray-400 mt-1 tracking-wide">incl. VAT</p>
+  </div>
+</div>
+
+
       ) : (<div className="bg-white h-auto">
 
         <div className='px-[15vw] border-b border-blue-400 border-b-[5px]' style={{height:"170px"}}>
