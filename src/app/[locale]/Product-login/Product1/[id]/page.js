@@ -9,16 +9,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Link from 'next/link'
-
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-//supabase
-//import { createClient } from '../../../utils/supabase/client'
-
+import ProductDetail from '@/src/app/responsive/product/ProductDetail';
 //paypal
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 
 function page({params}) {
   const unwrappedParams = use(params);
@@ -31,18 +28,19 @@ function page({params}) {
 
   const [totalValue,setTotalValue] = useState(items[paramid].priceNum)
   const quantityRef = useRef(quantity); //THIS FIX THE BUG that paypal value doesnt update
-  //const supabase = createClient()
   const [userEmail,setUserEmail] = useState()
+   const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    handleResize() // initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
 
-    /*supabase.auth.getUser().then(({ data: { user }, error }) => {
-    if (error) {
-            console.error(error);
-    } else {
-            setUserEmail(user.email);
-            console.log(userEmail)
-        }
-    });  //基于bug运行 Error fetching user: AuthSessionMissingError: Auth session missing!*/
 
     useEffect(() => {
         quantityRef.current = quantity; // Update the ref whenever the quantity changes
@@ -169,8 +167,39 @@ function page({params}) {
     }
 
   return (
+    <div>
+        {isMobile ? (
+        // Mobile view
+        <div className="flex flex-col space-y-4">
+          <h1 className="text-2xl font-bold text-[#1D1D1F]">{items[paramid].name}</h1>
+          <p className="text-gray-500 text-sm">Typ: {items[paramid].serialNum}</p>
 
-    <div className="bg-white h-auto">
+          <video className="w-full h-auto rounded-xl shadow" controls muted>
+            <source src={`/p${parseInt(paramid) + 1}.mp4`} type="video/mp4" />
+          </video>
+
+          <div className="bg-gray-50 rounded-xl p-4 shadow-sm">
+            <h2 className="font-semibold text-lg text-[#1D1D1F] mb-2">Product Details</h2>
+            <table className="w-full text-sm text-gray-700">
+              <tbody>
+                {Object.entries(items[paramid])
+                  .filter(([key]) => !['priceNum', 'src'].includes(key))
+                  .map(([key, value]) => (
+                    <tr key={key} className="border-b border-gray-200">
+                      <td className="font-medium p-2 capitalize">{key}</td>
+                      <td className="p-2">{value}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="text-center mt-4">
+            <p className="text-2xl font-bold text-[#1D1D1F]">{items[paramid].price} €</p>
+            <p className="text-xs text-gray-500 mt-1">incl. VAT</p>
+          </div>
+        </div>
+      ) : (<div className="bg-white h-auto">
 
         <div className='px-[15vw] border-b border-blue-400 border-b-[5px]' style={{height:"170px"}}>
                     <Swiper
@@ -707,7 +736,9 @@ function page({params}) {
 
 
 
+        </div>)}
     </div>
+
   )
 }
 

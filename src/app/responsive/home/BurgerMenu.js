@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import ShoppingCart from "../../[locale]/Product-login/shoppingCart";
+import Loggout from '../../[locale]/Product-login/loggout'
 
 export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
@@ -40,7 +41,6 @@ export default function BurgerMenu() {
     }),
   };
 
-  // Load cart from localStorage + listen for updates
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCart(storedCart);
@@ -55,18 +55,32 @@ export default function BurgerMenu() {
 
   return (
     <div className="relative z-50">
-      {/* Top bar */}
-      <div className="flex justify-between items-center p-4 fixed w-full top-0 left-0 z-50 bg-white text-customBlue shadow-sm">
-        <motion.img
-          src="/tm2.png"
-          alt="Logo"
-          className="h-12 cursor-pointer"
-          whileHover={{ scale: 1.05 }}
-        />
+      {/* ------------------- MOBILE HEADER ------------------- */}
+      <div className="md:hidden">
+        <div className="flex justify-between items-center p-4 fixed w-full top-0 left-0 z-50 bg-white text-customBlue shadow-sm">
+          {/* Logo */}
+          <motion.img
+            src="/tm2.png"
+            alt="Logo"
+            className="h-12 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+          />
+          {/* Burger */}
+          <motion.button
+            className="text-3xl font-light cursor-pointer text-customBlue"
+            onClick={() => setOpen(!open)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            ☰
+          </motion.button>
+        </div>
+      </div>
 
-        {/* Burger button */}
+      {/* ------------------- DESKTOP BURGER ONLY ------------------- */}
+      <div className="hidden md:block">
         <motion.button
-          className="text-3xl font-light cursor-pointer text-customBlue"
+          className="fixed top-4 right-4 z-50 text-3xl font-light text-customBlue bg-white rounded-full p-2 shadow-md"
           onClick={() => setOpen(!open)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
@@ -75,7 +89,7 @@ export default function BurgerMenu() {
         </motion.button>
       </div>
 
-      {/* Overlay */}
+      {/* ------------------- OVERLAY MENU ------------------- */}
       <AnimatePresence>
         {open && (
           <>
@@ -85,7 +99,7 @@ export default function BurgerMenu() {
               animate={{ x: 0, opacity: 1, transition: { type: "spring", stiffness: 80, damping: 25 } }}
               exit={{ x: "100%", opacity: 0, transition: { type: "spring", stiffness: 80, damping: 25 } }}
             >
-              {/* Close Button */}
+              {/* Close */}
               <motion.button
                 className="absolute top-6 right-6 text-3xl text-customBlue cursor-pointer"
                 onClick={() => setOpen(false)}
@@ -118,11 +132,8 @@ export default function BurgerMenu() {
                 </motion.div>
               ))}
 
-              {/* Bottom-right icons */}
+              {/* Language Switcher */}
               <div className="absolute bottom-6 right-6 flex flex-col items-end space-y-4">
-
-
-                {/* Language Switcher */}
                 <div className="relative">
                   <button
                     onClick={() => setLangOpen(!langOpen)}
@@ -152,6 +163,21 @@ export default function BurgerMenu() {
                   )}
                 </div>
               </div>
+
+              {/* Shopping Cart pinned bottom-right */}
+              <div className="fixed bottom-10 right-6 z-50">
+                <ShoppingCart
+                  cart={cart}
+                  overlayOpen={open}
+                  setOverlayOpen={setOpen}
+                />
+              </div>
+
+                <Loggout 
+                overlayOpen={open}
+                setOverlayOpen={setOpen}
+                />
+
             </motion.div>
 
             {/* Backdrop */}

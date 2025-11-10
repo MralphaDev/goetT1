@@ -1,37 +1,52 @@
 "use client";
 
-import { useRouter,usePathname} from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
-const SignOutButton = () => {
+const SignOutButton = ({
+  overlayOpen: propOverlayOpen,
+  setOverlayOpen: propSetOverlayOpen,
+}) => {
   const router = useRouter();
-const pathname = usePathname(); // ✅ inside component
-     // Split the path and take only the first segment after /
-  const segments = pathname.split("/"); // ["", "en", "Product-login", "Product1"]
-  const locale = segments[1]; // "en", "de", "it"
+  const pathname = usePathname();
+  const segments = pathname.split("/"); 
+  const locale = segments[1] || "en";
 
-  const loginPath = `/${locale}/login`; // "/en/login"
+  const loginPath = `/${locale}/login`;
 
   const handleSignOut = () => {
-    // Clear login state
     localStorage.setItem("loggedIn", "false");
     localStorage.removeItem("user");
-
-    // Optionally reload or redirect
-    router.push(loginPath); // replace "en" with dynamic locale if needed
+    router.push(loginPath);
+    if (propSetOverlayOpen) propSetOverlayOpen(false);
   };
 
+  const overlayOpen = propOverlayOpen !== undefined ? propOverlayOpen : false;
+
   return (
-    <div className="fixed top-30 right-4 z-50">
-      <button
-        className="block bg-[#28A8DE] text-white py-2 px-4 rounded shadow hover:bg-blue-500 transition duration-300"
-        onClick={handleSignOut}
-      >
-        Sign out
-      </button>
-    </div>
+    <>
+      {/* Desktop: always show */}
+      <div className="hidden md:block fixed top-8 right-4 z-50">
+        <button
+          className="bg-[#28A8DE] text-white py-2 px-4 rounded shadow hover:bg-blue-500 transition duration-300"
+          onClick={handleSignOut}
+        >
+          Sign out
+        </button>
+      </div>
+
+      {/* Mobile: show only if overlayOpen */}
+      {overlayOpen && (
+        <div className="block md:hidden fixed top-25 right-4 z-50">
+          <button
+            className="bg-[#28A8DE] text-white py-2 px-4 rounded shadow hover:bg-blue-500 transition duration-300"
+            onClick={handleSignOut}
+          >
+            Sign out
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 
 export default SignOutButton;
-
-  

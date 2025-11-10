@@ -14,7 +14,7 @@ const MobileProductPage1 = () => {
     const filters1 = ["DN25",'DN27','DN28','DN29','DN30','DN31','DN32'];
     const filters2 = ["2/2","3/2","5/2"];
     const filters3 = ["12V-DC","24V-DC","110V","230V"];
-    const filters4 = ["Aluminium",'PA','PP','PVC'];
+    const filters4 = ['Aluminium','PA','PP','PVC'];
     const filters5 = ['EPDM','FKM','FPM','NBR'];
     const filters6 = ['Federraumbelüftung','NC','NO'];
     const filters7 = ['direktgesteuert','servorgesteurt','zwanggesteuert'];
@@ -23,7 +23,6 @@ const MobileProductPage1 = () => {
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filteredItems, setFilteredItems] = useState(items);
 
-    // Temp filter selections
     const [tempFilters, setTempFilters] = useState(filters1);
     const [tempFilters2, setTempFilters2] = useState(filters2);
     const [tempFilters3, setTempFilters3] = useState(filters3);
@@ -38,15 +37,12 @@ const MobileProductPage1 = () => {
     const modalRef = useRef(null);
 
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
-
-    // Cart
     const [cart, setCart] = useState([]);
     const [inCart, setInCart] = useState(false);
 
     useEffect(() => {
         const loggedIn = localStorage.getItem("loggedIn") === "true";
         setIsLoggedIn(loggedIn);
-
         const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
         setCart(storedCart);
     }, []);
@@ -82,16 +78,12 @@ const MobileProductPage1 = () => {
     const handleModalOpen = (id) => setModalOpen(true);
     const handleModalClose = () => setModalOpen(false);
 
-    // Cart handlers
     const increaseQuantity = (name) => {
         const price = items.find((i) => i.name === name)?.price || 0;
         const updated = [...cart];
         const idx = updated.findIndex(i => i.name === name);
-        if (idx >= 0) {
-            updated[idx].quantity += 1;
-        } else {
-            updated.push({ name, quantity: 1, price });
-        }
+        if (idx >= 0) updated[idx].quantity += 1;
+        else updated.push({ name, quantity: 1, price });
         setCart(updated);
         localStorage.setItem("cart", JSON.stringify(updated));
         setInCart(true);
@@ -106,11 +98,8 @@ const MobileProductPage1 = () => {
 
     const handleCartClick = (item) => {
         const exists = cart.find(i => i.name === item.name);
-        if(exists){
-            resetQuantity(item.name);
-        } else {
-            increaseQuantity(item.name);
-        }
+        if(exists) resetQuantity(item.name);
+        else increaseQuantity(item.name);
     };
 
     const allFilters = [
@@ -125,82 +114,114 @@ const MobileProductPage1 = () => {
     ];
 
     return (
-        <div className="w-full bg-white min-h-screen p-4">
-            {isLoggedIn && <Loggout/>}
+        <div className="w-full min-h-screen">
 
-            {/* Mobile Filter Button */}
-            <div className="w-full flex justify-center mb-4 mt-20">
-                <button
-                    onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-                    className="w-48 h-12 bg-blue-500 text-white rounded-lg"
-                >
-                    {mobileFilterOpen ? 'Close Filters' : 'Open Filters'}
-                </button>
+            {/* First Hero Page */}
+            <div 
+                className="w-full h-screen flex flex-col items-center justify-center text-white text-center relative"
+                style={{backgroundImage: `url(https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671)`, backgroundSize: 'cover', backgroundPosition: 'center'}}
+            >
+                <h1 className="text-5xl font-bold animate-fadeIn">PRODUCT </h1>
+                <p className="mt-4 text-lg animate-fadeIn delay-300">High quality, premium valve solution</p>
+                <div className="absolute bottom-20 animate-bounce">
+                    <span className="text-2xl">&#x25BC;</span>
+                </div>
             </div>
 
-            {/* Mobile Filter Panel */}
-            {mobileFilterOpen && (
-                <div className="flex flex-col gap-4 mb-4">
-                    {allFilters.map((group, i) => (
-                        <div key={i} className="flex flex-col w-full">
-                            <div className="mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">{group.label}</div>
-                            {group.items.map((cat, id) => (
-                                <label key={id} className="flex items-center mb-2">
-                                    <input
-                                        type="checkbox"
-                                        onChange={() => handleSelect(cat)}
-                                        checked={selectedFilters.includes(cat)}
-                                        className="mr-2"
-                                    />
-                                    {cat}
-                                </label>
-                            ))}
+            <div className="w-full bg-white p-4">
+                {isLoggedIn && <Loggout/>}
+
+                {/* Mobile Filter Button */}
+                <div className="w-full flex justify-center mb-4 mt-4">
+                    <button
+                        onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+                        className="w-48 h-12 bg-blue-500 text-white rounded-lg"
+                    >
+                        {mobileFilterOpen ? 'Close Filters' : 'Open Filters'}
+                    </button>
+                </div>
+
+                {/* Mobile Filter Panel */}
+                {mobileFilterOpen && (
+                    <div className="flex flex-col gap-4 mb-4">
+                        {allFilters.map((group, i) => (
+                            <div key={i} className="flex flex-col w-full">
+                                <div className="mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">{group.label}</div>
+                                {group.items.map((cat, id) => (
+                                    <label key={id} className="flex items-center mb-2">
+                                        <input
+                                            type="checkbox"
+                                            onChange={() => handleSelect(cat)}
+                                            checked={selectedFilters.includes(cat)}
+                                            className="mr-2"
+                                        />
+                                        {cat}
+                                    </label>
+                                ))}
+                            </div>
+                        ))}
+                        {selectedFilters.length > 0 && (
+                            <button
+                                onClick={resetFilters}
+                                className="w-32 h-10 bg-red-500 text-white rounded-lg"
+                            >
+                                Cancel All
+                            </button>
+                        )}
+                    </div>
+                )}
+
+                {/* Product list */}
+                <div className="flex flex-col space-y-6 mt-4">
+                    {filteredItems.map((item, idx) => (
+                        <div key={idx} className="flex flex-col bg-gray-50 p-3 rounded shadow-md">
+                            <div className="w-full h-40 flex items-center justify-center overflow-hidden rounded mb-2">
+                                <img src={item.src} className="object-contain w-full h-full" onClick={() => handleModalOpen(idx)} />
+                            </div>
+                            <div className="text-blue-600 font-bold">{item.name}</div>
+                            <div className="flex justify-between mt-2">
+                                <span>{isLoggedIn ? `${item.price}` : <Link href={loginPath}>Login to view</Link>}</span>
+                                {isLoggedIn && (
+                                    <button
+                                        onClick={() => handleCartClick(item)}
+                                        className={`w-32 h-10 rounded-lg text-white ${cart.find(i=>i.name===item.name) ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-400 hover:bg-blue-600'}`}
+                                    >
+                                        {cart.find(i=>i.name===item.name) ? 'Remove item' : 'Add to Cart'}
+                                    </button>
+                                )}
+                            </div>
+                            <Link href={`../Product-login/Product1/${idx}`} className="text-sm mt-2 text-blue-600">View Details</Link>
                         </div>
                     ))}
-                    {selectedFilters.length > 0 && (
-                        <button
-                            onClick={resetFilters}
-                            className="w-32 h-10 bg-red-500 text-white rounded-lg"
-                        >
-                            Cancel All
-                        </button>
-                    )}
                 </div>
-            )}
 
-            {/* Product list */}
-            <div className="flex flex-col space-y-6 mt-4">
-                {filteredItems.map((item, idx) => (
-                    <div key={idx} className="flex flex-col bg-gray-50 p-3 rounded shadow-md">
-                        <img src={item.src} className="w-full h-40 object-cover rounded mb-2" onClick={() => handleModalOpen(idx)} />
-                        <div className="text-blue-600 font-bold">{item.name}</div>
-                        <div className="flex justify-between mt-2">
-                            <span>{isLoggedIn ? `${item.price}` : <Link href={loginPath}>Login to view</Link>}</span>
-                            {isLoggedIn && (
-                                <button
-                                    onClick={() => handleCartClick(item)}
-                                    className={`w-32 h-10 rounded-lg text-white ${cart.find(i=>i.name===item.name) ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-400 hover:bg-blue-600'}`}
-                                >
-                                    {cart.find(i=>i.name===item.name) ? 'Remove item' : 'Add to Cart'}
-                                </button>
-                            )}
+                {/* Modal */}
+                {modalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className="bg-white w-11/12 h-4/5 rounded p-2 flex flex-col">
+                            <button onClick={handleModalClose} className="self-end bg-red-500 text-white px-2 py-1 rounded">Close</button>
+                            <div ref={modalRef} className="flex-1 w-full"></div>
                         </div>
-                        <Link href={`../Product-login/Product1/${idx}`} className="text-sm mt-2 text-blue-600">View Details</Link>
                     </div>
-                ))}
+                )}
+
+                <ShoppingCart cart={cart} />
             </div>
 
-            {/* Modal */}
-            {modalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <div className="bg-white w-11/12 h-4/5 rounded p-2 flex flex-col">
-                        <button onClick={handleModalClose} className="self-end bg-red-500 text-white px-2 py-1 rounded">Close</button>
-                        <div ref={modalRef} className="flex-1 w-full"></div>
-                    </div>
-                </div>
-            )}
-
-            <ShoppingCart cart={cart} />
+            {/* Animations */}
+            <style jsx>{`
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(-10px);}
+                    to { opacity: 1; transform: translateY(0);}
+                }
+                .animate-fadeIn { animation: fadeIn 1s ease forwards; }
+                .delay-300 { animation-delay: 0.3s; }
+                .animate-bounce { animation: bounce 1s infinite; }
+                @keyframes bounce {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-10px); }
+                }
+            `}</style>
         </div>
     )
 }

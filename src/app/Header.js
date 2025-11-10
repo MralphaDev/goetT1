@@ -4,6 +4,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { items } from "./[locale]/Product-login/Product1/items";
 import Link from "next/link";
+import BurgerMenu from './responsive/home/BurgerMenu';
+import Loggout from '../app/[locale]/Product-login/loggout'
 
 export default function Header() {
   const pathname = usePathname();
@@ -14,13 +16,14 @@ export default function Header() {
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const inputRef = useRef(null);
   const links = [
-  { name: "Goetvalve", href: `/${locale}/` },
-  { name: "Company", href: `/${locale}/Company` },
-  { name: "Products", href: `/${locale}/Product-login/Product1` },
-  { name: "Applications", href: `/${locale}/Applications` },
-  { name: "Service&Support", href: `/${locale}/Service` },
-  { name: "Contact", href: `/${locale}/Contact` },
-];
+    { name: "Goetvalve", href: `/${locale}/` },
+    { name: "Company", href: `/${locale}/Company` },
+    { name: "Products", href: `/${locale}/Product-login/Product1` },
+    { name: "Applications", href: `/${locale}/Applications` },
+    { name: "Service&Support", href: `/${locale}/Service` },
+    { name: "Contact", href: `/${locale}/Contact` },
+  ];
+
   // Update suggestions as user types
   useEffect(() => {
     if (query.trim() === "") {
@@ -34,7 +37,7 @@ export default function Header() {
         item.serialNum.toLowerCase().includes(query.toLowerCase()) ||
         item.category.some((c) => c.toLowerCase().includes(query.toLowerCase()))
       )
-      .slice(0, 5); // limit suggestions
+      .slice(0, 5);
     setSuggestions(matches);
     setHighlightIndex(-1);
   }, [query]);
@@ -65,7 +68,7 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6 relative">
         {/* Logo */}
         <motion.img
           src="/tm2.png"
@@ -75,7 +78,7 @@ export default function Header() {
           transition={{ type: "spring", stiffness: 300 }}
         />
 
-        {/* Futuristic Wide Search Bar */}
+        {/* Search Bar */}
         <motion.form
           className="relative flex-1 mx-10"
           onSubmit={handleSearch}
@@ -95,10 +98,7 @@ export default function Header() {
           />
           <motion.button
             type="submit"
-           className="absolute right-1 top-1/2 -translate-y-1/2 
-           bg-gray-200 text-gray-800 px-5 py-1.5 rounded-full shadow-lg text-base"
-
-
+            className="absolute right-1 top-1/2 -translate-y-1/2 bg-gray-200 text-gray-800 px-5 py-1.5 rounded-full shadow-lg text-base"
             whileHover={{ scale: 1.1, boxShadow: "0 0 20px rgba(59,130,246,0.6)" }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -106,44 +106,42 @@ export default function Header() {
           </motion.button>
 
           {/* Autocomplete Suggestions */}
-<AnimatePresence>
-  {suggestions.length > 0 && (
-    <motion.ul
-      initial={{ opacity: 0, y: -5 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -5 }}
-      className="absolute top-full mt-2 w-full bg-white shadow-xl rounded-2xl overflow-hidden z-50 border border-gray-200"
-    >
-      {suggestions.map((item, idx) => (
-        <motion.li
-          key={item.serialNum + idx}
-          onClick={() => router.push(`/${locale}/Product-login/Product1/${item.index}`)}
-          whileHover={{ scale: 1.02, backgroundColor: "#eff6ff" }}
-          className={`px-5 py-3 cursor-pointer transition-all duration-150 font-medium text-gray-700 ${
-            idx === highlightIndex ? "bg-blue-50 text-blue-600" : ""
-          }`}
-        >
-          {item.name}
-        </motion.li>
-      ))}
-    </motion.ul>
-  )}
-</AnimatePresence>
+          <AnimatePresence>
+            {suggestions.length > 0 && (
+              <motion.ul
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                className="absolute top-full mt-2 w-full bg-white shadow-xl rounded-2xl overflow-hidden z-50 border border-gray-200"
+              >
+                {suggestions.map((item, idx) => (
+                  <motion.li
+                    key={item.serialNum + idx}
+                    onClick={() => router.push(`/${locale}/Product-login/Product1/${item.index}`)}
+                    whileHover={{ scale: 1.02, backgroundColor: "#eff6ff" }}
+                    className={`px-5 py-3 cursor-pointer transition-all duration-150 font-medium text-gray-700 ${idx === highlightIndex ? "bg-blue-50 text-blue-600" : ""}`}
+                  >
+                    {item.name}
+                  </motion.li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
         </motion.form>
 
         {/* Navigation Links */}
-        <nav className="flex space-x-8">
-              {links.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  style={{ color: "gray", fontWeight: "lighter" }}
-                >
-                  {link.name}
-                </Link>
-              ))}
+        <nav className="hidden md:flex space-x-8">
+          {links.map((link) => (
+            <Link key={link.name} href={link.href} className="text-gray-500 font-light">
+              {link.name}
+            </Link>
+          ))}
         </nav>
       </div>
+        
+
+          <Loggout/>
+
     </header>
   );
 }

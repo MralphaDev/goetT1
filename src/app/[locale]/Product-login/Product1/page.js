@@ -328,7 +328,7 @@ const resetQuantity = (name) => {
     return (
         <>
         {device === 'pc' && (<div style={{height:"auto", width:"100vw",backgroundColor:"white"}}>
-            {isLoggedIn&&<Loggout/>}
+            {/*isLoggedIn&&<Loggout/>*/}
 
             {/*Swiper category section*/}
             <div className='px-[15vw] border-b border-blue-400 border-b-[5px]' style={{height:"200px"}}>
