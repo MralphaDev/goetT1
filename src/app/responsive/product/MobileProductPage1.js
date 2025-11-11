@@ -43,10 +43,16 @@ const MobileProductPage1 = () => {
     const [inCart, setInCart] = useState(false);
 
     useEffect(() => {
-        const loggedIn = localStorage.getItem("loggedIn") === "true";
+    const stored = localStorage.getItem("loggedIn");
+    const loggedIn = stored === null ? true : stored === "true";
+    setIsLoggedIn(loggedIn);
+
+    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCart(storedCart);
+        /*const loggedIn = localStorage.getItem("loggedIn") === "true";
         setIsLoggedIn(loggedIn);
         const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-        setCart(storedCart);
+        setCart(storedCart);*/
     }, []);
 
     const handleSelect = (category) => {
@@ -133,7 +139,7 @@ const MobileProductPage1 = () => {
             </div>
 
             <div className="w-full bg-white p-4">
-                {isLoggedIn && <Loggout/>}
+                {/*isLoggedIn && <Loggout/>*/}
 
                 {/* Mobile Filter Button */}
                 <div className="w-full flex justify-center mb-4 mt-4">
