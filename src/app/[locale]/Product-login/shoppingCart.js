@@ -19,7 +19,7 @@ export default function ShoppingCart({
   // Track user click on cart icon
   const [showCartContent, setShowCartContent] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [localCart, setLocalCart] = useState([]);
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
