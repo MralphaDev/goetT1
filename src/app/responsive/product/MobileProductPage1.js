@@ -44,6 +44,7 @@ const MobileProductPage1 = () => {
 
     useEffect(() => {
 
+        const stored = localStorage.getItem("loggedIn");
         const loggedIn = stored === null ? true : stored === "true";
         setIsLoggedIn(loggedIn);
         const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");

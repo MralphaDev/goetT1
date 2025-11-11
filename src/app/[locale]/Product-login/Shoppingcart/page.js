@@ -23,7 +23,7 @@ export default function ShoppingCart({ cart = [] }) {
     setLocalCart(storedCart);
   }, [cart]); // refresh when prop changes
 
-  if (!isLoggedIn) return null;
+  //if (!isLoggedIn) return null;
 
   const totalItems = localCart.reduce((sum, item) => sum + item.quantity, 0);
 
