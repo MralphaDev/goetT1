@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function ShoppingCart({ cart = [] }) {
   const [overlayOpen, setOverlayOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [localCart, setLocalCart] = useState([]);
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
