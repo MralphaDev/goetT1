@@ -34,7 +34,7 @@ const MobileProductPage1 = () => {
     const [tempFilters8, setTempFilters8] = useState(filters8);
     const [tempFilters9,setTempFilters9] = useState(filters9)// Initialize with all filters9
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [modalOpen, setModalOpen] = useState(false);
     const modalRef = useRef(null);
 
