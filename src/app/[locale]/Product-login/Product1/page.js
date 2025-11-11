@@ -68,7 +68,7 @@ const YourPage =  () => {
 
     //login state
     const [ID,setID] = useState()
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+    const [isLoggedIn, setIsLoggedIn] = useState(true); // State to track login status, TESTING MOBILE FORNOW
 
     // modal state
     const [modalOpen,setModalOpen] = useState(false)

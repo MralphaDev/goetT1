@@ -67,7 +67,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm">
+    <header className="bg-white shadow-lg sticky top-0 z-20 backdrop-blur-sm">
       <div className="container mx-auto flex justify-between items-center py-4 px-6 relative">
         {/* Logo */}
         <motion.img

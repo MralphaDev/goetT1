@@ -586,7 +586,7 @@ function page({params}) {
         isOpen ? 'translate-x-0' : 'translate-x-full'
     }`}
 >
-    <div className="flex flex-col justify-between h-full p-[30px]"> {/* Ensure the container takes full height */}
+    <div className="flex flex-col justify-between h-full p-[30px] z-20"> {/* Ensure the container takes full height */}
         <div>
             <h2 className="text-2xl font-bold mb-2 text-lightBlue">Warenkorb</h2>
             <h3 className="text-gray-600 mb-4">{quantity} Positionen</h3>
