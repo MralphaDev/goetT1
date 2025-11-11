@@ -43,16 +43,11 @@ const MobileProductPage1 = () => {
     const [inCart, setInCart] = useState(false);
 
     useEffect(() => {
-    const stored = localStorage.getItem("loggedIn");
-    const loggedIn = stored === null ? true : stored === "true";
-    setIsLoggedIn(loggedIn);
 
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCart(storedCart);
-        /*const loggedIn = localStorage.getItem("loggedIn") === "true";
+        const loggedIn = stored === null ? true : stored === "true";
         setIsLoggedIn(loggedIn);
         const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-        setCart(storedCart);*/
+        setCart(storedCart);
     }, []);
 
     const handleSelect = (category) => {
