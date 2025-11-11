@@ -36,7 +36,7 @@ export default function ShoppingCart({
     setLocalCart(storedCart);
   }, [cart]);
 
-  //if (!isLoggedIn) return null;
+  if (!isLoggedIn) return null;
 
   const totalItems = localCart.reduce((sum, item) => sum + item.quantity, 0);
 

@@ -208,42 +208,10 @@ export default function CheckoutPage() {
                                       ],
                                     })
                                   }
-                              onApprove={async (data, actions) => {
-                                await actions.order.capture();
-
-                                const purchaseData = {
-                                  name: userData.identity,
-                                  email: userData.email,
-                                  cart: cart,
-                                  total: totalPrice,
-                                  orderNumber: orderNumber // ✅ include order number
-                                };
-
-                                try {
-                                  // save purchase
-                                  const saveRes = await fetch("/api/savePurchase", {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify(purchaseData),
-                                  });
-                                  if (!saveRes.ok) throw new Error("Failed to save purchase");
-
-                                  // send confirmation email
-                                  const emailRes = await fetch("/api/sendEmail", {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify(purchaseData),
-                                  });
-                                  if (!emailRes.ok) throw new Error("Email API failed");
-                                } catch (err) {
-                                  console.error(err);
-                                }
-
-                                localStorage.removeItem("cart");
-                                setCart([]);
-                                setShowPayPal(false);
-                                setPaymentCompleted(true);
-                              }}
+                                  onApprove={async (data, actions) => {
+                                    await actions.order.capture();
+                                    await handlePurchaseComplete();
+                                  }}
                                 />
                               </PayPalScriptProvider>
                             )}
