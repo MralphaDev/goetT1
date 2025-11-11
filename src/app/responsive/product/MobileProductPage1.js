@@ -186,8 +186,8 @@ const MobileProductPage1 = () => {
                             </div>
                             <div className="text-blue-600 font-bold">{item.name}</div>
                             <div className="flex justify-between mt-2">
-                                <span>{isLoggedIn ? `${item.price}` : <Link href={loginPath}>Login to view</Link>}</span>
-                                {isLoggedIn && (
+                                <span>{true ? `${item.price}` : <Link href={loginPath}>Login to view</Link>}</span>
+                                {true && (
                                     <button
                                         onClick={() => handleCartClick(item)}
                                         className={`w-32 h-10 rounded-lg text-white ${cart.find(i=>i.name===item.name) ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-400 hover:bg-blue-600'}`}
