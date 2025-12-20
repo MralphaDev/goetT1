@@ -11,6 +11,25 @@ export default function BurgerMenu() {
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [cart, setCart] = useState([]);
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+      useEffect(() => {
+      const logged = localStorage.getItem("loggedIn") === "true";
+      setIsLoggedIn(logged);
+      
+    }, []);
+  
+      // 监听 localStorage 变化,有bug.local storage 变化只在刷新后有效 ，以后尽量不要localstorage了，改用context或者直接从后端获取状态
+    useEffect(() => {
+      const handleStorageChange = (e) => {
+        if (e.key === "loggedIn") {
+          setIsLoggedIn(e.newValue === "true");
+          
+        }
+      };
+      window.addEventListener("storage", handleStorageChange);
+      return () => window.removeEventListener("storage", handleStorageChange);
+    }, []);
 
   const flags = { en: "🇬🇧", de: "🇩🇪", it: "🇮🇹" };
   const router = useRouter();
@@ -173,10 +192,12 @@ export default function BurgerMenu() {
                 />
               </div>
 
-                <Loggout 
-                overlayOpen={open}
-                setOverlayOpen={setOpen}
-                />
+                {isLoggedIn && (
+                  <Loggout
+                    overlayOpen={open}
+                    setOverlayOpen={setOpen}
+                  />
+                )}
 
             </motion.div>
 

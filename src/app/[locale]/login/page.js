@@ -74,11 +74,12 @@ export default function Home() {
     if (showGoet) {
       // Redirect 0.5s after GOETVALVE appears
       const redirectTimeout = setTimeout(() => {
-        router.push(`/${locale}/Product-login/Product1`);
+        window.location.reload();
+        window.location.href = `/${locale}/Product-login/Product1`;
       }, 1200);
       return () => clearTimeout(redirectTimeout);
     }
-  }, [showGoet, locale, router]);
+  }, [showGoet, locale]);
 
   const handleLogout = () => {
     setLoggedIn(false);

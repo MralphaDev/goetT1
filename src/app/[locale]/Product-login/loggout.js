@@ -16,7 +16,8 @@ const SignOutButton = ({
   const handleSignOut = () => {
     localStorage.setItem("loggedIn", "false");
     localStorage.removeItem("user");
-    router.push(loginPath);
+    window.location.reload(); // 强制刷新页面
+    window.location.href = loginPath; // 刷新并跳转
     if (propSetOverlayOpen) propSetOverlayOpen(false);
   };
 
