@@ -1,4 +1,4 @@
-import { getConnection } from "@/src/lib/db";
+import { getConnection } from "../../../lib/db";
 
 export async function POST(req) {
   try {

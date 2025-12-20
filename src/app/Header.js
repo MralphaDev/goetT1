@@ -2,12 +2,20 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { items } from "./[locale]/Product-login/Product1/items";
+//import { items } from "./[locale]/Product-login/Product1/items";
 import Link from "next/link";
 import BurgerMenu from './responsive/home/BurgerMenu';
 import Loggout from '../app/[locale]/Product-login/loggout'
 
 export default function Header() {
+  const [items, setItems] = useState([]);
+    useEffect(() => {
+      fetch("/api/products")
+          .then(res => res.json())
+          .then(data => {
+          setItems(data);          // 更新 items 状态
+          });
+      }, []);
   const pathname = usePathname();
   const locale = pathname?.split("/")[1] || "en";
   const router = useRouter();

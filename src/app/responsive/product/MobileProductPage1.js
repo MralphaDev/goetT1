@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { items } from "../../../app/[locale]/Product-login/Product1/items"; 
+//import { items } from "../../../app/[locale]/Product-login/Product1/items"; 
 import Link from 'next/link';
 import ShoppingCart from '../../../app/[locale]/Product-login/shoppingCart';
 import Loggout from '../../../app/[locale]/Product-login/loggout';
@@ -22,7 +22,15 @@ const MobileProductPage1 = () => {
     let filters9 = ['Solenoid','Pressure-actuated','liqnitro','liqnitrofilter','safetyValve']
 
     const [selectedFilters, setSelectedFilters] = useState([]);
-    const [filteredItems, setFilteredItems] = useState(items);
+    const [filteredItems, setFilteredItems] = useState([]);
+        useEffect(() => {
+        fetch("/api/products")
+            .then(res => res.json())
+            .then(data => {
+            setItems(data);          // 更新 items
+            setFilterItems(data);  // 更新 filteredItems
+            });
+        }, []);
 
     const [tempFilters, setTempFilters] = useState(filters1);
     const [tempFilters2, setTempFilters2] = useState(filters2);

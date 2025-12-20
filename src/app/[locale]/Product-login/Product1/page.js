@@ -2,7 +2,7 @@
 import React, { useState, useEffect,useRef} from 'react';
 
 // Import items
-import { items } from "../Product1/items"; 
+//import { items } from "../Product1/items"; 
 
 import { useRouter } from 'next/router';
 import { usePathname } from "next/navigation";
@@ -39,11 +39,22 @@ import Loggout from '../loggout'
 //https://www.youtube.com/watch?v=u1yr_HZivzk
 
 const YourPage =  () => {
+
     const t = useTranslations('Product1'); // Load "Category" namespace
-
+    const [items, setItems] = useState([]);
     const [selectedFilters,setSelectedFilters] = useState([])
-    const [filteredItems,setFilterItems] = useState(items)
+    const [filteredItems,setFilterItems] = useState([])
 
+    useEffect(() => {
+    fetch("/api/products")
+        .then(res => res.json())
+        .then(data => {
+        setItems(data);          // 更新 items
+        setFilterItems(data);  // 更新 filteredItems
+        });
+    }, []);
+    
+    console.log('itemsreceived',items)
     //filtering criteria 
     let filters1 = ["DN25",'DN27','DN28','DN29','DN30','DN31','DN32','DN33','DN34','DN35','DN36','DN37']
     let filters2 = ["2/2","3/2","5/2"]

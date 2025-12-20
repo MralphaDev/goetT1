@@ -5,9 +5,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { items } from '../../[locale]/Product-login/Product1/items';
+//import { items } from '../../[locale]/Product-login/Product1/items';
 
 function Page({ params }) {
+  const [items, setItems] = useState([]);
   const paramid = params.id;
   const [view, setView] = useState("description");
   const [quantity, setQuantity] = useState(1);
@@ -17,6 +18,14 @@ function Page({ params }) {
   const quantityRef = useRef(quantity);
 
   useEffect(() => {
+  fetch("/api/products")
+    .then(res => res.json())
+    .then(data => {
+      setItems(data);          // 更新 items
+    });
+}, []);
+
+  useEffect(() => { 
     quantityRef.current = quantity;
     setTotalValue((quantity * items[paramid].priceNum).toFixed(2));
   }, [quantity, paramid]);

@@ -1,6 +1,5 @@
 'use client'
 import {React,useState,useEffect,useRef,use} from 'react'
-import {items} from '../../Product1/items'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
@@ -18,6 +17,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 
 function page({params}) {
+  const [items, setItems] = useState([]);
   const unwrappedParams = use(params);
   const paramid = unwrappedParams.id;
   const [view, setView] = useState("description");
@@ -30,6 +30,15 @@ function page({params}) {
   const quantityRef = useRef(quantity); //THIS FIX THE BUG that paypal value doesnt update
   const [userEmail,setUserEmail] = useState()
    const [isMobile, setIsMobile] = useState(false)
+
+       useEffect(() => {
+       fetch("/api/products")
+           .then(res => res.json())
+           .then(data => {
+           setItems(data);          // 更新 items
+           setFilterItems(data);  // 更新 filteredItems
+           });
+       }, []);
 
   useEffect(() => {
     const handleResize = () => {
