@@ -9,6 +9,25 @@ import Loggout from '../app/[locale]/Product-login/loggout'
 
 export default function Header() {
   const [items, setItems] = useState([]);
+
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+    const logged = localStorage.getItem("loggedIn") === "true";
+    setIsLoggedIn(logged);
+  }, []);
+
+    // 监听 localStorage 变化,有bug.local storage 变化只在刷新后有效 ，以后尽量不要localstorage了，改用context或者直接从后端获取状态
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === "loggedIn") {
+        setIsLoggedIn(e.newValue === "true");
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
     useEffect(() => {
       fetch("/api/products")
           .then(res => res.json())
@@ -148,7 +167,7 @@ export default function Header() {
       </div>
         
 
-          <Loggout/>
+           {isLoggedIn && <Loggout />}
 
     </header>
   );
