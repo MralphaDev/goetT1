@@ -10,6 +10,7 @@ const MobileProductPage1 = () => {
     const locale = pathname.split("/")[1] || "de";
     const loginPath = `/${locale}/login`;
 
+
     // Filters
     const filters1 = ["DN25",'DN27','DN28','DN29','DN30','DN31','DN32'];
     const filters2 = ["2/2","3/2","5/2"];
@@ -21,6 +22,7 @@ const MobileProductPage1 = () => {
     const filters8 = ['0-10','10-20','20-30','30-40','40-50'];
     let filters9 = ['Solenoid','Pressure-actuated','liqnitro','liqnitrofilter','safetyValve']
 
+    const [items, setItems] = useState([]);
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
         useEffect(() => {
@@ -28,7 +30,7 @@ const MobileProductPage1 = () => {
             .then(res => res.json())
             .then(data => {
             setItems(data);          // 更新 items
-            setFilterItems(data);  // 更新 filteredItems
+            setFilteredItems(data);  // 更新 filteredItems
             });
         }, []);
 

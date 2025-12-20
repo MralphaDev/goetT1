@@ -17,28 +17,28 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 
 function page({params}) {
+ const unwrappedParams = use(params); // 这一步是关键
+  const paramid = unwrappedParams.id;  // 安全访问
   const [items, setItems] = useState([]);
-  const unwrappedParams = use(params);
-  const paramid = unwrappedParams.id;
   const [view, setView] = useState("description");
   const containerRef = useRef(null);
   const [showMessage, setShowMessage] = useState(false);
   const [quantity,setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
-
-  const [totalValue,setTotalValue] = useState(items[paramid].priceNum)
   const quantityRef = useRef(quantity); //THIS FIX THE BUG that paypal value doesnt update
+  const [totalValue,setTotalValue] = useState(0); // 默认 0
   const [userEmail,setUserEmail] = useState()
-   const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-       useEffect(() => {
-       fetch("/api/products")
-           .then(res => res.json())
-           .then(data => {
-           setItems(data);          // 更新 items
-           setFilterItems(data);  // 更新 filteredItems
-           });
-       }, []);
+  useEffect(() => {
+    fetch("/api/products") //从本地API路由获取数据,这里没错
+      .then(res => res.json())
+      .then(data => {
+        console.log("Fetched items:", data); // 检查数据
+        setItems(data);
+      })
+      .catch(err => console.error("Fetch error:", err));
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,128 +49,96 @@ function page({params}) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-
-
-    useEffect(() => {
-        quantityRef.current = quantity; // Update the ref whenever the quantity changes
-    }, [quantity]);
-
-    const calculateTotalValue = () => {
-        
-        return parseFloat(quantity * items[paramid].priceNum).toFixed(2) 
+  useEffect(() => {
+    quantityRef.current = quantity; // Update the ref whenever the quantity changes
+    if(items.length > 0 && items[paramid]){
+      const newTotalPrice = (quantity * items[paramid].priceNum).toFixed(2)
+      setTotalValue(newTotalPrice);
     }
+  }, [quantity, items, paramid]);
 
+  const calculateTotalValue = () => {
+    if(items.length === 0 || !items[paramid]) return 0;
+    return parseFloat(quantity * items[paramid].priceNum).toFixed(2) 
+  }
 
-    useEffect(() =>{
-        const newTotalPrice = calculateTotalValue();
-        console.log("test quantity"+ quantity)
-        console.log("test"+ totalValue)
-        setTotalValue(newTotalPrice);
-    },[quantity])
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
-
+  const toggleMenu = () => {
+      setIsOpen(!isOpen);
+  };
 
   const handleIncrease = () => {
-    setQuantity(prevQuantity => prevQuantity + 1); // Use previous state to increment, react auto provides current state as argument
-    };
+    setQuantity(prevQuantity => prevQuantity + 1);
+  };
 
-    // Function to decrease quantity
-    const handleDecrease = () => {
-        setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1)); // Decrement but not below 1
-    };
+  const handleDecrease = () => {
+      setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1));
+  };
 
   useEffect(() => {
     if (view === "viewer") {
-        // Only proceed if the ref is available
-        if (containerRef.current) {
+        if (containerRef.current && items.length > 0 && items[paramid]) {
             const scene = new THREE.Scene();
-            const width = containerRef.current.clientWidth; // Get the width of the modal
-            const height = containerRef.current.clientHeight; // Get the height of the modal
+            const width = containerRef.current.clientWidth; 
+            const height = containerRef.current.clientHeight; 
             
             const camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 2000);
             const renderer = new THREE.WebGLRenderer();
-            const gridHelper = new THREE.GridHelper(1000, 1000);
-            const light = new THREE.AmbientLight(0x404040, 1); // soft white light
+            const light = new THREE.AmbientLight(0x404040, 1); 
             const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 
             scene.add(directionalLight);
             scene.add(light);
 
-            // Only append the renderer if the ref is valid
             containerRef.current.appendChild(renderer.domElement);
             renderer.setSize(width, height);
-            scene.background = new THREE.Color(0xffffff); // White background
+            scene.background = new THREE.Color(0xffffff); 
             
             const controls = new OrbitControls(camera, renderer.domElement);
-            camera.position.set(50, 300, 50); // Move the camera back and up
+            camera.position.set(50, 300, 50);
             controls.update();
 
-            const loader = new GLTFLoader(); // Instantiate a loader
+            const loader = new GLTFLoader();
             loader.load(
-                `/demo${parseInt(paramid.id) + 1}.glb`,
+                `/demo${parseInt(paramid) + 1}.glb`,
                 function (glb) {
-                    console.log("Load successfully in product page");
                     glb.scene.position.set(0, 0, 0);
                     scene.add(glb.scene);
-                    animate(glb.scene);
+                    const animate = () => {
+                        requestAnimationFrame(animate);
+                        controls.update();
+                        glb.scene.rotation.y += 0.01;
+                        renderer.render(scene, camera);
+                    };
+                    animate();
                 },
-                undefined, // No progress function
+                undefined,
                 function (error) {
-                    console.log('An error occurred in product page');
-                    console.log("The ERROR IS: " + error);
+                    console.log('An error occurred in product page', error);
                 }
             );
 
-            /*const animate = () => {
-                requestAnimationFrame(animate);
-                controls.update();
-                renderer.render(scene, camera);
-                
-            };*/
-
-            const animate = (mesh) => {
-                requestAnimationFrame(() => animate(mesh)); // Recursively call animate
-                controls.update();
-                
-                // Update position or other properties of the mesh
-                mesh.rotation.y += 0.01; // Adjust the value to control the speed of rotation
-                
-                renderer.render(scene, camera);
-            };
-            
-            //animate();
-
             setShowMessage(true);
-
-            setTimeout(() => {
-                setShowMessage(false); // Hide the message after 2 seconds
-            }, 2000);
-
+            setTimeout(() => setShowMessage(false), 2000);
         } else {
-            console.warn('containerRef is not set');
+            console.warn('containerRef or items[paramid] not set');
         }
     }
-}, [view,paramid.id]); // THIS IS WHERE THE ISSUE IS!!!! view is one of the dependency Dependencies array to re-run on changes to view or params.id 
-   
-    //useEffect(() => {},[])
+}, [view, paramid, items]);
 
- 
-     //paypal
-     const initialOptions = {
-        clientId: "AVUCxrYI-UFeGL-HHLjmZBCTn5qt7vB7I6HuXcaujVesJ7e09O5F1ZrxfjJFmXA1nqXGOQ9dhc4xuPYC",
-        currency: 'EUR',
-        // Add other options as needed
-    };
+  const initialOptions = {
+      clientId: "AVUCxrYI-UFeGL-HHLjmZBCTn5qt7vB7I6HuXcaujVesJ7e09O5F1ZrxfjJFmXA1nqXGOQ9dhc4xuPYC",
+      currency: 'EUR',
+  };
 
-    function generateOrderNumber() {
-        const timestamp = Date.now().toString(); // Get current timestamp
-        const randomChars = Math.random().toString(36).substring(2, 8).toUpperCase(); // Generate random alphanumeric string
-        const orderNumber = `GoetValve-${timestamp}-${randomChars}`; // Combine them into order number format
-        return orderNumber;
-    }
+  function generateOrderNumber() {
+      const timestamp = Date.now().toString(); 
+      const randomChars = Math.random().toString(36).substring(2, 8).toUpperCase(); 
+      const orderNumber = `GoetValve-${timestamp}-${randomChars}`; 
+      return orderNumber;
+  }
+
+  // 渲染前安全判断
+  if( !items[paramid]) return <div>Loading...</div>; //这一步能解决异步问题的bug,不然item还没反回来就报错了。item要等到fetch完才有值
 
   return (
     <div>
@@ -215,143 +183,6 @@ function page({params}) {
 
 
       ) : (<div className="bg-white h-auto">
-
-        <div className='px-[15vw] border-b border-blue-400 border-b-[5px]' style={{height:"170px"}}>
-                    <Swiper
-                        // install Swiper modules
-                        modules={[Navigation, Pagination, A11y]}
-                        spaceBetween={50}
-                        slidesPerView={6}
-                        navigation
-                        //pagination={{ clickable: true }}
-                        scrollbar={{ draggable: true }}
-                        onSwiper={(swiper) => console.log(swiper)}
-                        onSlideChange={() => console.log('slide change')}
-                        >
-
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center cursor-pointer'>
-                                <Link href="/Product/Product1">
-                                    <img className='h-32 hover:scale-105 transition-transform duration-200' 
-                                    src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478">
-                                    </img>
-                                </Link>
-                               
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    category1
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        
-                        
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center cursor-pointer'>
-                                <Link href="/Product/Product2">
-                                    <img className='h-32 hover:scale-105 transition-transform duration-200' 
-                                    src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478">
-                                    </img>
-                                </Link>
-                               
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    category2
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                category3
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    category4
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    category4
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                category5
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    category6
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    Absperrsvalve
-                                </div>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    Absperrsvalve
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                        
-                        <SwiperSlide>
-                            <div>
-                            <div className='flex justify-center'>
-                                <img className='h-32' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
-                            </div>
-                                <div className='flex justify-center items-center text-gray-400'>
-                                    Absperrsvalve
-                                </div>
-                            </div>
-                        </SwiperSlide>
-            
-                    </Swiper>        
-        </div>
 
         {/*
         <video autoPlay loop muted className="object-cover w-full h-full">
