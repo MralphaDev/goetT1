@@ -42,8 +42,10 @@ const YourPage =  () => {
 
     const t = useTranslations('Product1'); // Load "Category" namespace
     const [items, setItems] = useState([]);
+
     const [selectedFilters,setSelectedFilters] = useState([])
     const [filteredItems,setFilterItems] = useState([])
+    //////both usestate need to be placed above useeffect for it to show! else wont work
 
     useEffect(() => {
     fetch("/api/products")
@@ -53,7 +55,7 @@ const YourPage =  () => {
         setFilterItems(data);  // 更新 filteredItems
         });
     }, []);
-    
+
     console.log('itemsreceived',items)
     //filtering criteria 
     let filters1 = ["DN25",'DN27','DN28','DN29','DN30','DN31','DN32','DN33','DN34','DN35','DN36','DN37']
