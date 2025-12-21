@@ -54,23 +54,33 @@ export default function Header() {
     { name: "Contact", href: `/${locale}/Contact` },
   ];
 
-  // Update suggestions as user types
-  useEffect(() => {
-    if (query.trim() === "") {
-      setSuggestions([]);
-      return;
-    }
-    const matches = items
-      .map((item, index) => ({ ...item, index }))
-      .filter((item) =>
+// Update suggestions as user types
+useEffect(() => {
+  if (query.trim() === "") {
+    setSuggestions([]);
+    return;
+  }
+
+  const matches = items
+    .map((item, index) => ({ ...item, index }))
+    .filter((item) => {
+      const category = Array.isArray(item.category)
+        ? item.category
+        : [item.category].filter(Boolean);
+
+      return (
         item.name.toLowerCase().includes(query.toLowerCase()) ||
         item.serialNum.toLowerCase().includes(query.toLowerCase()) ||
-        item.category.some((c) => c.toLowerCase().includes(query.toLowerCase()))
-      )
-      .slice(0, 5);
-    setSuggestions(matches);
-    setHighlightIndex(-1);
-  }, [query]);
+        category.some((c) =>
+          c.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    })
+    .slice(0, 5);
+
+  setSuggestions(matches);
+  setHighlightIndex(-1);
+}, [query, items]);
 
   useEffect(() => {
       console.log(items);}, [items]);

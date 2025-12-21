@@ -17,7 +17,7 @@ export async function POST(req) {
     hostingerForm.append("file", file, file.name);
 
     // 注意这里是你的完整 PHP 地址
-    const res = await fetch("https://linen-eland-918503.hostingersite.com/api/upload.php", {
+    const res = await fetch("https://beige-fish-147598.hostingersite.com/api/upload.php", {
       method: "POST",
       body: hostingerForm,
     });

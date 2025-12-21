@@ -13,7 +13,7 @@ export async function GET() {
   const items = rows.map(row => ({
     id: row.id,
     name: row.name,
-    category: row.category ? JSON.parse(row.category) : [],
+    category: row.category, // theres bug with JSON.parse so leave it as string
     src: row.src,
     price: row.price,
     priceNum: row.priceNum,
