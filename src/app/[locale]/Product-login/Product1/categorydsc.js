@@ -2,20 +2,23 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 
 function CategoryDsc({ tempFilters9 }) {
-  // Convert tempFilters9 object into a string for namespace
-  const activeCategory = String(tempFilters9|| 'Solenoid'); 
+  const activeCategory = String(tempFilters9 || 'Solenoid'); 
 
-  // Map category string to translation namespace
   const namespaceMap = {
-  Solenoid: 'Product1',
-  'Pressure-actuated': 'Pressureactuated',
-  liqnitro: 'liqnitro',
-  liqnitrofilter: 'liqnitrofilter',
-  safetyValve: 'safetyValve'
+    Solenoid: 'Product1',
+    'Pressure-actuated': 'Pressureactuated',
+    liqnitro: 'liqnitro',
+    liqnitrofilter: 'liqnitrofilter',
+    safetyValve: 'safetyValve'
   };
 
-
   const t = useTranslations(namespaceMap[activeCategory] || 'Product1');
+
+  // Split title at "for" if present
+  const rawTitle = t('title');
+  const titleParts = rawTitle.includes('non')
+    ? rawTitle.split(/(non.*)/)
+    : [rawTitle];
 
   return (
     <div>
@@ -27,20 +30,28 @@ function CategoryDsc({ tempFilters9 }) {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundImage:
-            "url('https://www.nieruf.de/thumbnail/14/3f/d1/1708518038/436_Category_800x800.png?ts=1711399957')",
+            "url('https://linen-eland-918503.hostingersite.com/image/ab5s.jpg')",
         }}
       >
+        {/* Overlay with second background */}
         <div
-          className="absolute inset-x-0 top-0.4 h-full opacity-70"
-          style={{ backgroundColor: 'var(--color-customBlue)' }}
+          className="absolute inset-0 h-full w-full opacity-70"
+          style={{ backgroundImage: "url('https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671')", backgroundSize: 'cover', backgroundPosition: 'center' }}
         />
 
         <div className="flex justify-center items-center h-full pr-[10%]">
-          <div className="flex justify-center relative w-1/2 z-11 text-white">
-            <h1 className="text-4xl font-bold">{t('title')}</h1>
+          <div className="flex justify-center relative w-1/2 z-11 text-white" style={{ fontFamily: 'Bahnschrift SemiBold SemiConden' }}>
+            <h1 className="text-6xl font-bold">
+              {titleParts.map((part, index) => (
+                <React.Fragment key={index}>
+                  {part.trim()}
+                  {index === 0 && titleParts.length > 1 && <br />}
+                </React.Fragment>
+              ))}
+            </h1>
           </div>
 
-          <div className="flex justify-center relative w-1/2 z-11 text-white">
+          <div className="flex justify-center relative w-1/2 z-11 text-white" style={{ fontFamily: 'Bahnschrift SemiBold SemiConden' }}>
             <p className="mt-2 text-justify w-[80%]">{t('description')}</p>
           </div>
         </div>

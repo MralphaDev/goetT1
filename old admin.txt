@@ -1,20 +1,14 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import "../../app/globals.css";
 import Sidebar from './Sidebar';
 import AddItemForm from './AddItemForm';
+import Dropdown from './Dropdown';
 
 const Admin = () => {
-  // -----------------------
-  // 所有条目列表
-  // -----------------------
   const [items, setItems] = useState([]);
-
-  // -----------------------
-  // 当前编辑/新增条目数据
-  // id 自动生成, 不允许用户修改
-  // -----------------------
   const [itemData, setItemData] = useState({
+    id: null,
     name: '',
     category: '',
     src: '',
@@ -45,50 +39,38 @@ const Admin = () => {
     Einbaulage: ''
   });
 
-  // -----------------------
-  // 密码认证
-  // -----------------------
   const [authPassword, setAuthPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // -----------------------
-  // 当前操作 add/edit/delete
-  // -----------------------
   const [action, setAction] = useState('add');
   const [editItemId, setEditItemId] = useState(null);
+  const [scenario, setScenario] = useState('solenoid');
+  const [currentTable, setCurrentTable] = useState('products');
 
-  const currentTable = 'products'; // 固定
+  const scenarioTableMap = {
+    solenoid: 'products',
+    'pressure-actuated': 'pressure-actuated',
+  };
 
-  // -----------------------
-  // 密码提交处理
-  // -----------------------
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (authPassword === '') setIsAuthenticated(true);
     else alert('Incorrect password');
   };
 
-  // -----------------------
-  // 表单输入变化
-  // -----------------------
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setItemData(prev => ({ ...prev, [name]: value || '' }));
+    setItemData(prev => ({ ...prev, [name]: value }));
   };
 
-  // -----------------------
-  // 加载数据库条目
-  // -----------------------
+  // Load items from MySQL
   useEffect(() => {
     fetch(`/api/${currentTable}`)
       .then(res => res.json())
       .then(data => setItems(data))
       .catch(err => console.error(err));
-  }, []);
+  }, [currentTable]);
 
-  // -----------------------
-  // CREATE - 添加条目
-  // -----------------------
+  // CREATE
   const handleAddItem = async () => {
     const res = await fetch(`/api/${currentTable}`, {
       method: 'POST',
@@ -101,52 +83,38 @@ const Admin = () => {
     alert('Item added!');
   };
 
-  // -----------------------
-  // UPDATE - 编辑条目
-  // -----------------------
+  // UPDATE
   const handleEditItem = async (e) => {
     e.preventDefault();
     if (!editItemId) return;
-
-    await fetch(`/api/${currentTable}`, {
+    await fetch(`/api/${currentTable}/${editItemId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: editItemId, ...itemData }),
+      body: JSON.stringify(itemData),
     });
-
-    setItems(prev => prev.map(i => i.id === editItemId ? { id: editItemId, ...itemData } : i));
+    setItems(prev => prev.map(i => i.id === editItemId ? itemData : i));
     alert('Item updated!');
   };
 
-  // -----------------------
-  // DELETE - 删除条目
-  // -----------------------
+  // DELETE
   const handleDeleteItem = async () => {
     if (!editItemId) return;
-
-    await fetch(`/api/${currentTable}?id=${editItemId}`, { method: 'DELETE' });
-
+    await fetch(`/api/${currentTable}/${editItemId}`, { method: 'DELETE' });
     setItems(prev => prev.filter(i => i.id !== editItemId));
     setItemData(Object.keys(itemData).reduce((a,k)=>({ ...a, [k]: ''}), {}));
     alert('Item deleted!');
   };
 
-  // -----------------------
-  // 选择条目用于编辑或删除
-  // -----------------------
+  // select item for edit/delete
   const handleSelectItem = (id) => {
     const item = items.find(i => i.id === id);
-    if (!item) return;
-
-    const cleanedItem = { ...item };
-    delete cleanedItem.id; // id 不允许编辑
-    setItemData(cleanedItem);
+    setItemData(item || {});
     setEditItemId(id);
   };
-
   return (
     <div className="flex flex-col items-center mt-20 mb-30">
       {!isAuthenticated ? (
+        // 密码输入界面
         <form onSubmit={handlePasswordSubmit} className="h-[50vh] w-[30vw] p-6 bg-white shadow-md rounded-md">
           <label className="block text-sm font-medium text-gray-700">Enter Password</label>
           <input
@@ -161,10 +129,18 @@ const Admin = () => {
         </form>
       ) : (
         <div className="h-screen w-full max-w-md">
+          {/* 场景下拉选择 */}
+          <Dropdown
+            scenario={scenario}
+            setScenario={setScenario}
+            scenarioTableMap={scenarioTableMap}
+            setCurrentTable={setCurrentTable}
+          />
+
           {/* 操作选择侧边栏 */}
           <Sidebar setAction={setAction} />
 
-          {/* 添加条目 */}
+          {/* 添加条目表单 */}
           {action === 'add' && (
             <AddItemForm
               itemData={itemData}
@@ -173,27 +149,27 @@ const Admin = () => {
             />
           )}
 
-          {/* 编辑条目 */}
+          {/* 编辑条目表单 */}
           {action === 'edit' && (
             <form className="space-y-4" onSubmit={handleEditItem}>
               <h2 className="text-lg font-semibold">Edit Item</h2>
               <select
-                onChange={(e) => handleSelectItem(Number(e.target.value))}
+                onChange={(e) => setEditItemName(e.target.value)}
                 className="block w-full p-2 border border-gray-300 rounded-md"
               >
                 <option value="">Select Item</option>
                 {items.map((i) => (
-                  <option key={i.id} value={i.id}>{i.name}</option>
+                  <option key={i.name} value={i.name}>{i.name}</option>
                 ))}
               </select>
-
+              {/* 所有字段输入 */}
               {Object.keys(itemData).map((key) => (
                 <div key={key}>
                   <label className="block text-sm font-medium text-gray-700">{key}</label>
                   <input
                     type="text"
                     name={key}
-                    value={itemData[key] || ''} // 防止 null
+                    value={itemData[key]}
                     onChange={handleInputChange}
                     className="w-full border p-2 rounded-md"
                   />
@@ -208,18 +184,18 @@ const Admin = () => {
             <div className="space-y-4">
               <h2 className="text-lg font-semibold">Delete Item</h2>
               <select
-                onChange={(e) => handleSelectItem(Number(e.target.value))}
+                onChange={(e) => setEditItemName(e.target.value)}
                 className="block w-full p-2 border border-gray-300 rounded-md"
               >
                 <option value="">Select Item</option>
                 {items.map((i) => (
-                  <option key={i.id} value={i.id}>{i.name}</option>
+                  <option key={i.name} value={i.name}>{i.name}</option>
                 ))}
               </select>
               <button
                 onClick={handleDeleteItem}
                 className="bg-red-500 text-white px-4 py-2 rounded-md"
-                disabled={!editItemId}
+                disabled={!editItemName}
               >
                 Delete
               </button>

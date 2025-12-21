@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import Link from 'next/link'
 import ContactPage from '../../[locale]/Contact/page'
+import homeValve from '../../../../public/img/homeValve.png'
+import home2 from '../../../../public/img/home2.png'
 
 function HomePagePC() {
   const sectionsCount = 5
@@ -110,11 +112,42 @@ function HomePagePC() {
       <motion.div animate={controls} className="relative overflow-hidden">
 
         {/* SECTION 0 - Video */}
-        <section className="h-screen w-full overflow-hidden">
-          <video autoPlay loop muted className="object-cover w-full h-full">
-            <source src='/p3.mp4' type="video/mp4" />
-          </video>
-        </section>
+<div className="relative w-full h-screen">
+  {/* Background image */}
+  <img
+    src="https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671"
+    alt="Background"
+    className="object-cover w-full h-full"
+  />
+
+  {/* Left-side text */}
+<div className="absolute left-50 top-1/2 transform -translate-y-1/2 text-white font-bold" style={{ fontFamily: 'Russo One' }}>
+  <h1 className="text-7xl leading-snug uppercase">
+    SOLENOID VALVES <br />
+    <span className="text-3xl relative -top-8">FOR CRYOGENIC APPLICATION</span>
+  </h1>
+</div>
+
+
+  {/* Right-side container for overlay images */}
+  <div className="absolute right-30 top-1/2 transform -translate-y-1/2 h-[100%] w-[40%] flex items-center -space-x-85">
+    <motion.img
+      src={homeValve.src}
+      alt="valve"
+      className="object-contain h-full w-[90%]"
+      animate={{ rotate: [-2, 1, -2] }}
+      transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+    />
+    <motion.img
+      src={home2.src}
+      alt="pipe"
+      className="object-contain h-full w-[40%] mt-[15%]"
+      animate={{ rotate: [-2, 1, -2] }}
+      transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+    />
+  </div>
+</div>
+
 
         {/* SECTION 1 - Accordion */}
         <section className="h-screen w-full bg-white flex overflow-hidden">

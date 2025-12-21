@@ -20,9 +20,12 @@ function HomePagePC() {
             
             <div className="flex bg-cover bg-center w-screen" style={{ height: "980px" }}>
               <div className="flex flex-1 items-center">
-                <video autoPlay loop muted className="object-cover w-full h-full">
-                  <source src='/p3.mp4' type="video/mp4" />
-                </video>
+    <img
+      src="https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671"
+      alt="Background"
+      className="object-cover w-full h-full"
+    />
+
               </div>
             </div>
 

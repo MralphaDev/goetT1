@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 import "../../app/globals.css";
 
 export default function AddItemForm({ itemData, handleInputChange, handleAddItem }) {
   const [currentPage, setCurrentPage] = useState(0);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(itemData.src || null);
   const entriesPerPage = 5;
 
   const keys = Object.keys(itemData);
@@ -11,7 +11,6 @@ export default function AddItemForm({ itemData, handleInputChange, handleAddItem
   for (let i = 0; i < keys.length; i += entriesPerPage) {
     paginatedKeys.push(keys.slice(i, i + entriesPerPage));
   }
-
   const currentKeys = paginatedKeys[currentPage] || [];
 
   const handleNextPage = () => {
@@ -22,21 +21,52 @@ export default function AddItemForm({ itemData, handleInputChange, handleAddItem
     if (currentPage > 0) setCurrentPage(currentPage - 1);
   };
 
-  // 🧩 local image preview only (no upload)
-  const handleImagePreview = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreview(url);
-      handleInputChange({ target: { name: 'src', value: url } });
-    }
-  };
+  // 上传图片
+const handleImageUpload = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-  // 🧩 simple local submit
+  // 本地预览（立即显示选择的图片）
+  const localUrl = URL.createObjectURL(file);
+  setPreview(localUrl);
+  handleInputChange({ target: { name: "src", value: localUrl } });
+
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      console.error("Upload failed:", res.status);
+      alert("上传失败，请检查控制台");
+      return;
+    }
+
+    const data = await res.json();
+
+    if (data.url) {
+      setPreview(data.url);  // 替换为最终线上地址
+      handleInputChange({ target: { name: "src", value: data.url } });
+      console.log("上传成功:", data.url);
+    } else {
+      console.error("Upload failed:", data.error);
+      alert("上传失败: " + (data.error || "未知错误"));
+    }
+  } catch (err) {
+    console.error("Upload error:", err);
+    alert("网络错误，请重试");
+  }
+};
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("New item:", itemData);
-    handleAddItem?.(); // optional callback
+    handleAddItem?.();
   };
 
   return (
@@ -46,21 +76,13 @@ export default function AddItemForm({ itemData, handleInputChange, handleAddItem
       {currentKeys.map((key) => (
         <div key={key}>
           <label className="block text-sm font-medium text-gray-700">{key}</label>
-          <input
-            type="text"
-            name={key}
-            value={itemData[key]}
-            onChange={handleInputChange}
-            className="mt-1 block w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder={`Enter ${key}`}
-          />
-          {key === 'src' && (
+          {key === "src" ? (
             <>
               <input
                 type="file"
                 accept="image/*"
-                onChange={handleImagePreview}
-                className="mt-2"
+                onChange={handleImageUpload}
+                className="mt-2 block w-full"
               />
               {preview && (
                 <img
@@ -70,6 +92,15 @@ export default function AddItemForm({ itemData, handleInputChange, handleAddItem
                 />
               )}
             </>
+          ) : (
+            <input
+              type="text"
+              name={key}
+              value={itemData[key]}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+              placeholder={`Enter ${key}`}
+            />
           )}
         </div>
       ))}
