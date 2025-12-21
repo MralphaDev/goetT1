@@ -2,6 +2,8 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import ApplicationMobile from '../../responsive/Application/Applicationmobile'
+import { motion } from "framer-motion"
+
 function page() {
 const [isMobile, setIsMobile] = useState(false)
 
@@ -18,21 +20,44 @@ const [isMobile, setIsMobile] = useState(false)
     <div className="bg-white h-screen w-screen" style={{height:"2000px"}}>
         <div>
           
-            <div className="flex bg-cover bg-center w-screen " style={{ height: "700px",backgroundImage: "url(https://www.nieruf.de/media/ea/fb/0d/1710351033/Gruppe-3767.webp)"}}>
-                <div className="flex flex-1 items-center">
-                    <img src="https://www.nieruf.de/media/ae/9a/35/1709276517/NieRuf_Premium-News_2024_Druckminderer-02_RZ_komprimiert.png" alt="Image" className="object-contain h-full mx-auto" />
+            <div
+                className="relative flex bg-cover bg-center w-screen"
+                style={{
+                    height: "700px",
+                    backgroundImage:
+                    "url(https://linen-eland-918503.hostingersite.com/image/ban2.jpg)",
+                }}
+                >
+                {/* overlay */}
+                <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                    backgroundImage:
+                    "url(https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671)",
+                    WebkitMaskImage:
+                    "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 100%)",
+                    maskImage:
+                    "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 100%)",
+
+                }}
+                />
+
+
+                {/* content */}
+                <div className="relative flex flex-1 items-center left-10 ">
+                    <img
+                    src="https://linen-eland-918503.hostingersite.com/image/7100.png"
+                    className="object-contain h-full mx-auto mt-10"
+                    />
                 </div>
-                
-                
-                <div className="flex items-start flex-1 ">
-                    <div className="" style={{ marginTop: "25%" }}> 
-                        <h1 className="text-8xl font-semibold text-white">
-                        APPLICATIONS 
-                        </h1>
+
+                <div className="relative flex items-start flex-1">
+                    <div style={{ marginTop: "25%" }}>
+                    <h1 className="text-8xl font-semibold text-white">APPLICATIONS</h1>
                     </div>
-            
                 </div>
-            </div>
+                </div>
+
 
             <div className ="pt-12 pb-10 container mx-auto mb-10 border-b-2 border-blue-400 ">
                 <h1 className="flex pt-5 text-blue-500 text-5xl " style={{color:"#0F4C71"}}>CHECK OUT</h1>

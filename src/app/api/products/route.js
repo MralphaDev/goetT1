@@ -13,7 +13,7 @@ export async function GET() {
   const items = rows.map(row => ({
     id: row.id,
     name: row.name,
-    category: row.category || '', // 直接返回字符串，不用 JSON.parse
+    category: row.category ? JSON.parse(row.category) : [],
     src: row.src,
     price: row.price,
     priceNum: row.priceNum,

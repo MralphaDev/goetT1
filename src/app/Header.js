@@ -37,6 +37,7 @@ export default function Header() {
           setItems(data);          // 更新 items 状态
           });
       }, []);
+
   const pathname = usePathname();
   const locale = pathname?.split("/")[1] || "en";
   const router = useRouter();
@@ -71,6 +72,9 @@ export default function Header() {
     setHighlightIndex(-1);
   }, [query]);
 
+  useEffect(() => {
+      console.log(items);}, [items]);
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (highlightIndex >= 0 && suggestions[highlightIndex]) {
@@ -94,6 +98,9 @@ export default function Header() {
       handleSearch(e);
     }
   };
+
+    // 渲染前安全判断
+  if( !items) return <div>Loading...</div>; //这一步能解决异步问题的bug,不然item还没反回来就报错了。item要等到fetch完才有值
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-20 backdrop-blur-sm">

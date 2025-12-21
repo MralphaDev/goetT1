@@ -373,8 +373,8 @@ const resetQuantity = (name) => {
                             <div onClick={() => handleCategorySelect("Solenoid")}>
                             <div className='flex justify-center cursor-pointer'>
                                 <Link href={`/${locale}/Product-login/Product1`}>
-                                    <img className='h-32 hover:scale-105 transition-transform duration-200' 
-                                    src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478">
+                                    <img className='ml-5 h-32 hover:scale-105 transition-transform duration-200' 
+                                    src="https://linen-eland-918503.hostingersite.com/image/solen1.png">
                                     </img>
                                 </Link>
                                
@@ -391,7 +391,7 @@ const resetQuantity = (name) => {
                             <div className='flex justify-center cursor-pointer'>
                                 <Link href={`/${locale}/Product-login/Product1`}>
                                     <img className='h-32 hover:scale-105 transition-transform duration-200' 
-                                    src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478">
+                                    src="https://linen-eland-918503.hostingersite.com/image/pressureactuated.png">
                                     </img>
                                 </Link>
                                
@@ -405,7 +405,7 @@ const resetQuantity = (name) => {
                         <SwiperSlide>
                             <div onClick={() => handleCategorySelect("liqnitro")}>
                             <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
+                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://linen-eland-918503.hostingersite.com/image/non-return1.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
                                 liquidnitrogen non return 
@@ -416,7 +416,7 @@ const resetQuantity = (name) => {
                         <SwiperSlide onClick={() => handleCategorySelect("liqnitrofilter")}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
+                                <img className='h-32  hover:scale-105 transition-transform duration-200' src="https://linen-eland-918503.hostingersite.com/image/filter2.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
                                     liquidnitrogen filter
@@ -427,10 +427,10 @@ const resetQuantity = (name) => {
                         <SwiperSlide onClick={() => handleCategorySelect("safetyValve")}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://www.nieruf.de/thumbnail/9d/83/4a/1707834708/Manometer-Absperrventile_400x400.png?ts=1710263478"></img>
+                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://linen-eland-918503.hostingersite.com/image/safety1.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                    safety valves for cryogenic use
+                                    safety valves
                                 </div>
                             </div>
                         </SwiperSlide>

@@ -11,11 +11,27 @@ export default function ContactPage() {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    if (res.ok) {
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 3000);
+    } else {
+      console.error("Email sending failed");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6">
