@@ -374,7 +374,7 @@ const resetQuantity = (name) => {
                             <div className='flex justify-center cursor-pointer'>
                                 <Link href={`/${locale}/Product-login/Product1`}>
                                     <img className='ml-5 h-32 hover:scale-105 transition-transform duration-200' 
-                                    src="https://linen-eland-918503.hostingersite.com/image/solen1.png">
+                                    src="https://beige-fish-147598.hostingersite.com/image/solen1.png">
                                     </img>
                                 </Link>
                                
@@ -391,7 +391,7 @@ const resetQuantity = (name) => {
                             <div className='flex justify-center cursor-pointer'>
                                 <Link href={`/${locale}/Product-login/Product1`}>
                                     <img className='h-32 hover:scale-105 transition-transform duration-200' 
-                                    src="https://linen-eland-918503.hostingersite.com/image/pressureactuated.png">
+                                    src="https://beige-fish-147598.hostingersite.com/image/pressureactuated.png">
                                     </img>
                                 </Link>
                                
@@ -405,7 +405,7 @@ const resetQuantity = (name) => {
                         <SwiperSlide>
                             <div onClick={() => handleCategorySelect("liqnitro")}>
                             <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://linen-eland-918503.hostingersite.com/image/non-return1.png"></img>
+                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://beige-fish-147598.hostingersite.com/image/c26.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
                                 liquidnitrogen non return 
@@ -416,7 +416,7 @@ const resetQuantity = (name) => {
                         <SwiperSlide onClick={() => handleCategorySelect("liqnitrofilter")}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32  hover:scale-105 transition-transform duration-200' src="https://linen-eland-918503.hostingersite.com/image/filter2.png"></img>
+                                <img className='h-32  hover:scale-105 transition-transform duration-200' src="https://beige-fish-147598.hostingersite.com/image/filter2.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
                                     liquidnitrogen filter
@@ -427,7 +427,7 @@ const resetQuantity = (name) => {
                         <SwiperSlide onClick={() => handleCategorySelect("safetyValve")}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
-                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://linen-eland-918503.hostingersite.com/image/safety1.png"></img>
+                                <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://beige-fish-147598.hostingersite.com/image/safety1.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
                                     safety valves

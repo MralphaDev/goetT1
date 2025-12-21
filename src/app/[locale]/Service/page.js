@@ -18,13 +18,31 @@ function page() {
     <div>
         <div className="bg-cover bg-center w-screen" style={{height:"1150px", backgroundColor: "white"}}>
           <div className ="pt-12 pb-10 container mx-auto mb-10 border-b-2 border-blue-400 ">
-             <h1 className="flex pt-5 text-blue-500 text-5xl " style={{color:"#0F4C71"}}>SERVICE & SUPPORT</h1>
+             <h1 className="flex  text-blue-500 text-5xl " style={{color:"#0F4C71"}}>SERVICE & SUPPORT</h1>
             
           </div>
           
-          <div className="pt-5 container mx-auto  "style={{height:"1000px"}}>
-              <div className="w-full" style={{height:"450px"}} >
-                <img src="http://www.goetvalve.eu/images/aba4.jpg" alt="Image" className="w-full h-full object-cover" ></img>
+          <div className=" container mx-auto  "style={{height:"1000px"}}>
+              <div className="relative w-full" style={{height:"600px"}}>
+                <img 
+                  src="https://beige-fish-147598.hostingersite.com/image/dn4.png" 
+                  alt="Image" 
+                  className="w-full h-full object-cover" 
+                  style={{ objectPosition: "20% 30%" }} // slightly left and slightly up
+                />
+                {/* overlay */}
+                <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                    backgroundImage:
+                    "url(https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671)",
+                    WebkitMaskImage:
+                    "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 100%)",
+                    maskImage:
+                    "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 100%)",
+
+                }}
+                />
               </div>
               <br/>
              
