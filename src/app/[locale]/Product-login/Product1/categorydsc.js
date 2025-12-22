@@ -30,7 +30,7 @@ function CategoryDsc({ tempFilters9 }) {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundImage:
-            "url('https://beige-fish-147598.hostingersite.com/image/ab5s.jpg')",
+            "url('https://goetvalves.eu/image/ab5s.jpg')",
         }}
       >
         {/* Overlay with second background */}

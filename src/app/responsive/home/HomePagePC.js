@@ -154,7 +154,7 @@ function HomePagePC() {
           <div className="flex w-full h-full">
             <div className="rounded-tl-3xl rounded-bl-3xl w-1/3 h-full relative overflow-hidden flex transition-all duration-500 hover:w-3/4">
               <video autoPlay loop muted className="object-cover w-full h-full">
-                <source src="https://www.nieruf.de/media/8c/89/17/1683814602/NieRuf_Animation_Website_Produkt-Konfigurator_Akkordeon_DE_kom.mp4" type="video/mp4" />
+                <source src="https://goetvalves.eu.hostingersite.com/video/homevid.mp4" type="video/mp4" />
               </video>
             </div>
             <div className="w-1/3 h-full relative overflow-hidden transition-all duration-500 hover:w-3/4">

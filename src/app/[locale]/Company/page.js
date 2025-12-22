@@ -34,7 +34,7 @@ function Page() {
         {/* Right Image */}
         <div className="lg:w-3/5 w-full relative flex items-center justify-center lg:pr-[5%] h-64 sm:h-80 md:h-96 lg:h-[80vh] mt-4 lg:mt-0">
           <img
-            src="https://beige-fish-147598.hostingersite.com/image/ab2.jpg"
+            src="https://goetvalves.eu/image/ab2.jpg"
             alt="Company Image"
             className="w-full h-full object-cover rounded-lg"
           />

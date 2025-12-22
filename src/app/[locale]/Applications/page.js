@@ -25,7 +25,7 @@ const [isMobile, setIsMobile] = useState(false)
                 style={{
                     height: "700px",
                     backgroundImage:
-                    "url(https://beige-fish-147598.hostingersite.com/image/ban2.jpg)",
+                    "url(https://goetvalves.eu/image/ban2.jpg)",
                 }}
                 >
                 {/* overlay */}
@@ -46,7 +46,7 @@ const [isMobile, setIsMobile] = useState(false)
                 {/* content */}
                 <div className="relative flex flex-1 items-center left-10 ">
                     <img
-                    src="https://beige-fish-147598.hostingersite.com/image/7100.png"
+                    src="https://goetvalves.eu/image/7100.png"
                     className="object-contain h-full mx-auto mt-10"
                     />
                 </div>
