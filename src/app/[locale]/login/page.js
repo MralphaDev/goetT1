@@ -37,7 +37,7 @@ export default function Home() {
 
     let res, data;
     try {
-      res = await fetch("../../api", {
+      res = await fetch("/api", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
