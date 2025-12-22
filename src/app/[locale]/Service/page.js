@@ -25,7 +25,7 @@ function page() {
           <div className=" container mx-auto  "style={{height:"1000px"}}>
               <div className="relative w-full" style={{height:"600px"}}>
                 <img 
-                  src="https://beige-fish-147598.hostingersite.com/image/dn4.png" 
+                  src="https://goetvalves.eu/image/dn4.png" 
                   alt="Image" 
                   className="w-full h-full object-cover" 
                   style={{ objectPosition: "20% 30%" }} // slightly left and slightly up
