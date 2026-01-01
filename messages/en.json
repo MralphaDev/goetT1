@@ -26,7 +26,7 @@
       "Product1": {
         "finder": "PRODUCTFILTER",
         "title":"Solenoid Valves",
-        "description":"Within closed pipeline systems, different, and sometimes aggressive, media must be reliably controlled and managed. Shut-off valves from NieRuf play a central role in such a system to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the pipeline system, thereby protecting the plant or maintaining proper operation. Since the flow rate varies depending on the pipeline system, we offer our butterfly valves in nominal sizes ranging from DN25 to DN600.",
+        "description":"Our cryogenic solenoid valves are designed to control low-temperature fluids safely and reliably. They are suitable for a wide range of applications, offering durability, precise operation, and high performance in extreme conditions. They can be supplied with a minimum temperature of -250°C and a maximum operating pressure of 100 bar. Available in standard and customizable versions, these valves provide efficient and cost-effective solutions for cryogenic systems, with options for different materials, connection types, and operating voltages to meet diverse customer needs.",
         "Nennweite": "Nominal width",
         "Baumform": "Design",
         "Spannung": "Voltage",
@@ -42,7 +42,7 @@
       },
       "Pressureactuated": {
         "title": "Pressure Actuated Valve",
-        "description": "Within closed piping systems, various—sometimes aggressive—media must be reliably controlled and regulated. Shut-off valves from NieRuf play a central role in such systems to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the piping system, thereby protecting the plant or maintaining proper operation. Since the flow rate varies depending on the piping system, our butterfly valves are available in nominal sizes from DN25 to DN600.",
+        "description": "Pneumatic piston valves are used to control and regulate extremely low-temperature cryogenic fluids. They can handle large flow rates and are suitable for high-viscosity or contaminated media. **We offer pressure-driven models only, specifically designed for cryogenic fluids, providing a minimum operating temperature of -250°C and a maximum operating pressure of 40 bar. Customization is available to meet specific application requirements.",
         "finder": "PRODUCT FINDER",
         "Nennweite": "Nominal Size",
         "Baumform": "Design Type",
@@ -56,14 +56,14 @@
         "Buynow": "buy now",
         "DeliveryTime": "Delivery Time"
       },
-      "liqnitro": {
+      "liqnitrogen-non-return": {
         "title": "Liquid nitrogen non-return valve",
-        "description": "Within closed piping systems, different and sometimes aggressive media must be reliably controlled and regulated. Shut-off valves from NieRuf play a central role in such systems to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the piping system, thereby protecting the system or maintaining proper operation. Since the flow rate varies depending on the piping system, our butterfly valves are available in nominal sizes from DN25 to DN600.",
+        "description": "Our liquid nitrogen non-return valves are specially designed for ultra-low temperature media. They have a minimum opening pressure of 0.3 bar and a maximum withstand pressure of 30 bar, with a leakage rate of less than 0.01 cc in 10 minutes. The valves are made of stainless steel and are available in connection sizes from G1/4 to 1 inch, ensuring reliable performance in demanding cryogenic systems.",
         "finder": "PRODUCT FINDER",
         "Nennweite": "Nominal Size",
         "Baumform": "Design Type",
         "Spannung": "Voltage",
-        "Material": "Material",
+        "Material": "Body Material",
         "Dichtung": "Seal",
         "Schaltfunktion": "Switching Function",
         "Steurung": "Control",
@@ -74,7 +74,7 @@
       },
         "liqnitrofilter": {
         "title": "Liquid nitrogen filter",
-        "description": "Within closed piping systems, different and sometimes aggressive media must be reliably controlled and regulated. Shut-off valves from NieRuf play a central role in such systems to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the piping system, thereby protecting the system or maintaining proper operation. Since the flow rate varies depending on the piping system, our butterfly valves are available in nominal sizes from DN25 to DN600.",
+        "description": "Our liquid nitrogen filters are specially designed for ultra-low temperature fluids, with selectable filtration precision ranging from 7 µm to 100 µm to ensure effective particle removal for sensitive applications. They can operate at temperatures as low as -200 °C and withstand a maximum working pressure of 30 bar. Connection sizes range from G1/4 to 1 inch. Robust, efficient, and customizable, these filters provide an ideal solution for demanding cryogenic systems.",
         "finder": "PRODUCT FINDER",
         "Nennweite": "Nominal Size",
         "Baumform": "Design Type",
@@ -90,7 +90,7 @@
       },
         "safetyValve": {
         "title": "Safety valves",
-        "description": "Within closed piping systems, different and sometimes aggressive media must be reliably controlled and regulated. Shut-off valves from NieRuf play a central role in such systems to ensure the reliable operation of the plant. Butterfly valves are used to completely stop the flow within the piping system, thereby protecting the system or maintaining proper operation. Since the flow rate varies depending on the piping system, our butterfly valves are available in nominal sizes from DN25 to DN600.",
+        "description": "Our safety valves are primarily designed for ultra-low temperature media, with a minimum operating temperature of -200 °C and selectable working pressure from 0 to 40 bar. Valve bodies are available in bronze or stainless steel, with connection sizes ranging from G3/8 to 1 inch, providing reliable protection and durability in demanding cryogenic applications.",
         "finder": "PRODUCT FINDER",
         "Nennweite": "Nominal Size",
         "Baumform": "Design Type",

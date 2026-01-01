@@ -108,46 +108,31 @@ function HomePagePC() {
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden relative">
+    <div className="h-screen w-screen overflow-hidden relative ">
       <motion.div animate={controls} className="relative overflow-hidden">
 
-        {/* SECTION 0 - Video */}
-<div className="relative w-full h-screen">
-  {/* Background image */}
-  <img
-    src="https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671"
-    alt="Background"
-    className="object-cover w-full h-full"
-  />
+       
+<div 
+  className="relative w-full h-[90vh] overflow-hidden z-11 mb-[10vh]"
+  style={{
+    backgroundImage: `url('https://goetvalves.eu/image/hj01.png')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }}
+>
 
-  {/* Left-side text */}
-<div className="absolute left-50 top-1/2 transform -translate-y-1/2 text-white font-bold" style={{ fontFamily: 'Russo One' }}>
-  <h1 className="text-7xl leading-snug uppercase">
-    SOLENOID VALVES <br />
-    <span className="text-3xl relative -top-8">FOR CRYOGENIC APPLICATION</span>
-  </h1>
-</div>
-
-
-  {/* Right-side container for overlay images */}
-  <div className="absolute right-30 top-1/2 transform -translate-y-1/2 h-[100%] w-[40%] flex items-center -space-x-85">
-    <motion.img
-      src={homeValve.src}
-      alt="valve"
-      className="object-contain h-full w-[90%]"
-      animate={{ rotate: [-2, 1, -2] }}
-      transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-    />
-    <motion.img
-      src={home2.src}
-      alt="pipe"
-      className="object-contain h-full w-[40%] mt-[15%]"
-      animate={{ rotate: [-2, 1, -2] }}
-      transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-    />
+  {/* 你的原文本位置，完全保留 */}
+  <div 
+    className="absolute left-[5%] top-1/3  text-white font-bold  z-20"
+    style={{ fontFamily: 'Russo One' }}
+  >
+    <h1 className="text-7xl leading-snug uppercase">
+      SOLENOID VALVES <br />
+      <span className="text-3xl relative -top-8">FOR CRYOGENIC APPLICATION</span>
+    </h1>
   </div>
 </div>
-
 
         {/* SECTION 1 - Accordion */}
         <section className="h-screen w-full bg-white flex overflow-hidden">
@@ -157,13 +142,15 @@ function HomePagePC() {
                 <source src="https://goetvalves.eu/video/homevid.mp4" type="video/mp4" />
               </video>
             </div>
-            <div className="w-1/3 h-full relative overflow-hidden transition-all duration-500 hover:w-3/4">
-              <img src="https://www.nieruf.de/thumbnail/3f/97/45/1683190351/NieRuf_Bilder_Web-Startseite_Akkordeon_Bild-02_komprimiert_1920x1920.webp" alt="Image 2" className="w-full h-full object-cover" />
-            </div>
-            <div className="rounded-tr-3xl rounded-br-3xl w-1/3 h-full relative overflow-hidden transition-all duration-500 hover:w-3/4">
-              <img src="https://www.nieruf.de/thumbnail/0b/09/cf/1683190358/NieRuf_Bilder_Web-Startseite_Akkordeon_Bild-03_komprimiert_1920x1920.webp" alt="Image 3" className="w-full h-full object-cover" />
+            <div className="rounded-tr-3xl rounded-br-3xl w-2/3 h-full relative overflow-hidden transition-all duration-500 hover:w-3/4">
+              <img src="https://goetvalves.eu/image/book-2.png" alt="Image 3" className="w-full h-full object-cover" />
             </div>
           </div>
+            <div className="w-1/3 h-full relative overflow-hidden transition-all duration-500 hover:w-3/4">
+              <video autoPlay loop muted className="object-cover w-full h-full">
+                <source src="https://goetvalves.eu/video/homeApplication.mp4" type="video/mp4" />
+              </video>
+            </div>
         </section>
 
         {/* SECTION 2 - Text & Image */}

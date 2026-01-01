@@ -23,9 +23,11 @@ const [isMobile, setIsMobile] = useState(false)
             <div
                 className="relative flex bg-cover bg-center w-screen"
                 style={{
-                    height: "700px",
+                    height: "900px",
+            
                     backgroundImage:
                     "url(https://goetvalves.eu/image/ban2.jpg)",
+                    
                 }}
                 >
                 {/* overlay */}
@@ -44,14 +46,21 @@ const [isMobile, setIsMobile] = useState(false)
 
 
                 {/* content */}
-                <div className="relative flex flex-1 items-center left-10 ">
+                <div className="relative flex flex-2 items-center">
                     <img
-                    src="https://goetvalves.eu/image/7100.png"
-                    className="object-contain h-full mx-auto mt-10"
+                    src="https://goetvalves.eu/image/7100dc-29.png"
+                    className="object-contain h-full mx-auto mt-10 ml-45 z-2"
                     />
                 </div>
 
-                <div className="relative flex items-start flex-1">
+                <div className="relative flex flex-2 items-center ">
+                    <img
+                    src="https://goetvalves.eu/image/7100.png"
+                    className="object-contain h-[60%] mx-auto mt-10 opacity-50 -ml-25 "
+                    />
+                </div>
+
+                <div className="relative flex items-start flex-4">
                     <div style={{ marginTop: "25%" }}>
                     <h1 className="text-8xl font-semibold text-white">APPLICATIONS</h1>
                     </div>

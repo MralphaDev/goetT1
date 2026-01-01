@@ -3,6 +3,7 @@ import {React,useState,useEffect,useRef,use} from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { FileText, Cube, Download } from "lucide-react";
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -17,9 +18,9 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 
 function page({params}) {
- const unwrappedParams = use(params); // 这一步是关键
-  const paramid = unwrappedParams.id;  // 安全访问
+  const unwrappedParams = use(params); // 这一步是关键
   const [items, setItems] = useState([]);
+  const paramid = items.findIndex(item => item.id === Number(unwrappedParams.id));  //// 找到当前 URL param(传进来是数据库产品 id) 对应的产品在 items 数组里的位置（index），方便安全访问
   const [view, setView] = useState("description");
   const containerRef = useRef(null);
   const [showMessage, setShowMessage] = useState(false);
@@ -30,6 +31,19 @@ function page({params}) {
   const [userEmail,setUserEmail] = useState()
   const [isMobile, setIsMobile] = useState(false)
 
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+   // 找 items 里对应的 index
+const indextest = items.findIndex(item => item.id === Number(unwrappedParams.id));
+
+console.log("indextest:",indextest)
+
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("loggedIn") === "true");
+
+  }, []);
+
   useEffect(() => {
     fetch("/api/products") //从本地API路由获取数据,这里没错
       .then(res => res.json())
@@ -39,6 +53,8 @@ function page({params}) {
       })
       .catch(err => console.error("Fetch error:", err));
   }, []);
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -144,46 +160,45 @@ function page({params}) {
     <div>
         {isMobile ? (
         // Mobile view
-<div className="flex flex-col pt-30 px-6 max-w-xl mx-auto space-y-8 font-sans">
-  {/* Product Title */}
-  <div className="space-y-1">
-    <h1 className="text-3xl font-bold text-gray-900 leading-snug">{items[paramid].name}</h1>
-    <p className="text-sm text-gray-500 tracking-wide">Typ: {items[paramid].serialNum}</p>
-  </div>
+        <div className="flex flex-col pt-30 px-6 max-w-xl mx-auto space-y-8 font-sans">
+        {/* Product Title */}
+        <div className="space-y-1">
+            <h1 className="text-3xl font-bold text-gray-900 leading-snug">{items[paramid].name}</h1>
+            <p className="text-sm text-gray-500 tracking-wide">Typ: {items[paramid].serialNum}</p>
+        </div>
 
-  {/* Video */}
-  <div className="relative w-full overflow-hidden rounded-3xl shadow-xl">
-    <video className="w-full h-auto rounded-3xl object-cover" controls muted>
-      <source src={`/p${parseInt(paramid) + 1}.mp4`} type="video/mp4" />
-    </video>
-    <div className="absolute bottom-3 left-3 bg-white/70 px-3 py-1 rounded-full text-xs font-medium text-gray-700">Preview</div>
-  </div>
+        {/* Video */}
+        <div className="relative w-full overflow-hidden rounded-3xl shadow-xl">
+            <video className="w-full h-auto rounded-3xl object-cover" controls muted>
+            <source src={`/p${parseInt(paramid) + 1}.mp4`} type="video/mp4" />
+            </video>
+            <div className="absolute bottom-3 left-3 bg-white/70 px-3 py-1 rounded-full text-xs font-medium text-gray-700">Preview</div>
+        </div>
 
-  {/* Product Details */}
-  <div className="bg-white rounded-3xl p-6 shadow-md border border-gray-100">
-    <h2 className="text-xl font-semibold text-gray-900 mb-5">Product Details</h2>
-    <div className="grid grid-cols-2 gap-y-4 gap-x-4">
-      {Object.entries(items[paramid])
-        .filter(([key]) => !['priceNum','src'].includes(key))
-        .map(([key,value]) => (
-          <div key={key} className="flex flex-col">
-            <span className="text-gray-500 text-xs font-medium uppercase tracking-wider">{key}</span>
-            <span className="text-gray-900 font-semibold">{value}</span>
-          </div>
-        ))}
-    </div>
-  </div>
+        {/* Product Details */}
+        <div className="bg-white rounded-3xl p-6 shadow-md border border-gray-100">
+            <h2 className="text-xl font-semibold text-gray-900 mb-5">Product Details</h2>
+            <div className="grid grid-cols-2 gap-y-4 gap-x-4">
+            {Object.entries(items[paramid])
+                .filter(([key]) => !['priceNum','src'].includes(key))
+                .map(([key,value]) => (
+                <div key={key} className="flex flex-col">
+                    <span className="text-gray-500 text-xs font-medium uppercase tracking-wider">{key}</span>
+                    <span className="text-gray-900 font-semibold">{value}</span>
+                </div>
+                ))}
+            </div>
+        </div>
 
-  {/* Price */}
-  <div className="text-center">
-    <p className="text-3xl font-bold text-gray-900">{items[paramid].price} €</p>
-    <p className="text-xs text-gray-400 mt-1 tracking-wide">incl. VAT</p>
-  </div>
-</div>
+        {/* Price */}
+        <div className="text-center">
+            <p className="text-3xl font-bold text-gray-900">{items[paramid].price} €</p>
+            <p className="text-xs text-gray-400 mt-1 tracking-wide">incl. VAT</p>
+        </div>
+        </div>
 
 
       ) : (<div className="bg-white h-auto">
-
         {/*
         <video autoPlay loop muted className="object-cover w-full h-full">
                     <source src='/p3.mp4' type="video/mp4"/>
@@ -207,7 +222,7 @@ function page({params}) {
             </div>
 
             {/* Right Side Div */}
-            <div className="w-1/5 flex flex-col space-y-4 mr-[5%] mt-[5%] bg-[#E5F0F6]  text-black rounded-[20px] p-4">
+            <div className="w-1/5 flex flex-col space-y-4 mr-[5%] mt-[5%] bg-[#E5F0F6]  text-black rounded-[20px] p-4 ">
                 {/* Selector for number of products */}
                 <div className="flex space-x-4 ml-4 mt-4 mb-[20px]">
                     <div className="flex items-center justify-between mt-4 mb-4">
@@ -223,14 +238,30 @@ function page({params}) {
                     </div>
 
 
-
                     <div className="pl-[30px] text-black pr-6">
-                        {/* Original Price */}
-                        <div className="text-3xl font-bold">{items[paramid].price} </div>
+                        <div
+                        className={`cursor-pointer ${
+                            isLoggedIn
+                            ? "text-3xl font-bold"
+                            : "text-lg font-semibold text-gray-800"
+                        }`}
+                        onClick={() => {
+                            if (isLoggedIn) {
+                            window.location.href = "/en/login";
+                            }
+                        }}
+                        >
+                        {isLoggedIn
+                            ? items[paramid].price
+                            : "Login to purchase"}
+                        </div>
+
                         
                         {/* Price including VAT */}
                         <div className="text-xs font-light text-gray-500 mt-1">
-                            {(parseFloat(items[paramid].price) * 1.19).toFixed(2)} € inkl. Mwst.
+                        {isLoggedIn
+                            ? `${(parseFloat(items[paramid].price) * 1.19).toFixed(2)} € inkl. Mwst.`
+                            : ""}
                         </div>
                     </div>
 
@@ -240,9 +271,15 @@ function page({params}) {
                 {/* Datenblatt and Bestellen */}
              
                 <div className="mt-6 pb-[30px] flex flex-col justify-left">
-                    <button  onClick={() => setIsOpen(true)} className="mb-[20px] w-2/3 py-2 rounded-lg bg-gradient-to-r from-[#B0D6EC] to-[#E5F0F6] text-black flex items-center justify-center shadow-md hover:bg-gradient-to-r hover:from-[#9AC9E3] hover:to-[#CFE6F1] transition duration-300 ease-in-out">
-                        Buy Now
-                    </button>
+                        {isLoggedIn && (
+                        <button
+                            onClick={() => setIsOpen(true)}
+                            className="mb-[20px] w-2/3 py-2 rounded-lg bg-gradient-to-r from-[#B0D6EC] to-[#E5F0F6] text-black flex items-center justify-center shadow-md hover:bg-gradient-to-r hover:from-[#9AC9E3] hover:to-[#CFE6F1] transition duration-300 ease-in-out"
+                        >
+                            Buy Now
+                        </button>
+                        )}
+
 
                     <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Absperrklappe-AK01-AK02.pdf" className="w-full">
                         <button className="w-2/3 py-2 rounded-lg bg-gradient-to-r from-[#B0D6EC] to-[#E5F0F6] text-black flex items-center justify-center shadow-md hover:bg-gradient-to-r hover:from-[#9AC9E3] hover:to-[#CFE6F1] transition duration-300 ease-in-out">
@@ -308,27 +345,37 @@ function page({params}) {
 
         </div>
         <div className="flex justify-center">
-            <div className="flex justify-center mr-[7%] ml-[1.5%] mt-[5%] mb-[30px] pb-[20px] space-x-20 w-screen border-b border-gray-300">
+            <div className="flex justify-center mr-[7%] ml-[1.5%] mt-[5%] mb-[30px] pb-[20px] space-x-20 w-screen border-b border-gray-300 shadow-md">
                 <span
                     onClick={() => setView("description")}
-                    className="text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
+                    className="text-[20px] text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
                 >
-                    Description
+                <div className="flex justify-center items-center h-full">
+                <span className="flex items-center gap-2 text-[40px]">
+                    <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Icon-doc.svg"
+                    alt="Description"
+                    className="w-[40px] h-[40px]"
+                    />
+                    <span className="text-[20px] font-semibold">Description</span>
+                </span>
+                </div>
+
                 </span>
 
                 <span
                     onClick={() => setView("viewer")}
-                    className="text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
+                    className="text-[20px] text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
                 >
-                    3D viewer
+                    <span  className="text-[40px]">🧊</span> 3D viewer
                 </span>
 
 
                 <span
                     onClick={() => setView("download")}
-                    className="text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
+                    className="text-[20px] text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
                 >
-                    download
+                    <span  className="text-[40px]">⬇️</span> Download
                 </span>
             </div>
         </div>
@@ -337,7 +384,7 @@ function page({params}) {
                 
         {(view === "description")&& (
             <div className="ml-[7%]  flex ">
-                <div className="mr-[10%] flex flex-col items-center h-[5%] w-[300px] p-4 bg-white rounded-lg shadow-lg border-2 border-gray-300 font-thin">
+                <div className="mr-[10%] flex flex-col items-center h-[5%] w-[300px] p-4 bg-white rounded-lg shadow-lg  font-thin">
                     <p className="text-[30px] text-gray-500  mb-[40px]">{"Type:"+ items[paramid].serialNum}</p> 
                     <img 
                         src={items[paramid].src} 
@@ -348,15 +395,15 @@ function page({params}) {
                 </div>
 
                 <div className="w-2/3 pb-[200px]">
-                    <h2 className="font-bold text-[30px] text-customBlue">Produktdetails</h2>
+                    <h2 className="font-bold text-[30px] text-customBlue">🧊Produktdetails</h2>
                     <table className="w-full font-thin">
                         <tbody>
                         
                         {Object.entries(items[paramid])
-                            .filter(([key]) => !['priceNum', 'src'].includes(key)) // Filter out keys you want to skip
-                            .map(([key, value]) => (
-                                <tr className="h-[62px] w-[280px] text-[#212529]" key={key}>
-                                    <td className="text-[16.8px] font-semibold font-montserrat p-[10px] text-customBlue">{key}</td>
+                            .filter(([key,value]) => !['priceNum', 'src','price','category','id'].includes(key) && value !== "" && value != null) // Filter out keys you want to skip
+                            .map(([key, value], index) => (
+                                <tr className={`h-[25px] w-[280px] text-[#212529] ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`} key={key}>
+                                    <td className="text-[16.8px] font-semibold font-montserrat p-[5px] text-customBlue">{key}</td>
                                     <td className=" text-[16.8px] font-montserrat p-[10px]">{value}</td>
                                 </tr>
                         ))}
@@ -367,7 +414,7 @@ function page({params}) {
                 
 
 
-        </div>
+            </div>
         
         
         
@@ -422,14 +469,14 @@ function page({params}) {
           
             {/* Sliding Menu */}
 <div
-    className={`fixed top-0 right-0 w-[400px] h-full bg-gray-100 shadow-lg transition-transform duration-300 transform ${
+    className={`z-999 fixed top-0 right-0 w-[400px] h-full bg-gray-100 shadow-lg transition-transform duration-300 transform ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
     }`}
 >
-    <div className="flex flex-col justify-between h-full p-[30px] z-20"> {/* Ensure the container takes full height */}
+    <div className="flex flex-col justify-between h-full p-[30px] z-999"> {/* Ensure the container takes full height */}
         <div>
-            <h2 className="text-2xl font-bold mb-2 text-lightBlue">Warenkorb</h2>
-            <h3 className="text-gray-600 mb-4">{quantity} Positionen</h3>
+            <h2 className="text-2xl font-bold mb-2 text-lightBlue z-999">Warenkorb</h2>
+            <h3 className="text-gray-600 mb-4 z-999">{quantity} Positionen</h3>
 
             <div className="flex items-center justify-between mt-4 border-b pb-2 pt-2">
                 <div className="flex items-center">

@@ -12,6 +12,7 @@
     "@paypal/react-paypal-js": "^8.9.2",
     "ethers": "^6.15.0",
     "framer-motion": "^12.23.24",
+    "lucide-react": "^0.562.0",
     "multer": "^2.0.2",
     "mysql2": "^3.15.3",
     "next": "15.5.6",

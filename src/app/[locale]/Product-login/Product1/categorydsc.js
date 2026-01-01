@@ -7,9 +7,9 @@ function CategoryDsc({ tempFilters9 }) {
   const namespaceMap = {
     Solenoid: 'Product1',
     'Pressure-actuated': 'Pressureactuated',
-    liqnitro: 'liqnitro',
-    liqnitrofilter: 'liqnitrofilter',
-    safetyValve: 'safetyValve'
+    'Liqnitrogen-non-return': 'liqnitrogen-non-return',
+    Liqnitrogenfilter: 'liqnitrofilter',
+    SafetyValve: 'safetyValve'
   };
 
   const t = useTranslations(namespaceMap[activeCategory] || 'Product1');

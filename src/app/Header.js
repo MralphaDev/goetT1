@@ -56,14 +56,13 @@ export default function Header() {
 
 // Update suggestions as user types
 useEffect(() => {
-  if (query.trim() === "") {
+  if (!query.trim()) {
     setSuggestions([]);
     return;
   }
 
   const matches = items
-    .map((item, index) => ({ ...item, index }))
-    .filter((item) => {
+    .filter(item => {
       const category = Array.isArray(item.category)
         ? item.category
         : [item.category].filter(Boolean);
@@ -71,9 +70,7 @@ useEffect(() => {
       return (
         item.name.toLowerCase().includes(query.toLowerCase()) ||
         item.serialNum.toLowerCase().includes(query.toLowerCase()) ||
-        category.some((c) =>
-          c.toLowerCase().includes(query.toLowerCase())
-        )
+        category.some(c => c.toLowerCase().includes(query.toLowerCase()))
       );
     })
     .slice(0, 5);
@@ -82,21 +79,29 @@ useEffect(() => {
   setHighlightIndex(-1);
 }, [query, items]);
 
-  useEffect(() => {
-      console.log(items);}, [items]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (highlightIndex >= 0 && suggestions[highlightIndex]) {
-      router.push(`/${locale}/Product-login/Product1/${suggestions[highlightIndex].index}`);
-    } else if (suggestions.length > 0) {
-      router.push(`/${locale}/Product-login/Product1/${suggestions[0].index}`);
-    } else {
-      alert("No product found!");
-    }
-    setQuery("");
-    setSuggestions([]);
-  };
+  //useEffect(() => {
+  //console.log(items);}, [items]);
+
+const handleSearch = (e) => {
+  e.preventDefault();
+
+  let targetId;
+
+  if (highlightIndex >= 0 && suggestions[highlightIndex]) {
+    targetId = suggestions[highlightIndex].id;
+  } else if (suggestions.length > 0) {
+    targetId = suggestions[0].id;
+  } else {
+    alert("No product found!");
+    return;
+  }
+
+  router.push(`/${locale}/Product-login/Product1/${targetId}`); // 直接用数据库 id
+  setQuery("");
+  setSuggestions([]);
+};
+
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {
@@ -113,7 +118,7 @@ useEffect(() => {
   if( !items) return <div>Loading...</div>; //这一步能解决异步问题的bug,不然item还没反回来就报错了。item要等到fetch完才有值
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-20 backdrop-blur-sm">
+    <header className="bg-white shadow-lg sticky top-0 z-10 backdrop-blur-sm">
       <div className="container mx-auto flex justify-between items-center py-4 px-6 relative">
         {/* Logo */}
         <motion.img
@@ -163,7 +168,7 @@ useEffect(() => {
                 {suggestions.map((item, idx) => (
                   <motion.li
                     key={item.serialNum + idx}
-                    onClick={() => router.push(`/${locale}/Product-login/Product1/${item.index}`)}
+                    onClick={() => router.push(`/${locale}/Product-login/Product1/${item.id}`)}
                     whileHover={{ scale: 1.02, backgroundColor: "#eff6ff" }}
                     className={`px-5 py-3 cursor-pointer transition-all duration-150 font-medium text-gray-700 ${idx === highlightIndex ? "bg-blue-50 text-blue-600" : ""}`}
                   >
