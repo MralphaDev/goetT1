@@ -118,7 +118,7 @@ const handleSearch = (e) => {
   if( !items) return <div>Loading...</div>; //这一步能解决异步问题的bug,不然item还没反回来就报错了。item要等到fetch完才有值
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-10 backdrop-blur-sm">
+    <header className="bg-white shadow-lg sticky top-0 z-20 backdrop-blur-sm">
       <div className="container mx-auto flex justify-between items-center py-4 px-6 relative">
         {/* Logo */}
         <motion.img

@@ -64,7 +64,7 @@ const Admin = () => {
   // -----------------------
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (authPassword === '') setIsAuthenticated(true);
+    if (authPassword === 'yojee8689') setIsAuthenticated(true);
     else alert('Incorrect password');
   };
 

@@ -59,15 +59,18 @@ const handleSubmit = async (e) => {
             className="space-y-4 text-gray-700"
           >
             <div className="flex items-center gap-3">
-              <PhoneIcon className="h-6 w-6 text-blue-600" />
-              <span>+49 174 4965240 (Mo – Fr 08:30 – 17:00)</span>
+              {/*<PhoneIcon className="h-4 w-6 text-blue-600" />*/}
+              <span className="font-thin "><span className="font-bold ">Asian inventory address:</span> 058727 150 South Bridge Road #02 Fookhai, Singapore <br/>(Mo – Fr 10:00 – 17:00)</span>
+              <span className="font-thin"><span className="font-bold ">European inventory address:</span> Karl-Lange-Str. 49,44791 Bochum, Germany <br/>(Mo – Fr 9:00 – 15:00)</span>
             </div>
             <div className="flex items-center gap-3">
               <EnvelopeIcon className="h-6 w-6 text-blue-600" />
-              <span>hanmavon@gmail.com</span>
+              <span className="mr-15">sgp@goetvalves.eu</span> 
+              <EnvelopeIcon className="h-6 w-6 text-blue-600" />
+              <span>info@goetvalves.eu</span>
             </div>
             <p className="mt-4 text-gray-600">
-              We’re here to help! Reach out via phone or email and we’ll get
+              We’re here to help! Reach out via email or contact form and we’ll get
               back to you as soon as possible.
             </p>
           </motion.div>
