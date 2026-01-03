@@ -17,7 +17,7 @@ export async function POST(req) {
     hostingerForm.append("file", file, file.name);
 
     // 注意这里是你的完整 PHP 地址
-    const res = await fetch("https://goetvalves.eu/api/upload.php", {
+    const res = await fetch("https://goetvalves.eu/api-goet/upload.php", {
       method: "POST",
       body: hostingerForm,
     });

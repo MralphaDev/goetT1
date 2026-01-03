@@ -124,19 +124,19 @@ export default function HomepageMobile() {
             className="w-full h-full object-cover"
           />
           <motion.img
-            src={homeValve.src}
+            src="https://www.goetvalves.eu/image/iphone-home.png"
             alt="valve"
-            className="absolute object-contain z-10 w-90 left-0 top-55"
-            animate={{ rotate: [-2, 1, -2] }}
+            className="absolute object-contain z-10 w-90 left-0 top-40"
+            //animate={{ rotate: [-2, 1, -2] }}
             transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
           />
-          <motion.img
+          {/*<motion.img
             src={home2.src}
             alt="pipe"
             className="absolute object-contain z-10 w-30 right-20 bottom-78"
             animate={{ rotate: [-2, 1, -2] }}
             transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-          />
+          />*/}
           <motion.div
             className="absolute left-5 bottom-23 z-20"
             initial="hidden"

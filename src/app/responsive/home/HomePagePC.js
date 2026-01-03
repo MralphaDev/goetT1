@@ -122,16 +122,36 @@ function HomePagePC() {
   }}
 >
 
-  {/* 你的原文本位置，完全保留 */}
   <div 
-    className="absolute left-[5%] top-1/3  text-white font-bold  z-20"
-    style={{ fontFamily: 'Russo One' }}
+    className="absolute left-[5%] top-1/5  text-white  z-20"   
   >
-    <h1 className="text-7xl leading-snug uppercase">
-      SOLENOID VALVES <br />
-      <span className="text-3xl relative -top-8">FOR CRYOGENIC APPLICATION</span>
+    <h1 style={{ fontFamily: 'Russo One' }} className="text-[5rem] leading-snug uppercase">
+      CRYOGENIC VALVES <br />
+      
     </h1>
+    <div className="relative flex bg-transparent text-white  py-8">
+      {/* 左边整条竖箭头 */}
+      <div className="flex-shrink-0 w-4 flex flex-col items-center">
+        {/* 竖线 */}
+        <div className="w-[0.7] bg-white flex-1 relative">
+        {/* 箭头尖，朝下 */}
+          
+        </div>
+      </div>
+
+      {/* 右边文字内容 */}
+      <div className="ml-6 flex flex-col space-y-10">
+        <h2 className="text-7xl font-bold text-[#4FA1CA]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          Serving the <br/>industry
+        </h2>
+        <p className="text-[22px] font-light max-w-2xl" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+         Solenoid valves, Pressure-actuated valves, <br/> non-returnvalves , cryogenic filter <br/> and safety valves 
+        </p>
+      </div>
+    </div>
+
   </div>
+
 </div>
 
         {/* SECTION 1 - Accordion */}
