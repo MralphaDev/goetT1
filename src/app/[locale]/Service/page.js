@@ -151,41 +151,39 @@ function page() {
         if (!dropdownOpen) setActiveTab('') // reset after exit finishes
       }}
       >
-<div className="flex items-center justify-between p-4 bg-[white] ">
-  {/* 左上角图片 */}
-  <img
-    src="https://goetvalves.eu/image/tm2.png"
-    alt="logo"
-    className="h-16 w-auto"
-  />
+        <div className="flex items-center justify-between p-4 bg-[white] ">
+          {/* 左上角图片 */}
+          <img
+            src="https://goetvalves.eu/image/tm2.png"
+            alt="logo"
+            className="h-16 w-auto"
+          />
 
-  {/* 中间 Tab 按钮 */}
-  <div className="flex space-x-4">
-    {['kv', 'info', 'faq'].map((tab) => (
-      <button
-        key={tab}
-        onClick={() => setActiveTab(tab)}
-        className={`px-4 py-2 rounded-full font-semibold transition-colors duration-300 ${
-          activeTab === tab
-          ? 'bg-[#0F4C71] text-white shadow-md' // 当前激活
-          : 'bg-[#28A8DE] text-white hover:bg-[#3DB0E0]' // 默认浅蓝 + hover 更亮
-        }`}
-      >
-        {tab === 'kv' ? 'KV Calculator' : tab === 'info' ? 'Info' : 'FAQ'}
-      </button>
-    ))}
-  </div>
+          {/* 中间 Tab 按钮 */}
+          <div className="flex space-x-4">
+            {['kv', 'info', 'faq'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 rounded-full font-semibold transition-colors duration-300 ${
+                  activeTab === tab
+                  ? 'bg-[#0F4C71] text-white shadow-md' // 当前激活
+                  : 'bg-[#28A8DE] text-white hover:bg-[#3DB0E0]' // 默认浅蓝 + hover 更亮
+                }`}
+              >
+                {tab === 'kv' ? 'KV Calculator' : tab === 'info' ? 'Info' : 'FAQ'}
+              </button>
+            ))}
+          </div>
 
-  {/* 右上角关闭按钮 */}
-  <button
-    onClick={() => setDropdownOpen(false)}
-    className="text-white text-lg font-bold px-4 py-2 bg-[#0F4C71] rounded-full hover:bg-[#0b3a55] transition-colors"
-  >
-    Close Tab
-  </button>
-</div>
-
-
+            {/* 右上角关闭按钮 */}
+            <button
+              onClick={() => setDropdownOpen(false)}
+              className="text-white text-lg font-bold px-4 py-2 bg-[#0F4C71] rounded-full hover:bg-[#0b3a55] transition-colors"
+            >
+              Close Tab
+            </button>
+        </div>
 
 
       {/* 内容区 */}

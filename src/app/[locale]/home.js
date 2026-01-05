@@ -19,6 +19,23 @@ export default function Homepage() {
     window.addEventListener('resize', handleResize)
     handleResize()
 
+    // Preload HomePagePC assets while loading
+    const assets = [
+      'https://goetvalves.eu/video/homeApplication.mp4',
+      'https://goetvalves.eu/video/homevid.mp4',
+      'https://goetvalves.eu/image/hj01.png',
+    ]
+    assets.forEach((src) => {
+      if (src.endsWith('.mp4')) {
+        const video = document.createElement('video')
+        video.src = src
+        video.preload = 'auto'
+      } else {
+        const img = new Image()
+        img.src = src
+      }
+    })
+    
     const timer = setTimeout(() => setLoading(false), 3000)
 
     return () => {

@@ -192,10 +192,22 @@ function HomePagePC() {
                 variants={textVariants}
                 className="text-5xl font-bold"
               >
-                {t('titleWord1')} · {t('titleWord2')} <br />
+<span className="relative inline-block leading-none perspective-[600px]">
+  <span className="block">
+    {t('titleWord1')} · {t('titleWord2')}
+  </span>
+
+  <span className="block  origin-top transform rotate-x-[85deg] scale-y-[7] opacity-20
+                   drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
+    {t('titleWord1')} · {t('titleWord2')}
+  </span>
+</span>
+
+
+                  <br />
                 <span className="text-lightBlue">{t('titleWord3')}</span>
               </motion.h2>
-
+              
               {[1, 2, 3, 4].map((i) => (
                 <motion.p
                   key={i}
@@ -203,7 +215,7 @@ function HomePagePC() {
                   initial="hidden"
                   animate={textControls}
                   variants={textVariants}
-                  className="font-medium text-gray-600 text-justify w-4/5"
+                  className="font-medium text-[20px] text-[#0F4C71] text-justify w-4/5"
                 >
                   {t(`samplePara${i}`)}
                 </motion.p>

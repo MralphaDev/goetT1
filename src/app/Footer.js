@@ -10,9 +10,9 @@ export default function Footer() {
         {/* Contact */}
         <div>
           <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-          <p className="text-sm font-bold mb-4">Asian inventory address: 058727 150 South Bridge Road #02 Fookhai, Singapore</p>
+          <p className="text-sm font-bold mb-4">Asian inventory address<br/> 058727 150 South Bridge Road #02 Fookhai, Singapore</p>
           <p className="text-sm font-bold mb-4">(Mo – Fr 10:00 – 17:00)</p>
-          <p className="text-sm font-bold mb-4">European inventory address: Karl-Lange-Str. 49,44791 Bochum, Germany</p>
+          <p className="text-sm font-bold mb-4">European inventory address<br/> Karl-Lange-Str. 49,44791 Bochum, Germany</p>
           <p className="text-sm font-bold mb-4">(Mo – Fr 9:00 – 15:00)</p>
           <p className="text-sm font-bold mb-4">Email1: sgp@goetvalves.eu</p>
           <p className="text-sm font-bold mb-4">Email2: info@goetvalves.eu</p>
