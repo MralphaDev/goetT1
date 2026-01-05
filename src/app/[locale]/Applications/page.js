@@ -72,19 +72,19 @@ function page() {
         <div className="mt-20 container mx-auto">
           <div className="grid grid-cols-3 gap-8">
             <div className="relative overflow-hidden rounded-tl-[8%] rounded-tr-[8%] rounded-bl-[8%] rounded-br-[8%]">
-              <img src="http://www.goetvalves.eu/image/c1.jpg" alt="Image 1" className="w-full h-full"></img>
+              <img src="https://www.goetvalves.eu/image/c1.jpg" alt="Image 1" className="w-full h-full"></img>
               <div className="absolute inset-0 flex items-end pb-5 pl-3 opacity-0  hover:opacity-100 transition duration-300 bg-black bg-opacity-50 text-white">
                 {t('Images.C1')}
               </div>
             </div>
             <div className="relative overflow-hidden rounded-tl-[8%] rounded-tr-[8%] rounded-bl-[8%] rounded-br-[8%]">
-              <img src="http://www.goetvalves.eu/image/c2.jpg" alt="Image 2" className="w-full h-full"></img>
+              <img src="https://www.goetvalves.eu/image/c2.jpg" alt="Image 2" className="w-full h-full"></img>
               <div className="absolute inset-0 flex items-end pb-5 pl-5 opacity-0 hover:opacity-100 transition duration-300 bg-black bg-opacity-50 text-white">
                 {t('Images.C2')}
               </div>
             </div>
             <div className="relative overflow-hidden rounded-tl-[8%] rounded-tr-[8%] rounded-bl-[8%] rounded-br-[8%]">
-              <img src="http://www.goetvalves.eu/image/c3.jpg" alt="Image 3" className="w-full h-full"></img>
+              <img src="https://www.goetvalves.eu/image/c3.jpg" alt="Image 3" className="w-full h-full"></img>
               <div className="absolute inset-0 flex items-end pb-5 pl-5 opacity-0 hover:opacity-100 transition duration-300 bg-black bg-opacity-50 text-white">
                 {t('Images.C3')}
               </div>
@@ -92,19 +92,19 @@ function page() {
           </div>
           <div className="grid grid-cols-3 gap-8 mt-12">
             <div className="relative overflow-hidden rounded-tl-[8%] rounded-tr-[8%] rounded-bl-[8%] rounded-br-[8%]">
-              <img src="http://www.goetvalves.eu/image/c4.jpg" alt="Image 4" className="w-full"></img>
+              <img src="https://www.goetvalves.eu/image/c4.jpg" alt="Image 4" className="w-full"></img>
               <div className="absolute inset-0 flex items-end pb-5 pl-5 opacity-0 hover:opacity-100 transition duration-300 bg-black bg-opacity-50 text-white">
                 {t('Images.C4')}
               </div>
             </div>
             <div className="relative overflow-hidden rounded-tl-[8%] rounded-tr-[8%] rounded-bl-[8%] rounded-br-[8%]">
-              <img src="http://www.goetvalves.eu/image/c5.jpg" alt="Image 5" className="w-full h-full"></img>
+              <img src="https://www.goetvalves.eu/image/c5.jpg" alt="Image 5" className="w-full h-full"></img>
               <div className="absolute inset-0 flex items-end pb-5 pl-5 opacity-0 hover:opacity-100 transition duration-300 bg-black bg-opacity-50 text-white">
                 {t('Images.C5')}
               </div>
             </div>
             <div className="relative overflow-hidden rounded-tl-[8%] rounded-tr-[8%] rounded-bl-[8%] rounded-br-[8%]">
-              <img src="http://www.goetvalves.eu/image/c6.jpg" alt="Image 6" className="w-full h-full"></img>
+              <img src="https://www.goetvalves.eu/image/c6.jpg" alt="Image 6" className="w-full h-full"></img>
               <div className="absolute inset-0 flex items-end pb-5 pl-5 opacity-0 hover:opacity-100 transition duration-300 bg-black bg-opacity-50 text-white">
                 {t('Images.C6')}
               </div>
