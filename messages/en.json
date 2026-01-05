@@ -265,8 +265,56 @@
     "zertifiziert": "Certified",
     "inklMwst": "incl. VAT",
     "deliveryNotice": "*Stated delivery times apply from Monday to Friday, excluding public holidays."
+  },
+  "faq": {
+    "flowHint": "Follow the steps below to explore the full FAQ details",
+    "current": {
+      "title": "Why is my GOETVALVE valve drawing a higher current than catalog?",
+      "story": "Some AC solenoids are rated in watts, but actually have VA (volt*amp) rating that are much higher. VA is a measure of the 'apparent power' of an electrical circuit, equal to RMS voltage x RMS current. It is used for sizing wires and fuses.",
+      "p1": "For example, a VA rating of 47 using 230V AC would have a current draw of 0.2 amps.",
+      "p2": "The 'real power' is watts in the power that performs work or generates heat; it's the rate at which energy is consumed.",
+      "p3": "In DC circuits, the real power equals the watts listed, product of voltage and amperage."
+    },
+    "heat": {
+      "title": "Why does the solenoid get hot?",
+      "story": "Temperature rise is expected when the solenoid is energized. Class 'H' insulation allows up to 160°C. Beyond that, insulation degrades.",
+      "p1": "Always handle energized coils with care.",
+      "p2": "Excess heat can damage insulation.",
+      "p3": "Monitor coil temperature during operation."
+    },
+    "burn": {
+      "title": "Why did the coil burn out?",
+      "story": "Ratings are based on 'holding' power after energizing. AC coils have an 'in-rush' current much higher than holding current. Stuck components prolong in-rush and can burn coils.",
+      "p1": "Use filters in valves exposed to particulate.",
+      "p2": "Improper voltage or exceeding duty cycle can also burn coils.",
+      "p3": "High cycling frequency prevents heat dissipation, causing burnout."
+    },
+    "cycle": {
+      "title": "Why limit AC cycles but not DC?",
+      "story": "AC coils are limited due to heat from in-rush current. DC coils lack in-rush, so high cycle frequency is safe.",
+      "p1": "AC in-rush generates heat, limiting cycles per unit time.",
+      "p2": "DC coils do not have in-rush; high-frequency cycling is safe.",
+      "p3": "Always follow duty cycle guidelines to avoid damage."
+    },
+    "temp": {
+      "title": "Is there a minimum/maximum ambient temperature?",
+      "story": "Heat damages coils, not cold. More current is drawn at very low temperatures due to wire resistance. Maximum ambient: 65℃ for 10W and 25℃ for 22W coils. Higher ambient allowed if fluid cooler. Internal temperature must not exceed table below.",
+      "p1": "Monitor coil temperature during operation to avoid exceeding limits.",
+      "p2": "Use proper installation and environment for long coil life.",
+      "p3": "Follow all manufacturer recommendations for safety.",
+      "table": {
+        "class": "Class",
+        "nominal": "Nominal Temp",
+        "permissible": "Permissible Temp",
+        "rise": "Temp Rise",
+        "A": { "nominal": "105°C", "permissible": "110°C", "rise": "85°C" },
+        "B": { "nominal": "130°C", "permissible": "120°C", "rise": "95°C" },
+        "F": { "nominal": "155°C", "permissible": "140°C", "rise": "115°C" },
+        "H": { "nominal": "180°C", "permissible": "160°C", "rise": "135°C" }
+      }
+    }
   }
 
-
+  
 
   }

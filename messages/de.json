@@ -265,7 +265,58 @@
     "inklMwst": "inkl. Mwst.",
     "deliveryNotice": "*Angegebene Lieferzeiten gelten für Mo.–Fr. ohne Berücksichtigung von Feiertagen."
   
+  },
+  
+  "faq": {
+    "flowHint": "Folgen Sie den Schritten unten, um die vollständigen FAQ-Details zu erkunden",
+    "current": {
+      "title": "Warum zieht mein GOETVALVE Ventil mehr Strom als im Katalog?",
+      "story": "Einige AC-Magnetventile sind in Watt angegeben, haben aber tatsächlich höhere VA (Volt*Ampere) Werte. VA misst die 'scheinbare Leistung' eines Stromkreises, gleich RMS Spannung x RMS Strom. Es wird für Draht- und Sicherungsdimensionierung verwendet.",
+      "p1": "Beispiel: VA 47 bei 230V AC → Stromaufnahme 0,2 A.",
+      "p2": "'Reale Leistung' ist Watt, die Arbeit verrichten oder Wärme erzeugen; die Rate des Energieverbrauchs.",
+      "p3": "In DC-Schaltungen entspricht die reale Leistung den angegebenen Watt, multipliziert mit Spannung und Stromstärke."
+    },
+    "heat": {
+      "title": "Warum wird die Spule heiß?",
+      "story": "Temperaturanstieg ist normal beim Einschalten. Klasse 'H' Isolierung bis 160°C. Darüber beginnt Isolierung abzubauen.",
+      "p1": "Immer vorsichtig mit unter Spannung stehenden Spulen umgehen.",
+      "p2": "Überhitzung kann Isolierung beschädigen.",
+      "p3": "Spulentemperatur während Betrieb überwachen."
+    },
+    "burn": {
+      "title": "Warum ist die Spule durchgebrannt?",
+      "story": "Bewertungen basieren auf 'Halte'-Leistung nach Einschalten. AC-Spulen haben 'Inrush'-Strom höher als Haltestrom. Festsitzende Komponenten verlängern Inrush → Verbrennung.",
+      "p1": "Filter in Ventilen mit Partikeln verwenden.",
+      "p2": "Falsche Spannung oder Überschreitung des Zyklus kann Spulen verbrennen.",
+      "p3": "Hohe Zyklusfrequenz verhindert Wärmeableitung → Verbrennung."
+    },
+    "cycle": {
+      "title": "Warum AC-Zyklen begrenzen, DC nicht?",
+      "story": "AC-Spulen begrenzt wegen Wärme durch Inrush. DC-Spulen ohne Inrush, hohe Frequenz möglich.",
+      "p1": "AC-Inrush erzeugt Wärme, begrenzt Zyklen pro Zeiteinheit.",
+      "p2": "DC-Spulen ohne Inrush; hohe Frequenz sicher.",
+      "p3": "Befolgen Sie Duty-Cycle Richtlinien, um Schäden zu vermeiden."
+    },
+    "temp": {
+      "title": "Gibt es eine minimale/maximale Umgebungstemperatur?",
+      "story": "Hitze schadet Spulen, nicht Kälte. Niedrige Temperaturen → mehr Strom wegen Drahtwiderstand. Max. Umgebung: 65℃ für 10W, 25℃ für 22W Spulen. Höhere Umgebung zulässig, wenn Medium kühler. Innentemperatur darf Tabelle unten nicht überschreiten.",
+      "p1": "Spulentemperatur überwachen, um Limits nicht zu überschreiten.",
+      "p2": "Installationsbedingungen beachten für lange Lebensdauer.",
+      "p3": "Herstellerempfehlungen stets beachten.",
+      "table": {
+        "class": "Klasse",
+        "nominal": "Nenn-Temp",
+        "permissible": "Zulässige Temp",
+        "rise": "Temp-Anstieg",
+        "A": { "nominal": "105°C", "permissible": "110°C", "rise": "85°C" },
+        "B": { "nominal": "130°C", "permissible": "120°C", "rise": "95°C" },
+        "F": { "nominal": "155°C", "permissible": "140°C", "rise": "115°C" },
+        "H": { "nominal": "180°C", "permissible": "160°C", "rise": "135°C" }
+      }
+    }
   }
+
+
   
 
   }

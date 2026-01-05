@@ -261,5 +261,53 @@
     "zertifiziert": "Certificato",
     "inklMwst": "IVA inclusa",
     "deliveryNotice": "*I tempi di consegna indicati si applicano dal lunedì al venerdì, esclusi i giorni festivi."
+  },
+   "faq": {
+    "flowHint": "Segui i passaggi sottostanti per esplorare le FAQ complete",
+    "current": {
+      "title": "Perché la mia valvola GOETVALVE assorbe più corrente del catalogo?",
+      "story": "Alcune elettrovalvole AC sono indicate in Watt ma hanno valori VA (Volt*Ampere) molto più alti. VA misura la 'potenza apparente', uguale a tensione RMS x corrente RMS. Usata per dimensionare fili e fusibili.",
+      "p1": "Esempio: VA 47 con 230V AC → corrente 0,2 A.",
+      "p2": "La 'potenza reale' è in Watt, fa lavoro o genera calore; è il tasso di consumo energetico.",
+      "p3": "Nei circuiti DC, potenza reale = Watt indicati x tensione x corrente."
+    },
+    "heat": {
+      "title": "Perché la bobina si riscalda?",
+      "story": "Aumento di temperatura previsto quando la bobina è alimentata. Isolamento classe 'H' fino a 160°C. Oltre degrada.",
+      "p1": "Maneggiare sempre bobine alimentate con cautela.",
+      "p2": "Calore eccessivo può danneggiare isolamento.",
+      "p3": "Monitorare temperatura della bobina."
+    },
+    "burn": {
+      "title": "Perché la bobina ha bruciato?",
+      "story": "Valutazioni basate su potenza 'di mantenimento' dopo accensione. AC ha corrente di spunto più alta. Componenti bloccati prolungano spunto → bruciatura.",
+      "p1": "Usare filtri per valvole con particelle.",
+      "p2": "Tensione impropria o ciclo eccessivo può bruciare bobina.",
+      "p3": "Alta frequenza di ciclo impedisce dissipazione → bruciatura."
+    },
+    "cycle": {
+      "title": "Perché limitare cicli AC ma non DC?",
+      "story": "AC limitata per calore da spunto. DC senza spunto, alta frequenza sicura.",
+      "p1": "AC spunto genera calore → cicli limitati.",
+      "p2": "DC senza spunto, alta frequenza sicura.",
+      "p3": "Seguire duty cycle per evitare danni."
+    },
+    "temp": {
+      "title": "Esiste temperatura ambiente minima/massima?",
+      "story": "Il calore danneggia le bobine, non il freddo. Corrente maggiore a basse temperature per resistenza filo. Max ambiente: 65℃ per 10W, 25℃ per 22W. Maggiore ambiente consentito se fluido più freddo. Interna non superare tabella sotto.",
+      "p1": "Monitorare temperatura interna per non superare limiti.",
+      "p2": "Installare correttamente per lunga vita.",
+      "p3": "Seguire sempre raccomandazioni del produttore.",
+      "table": {
+        "class": "Classe",
+        "nominal": "Temp nominale",
+        "permissible": "Temp ammissibile",
+        "rise": "Aumento Temp",
+        "A": { "nominal": "105°C", "permissible": "110°C", "rise": "85°C" },
+        "B": { "nominal": "130°C", "permissible": "120°C", "rise": "95°C" },
+        "F": { "nominal": "155°C", "permissible": "140°C", "rise": "115°C" },
+        "H": { "nominal": "180°C", "permissible": "160°C", "rise": "135°C" }
+      }
+    }
   }
 }

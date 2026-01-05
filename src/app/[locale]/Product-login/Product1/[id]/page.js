@@ -417,7 +417,7 @@ console.log("indextest:",indextest)
                         <tbody>
                         
                         {Object.entries(items[paramid])
-                                .filter(([key,value]) => !['priceNum', 'src','price','category','id','pdf'].includes(key) && value !== "" && value != null)
+                                .filter(([key,value]) => !['priceNum', 'src','price','category','id','pdf','video'].includes(key) && value !== "" && value != null)
                                 .map(([key, value], index) => (
                                     <tr className={`h-[25px] w-[280px] text-[#212529] ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`} key={key}>
                                         <td className="text-[16.8px] font-semibold font-montserrat p-[5px] text-customBlue">
