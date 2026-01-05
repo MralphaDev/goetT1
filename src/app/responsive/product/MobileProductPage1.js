@@ -21,6 +21,8 @@ const MobileProductPage1 = () => {
     const filters7 = ['direktgesteuert','servorgesteurt','zwanggesteuert'];
     const filters8 = ['0-10','10-20','20-30','30-40','40-50'];
     let filters9 = ['Solenoid','Pressure-actuated','liqnitro','liqnitrofilter','safetyValve']
+    let filters10 = ["Liquid-carbon-dioxide","Liquid-helium","Liquid-nitrogen","Liquid-argon",'Liquid-oxygen']; // medium
+    let filters11 = ['10µm','20µm','40µm','100µm'] //filter
 
     const [items, setItems] = useState([]);
     const [selectedFilters, setSelectedFilters] = useState([]);
@@ -43,6 +45,8 @@ const MobileProductPage1 = () => {
     const [tempFilters7, setTempFilters7] = useState(filters7);
     const [tempFilters8, setTempFilters8] = useState(filters8);
     const [tempFilters9,setTempFilters9] = useState(filters9)// Initialize with all filters9
+    const [tempFilters10,setTempFilters10] = useState(filters10)// Initialize with all filters10
+    const [tempFilters11,setTempFilters11] = useState(filters11)// Initialize with all filters10
 
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [modalOpen, setModalOpen] = useState(false);
@@ -80,6 +84,8 @@ const MobileProductPage1 = () => {
         setTempFilters7(filters7);
         setTempFilters8(filters8);
         setTempFilters9(filters9);
+        setTempFilters10(filters10)
+        setTempFilters11(filters11)
     };
 
     useEffect(() => {
@@ -126,7 +132,10 @@ const MobileProductPage1 = () => {
         {label: "Funktion", items: tempFilters6},
         {label: "Steuerung", items: tempFilters7},
         {label: "Durchfluss", items: tempFilters8},
-        {label:"Typ",items:tempFilters9}
+        {label:"Typ",items:tempFilters9},
+        {label:"Medium",items:tempFilters10},
+        {label:"Filter",items:tempFilters11},
+
     ];
 
     return (
@@ -206,7 +215,7 @@ const MobileProductPage1 = () => {
                                     </button>
                                 )}
                             </div>
-                            <Link href={`../Product-login/Product1/${idx}`} className="text-sm mt-2 text-blue-600">View Details</Link>
+                            <Link href={`../Product-login/Product1/${item.id}`} className="text-sm mt-2 text-blue-600">View Details</Link>
                         </div>
                     ))}
                 </div>

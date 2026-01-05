@@ -62,10 +62,13 @@ export default function Homepage() {
   initial={{ x: 120, opacity: 0 }}
   animate={{ x: 0, opacity: 1 }}
   transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
-  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-widest text-black mt-3 uppercase"
-  style={{ fontFamily: 'Orbitron, sans-serif' }}
+  className=" text-customBlue text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-widest  mt-3 uppercase"
+  
 >
-  Goetvalve
+  <div style={{ fontFamily: 'Franklin Gothic Demi, sans-serif' }}>
+      Goet<span className="text-lightBlue" style={{ fontFamily: 'inherit' }}>Valve</span>
+  </div>
+
 </motion.h2>
 
             </div>

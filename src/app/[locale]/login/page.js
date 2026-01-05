@@ -10,6 +10,11 @@ export default function Home() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [position, setPosition] = useState("");
   const [code, setCode] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
@@ -27,12 +32,12 @@ export default function Home() {
   };
 
   const handleSubmit = async () => {
-    if (!password|| !email) {
-      showPopup("password and email cannot be empty", "error");
+    if (!password|| !email || (isSignUp && !name) || (isSignUp && !companyName) || (isSignUp && !companyWebsite) || (isSignUp && !companyAddress) || (isSignUp && !position)) {
+      showPopup("there are missing fields", "error");
       return;
     }
 
-    const body = { password, email, isSignUp, step };
+    const body = { password, email, isSignUp, step, name, companyName, companyWebsite, companyAddress, position };
     if (isSignUp && step === 2) body.code = code;
 
     let res, data;
@@ -162,6 +167,52 @@ export default function Home() {
               className="border px-3 py-2 rounded w-64"
               disabled={step === 2}
             />
+            {isSignUp && (
+              <input
+              placeholder="your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="border px-3 py-2 rounded w-64"
+              disabled={step === 2}
+            />
+            )}
+              {isSignUp && (
+              <input
+              placeholder="your company name"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              className="border px-3 py-2 rounded w-64"
+              disabled={step === 2}
+            />
+            )}
+            {isSignUp && (
+              <input
+              placeholder="your company website"
+              value={companyWebsite}
+              onChange={(e) => setCompanyWebsite(e.target.value)}
+              className="border px-3 py-2 rounded w-64"
+              disabled={step === 2}
+            />
+            )}
+              {isSignUp && (
+              <input
+              placeholder="your company address"
+              value={companyAddress}
+              onChange={(e) => setCompanyAddress(e.target.value)}
+              className="border px-3 py-2 rounded w-64"
+              disabled={step === 2}
+            />
+            )}
+
+              {isSignUp && (
+              <input
+              placeholder="your position in company"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              className="border px-3 py-2 rounded w-64"
+              disabled={step === 2}
+            />
+            )}
 
             {isSignUp && step === 2 && (
               <input

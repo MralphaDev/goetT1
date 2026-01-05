@@ -163,7 +163,7 @@ export default function BurgerMenu() {
                   </button>
 
                   {langOpen && (
-                    <div className="absolute bottom-14 right-0 bg-white rounded-lg shadow-lg p-2 flex flex-col space-y-1">
+                    <div className="absolute bottom-0 right-20 bg-white rounded-lg shadow-lg p-2 flex flex-row space-x-1">
                       {["en", "de", "it"].map((loc) => (
                         <button
                           key={loc}

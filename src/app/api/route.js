@@ -2,7 +2,7 @@ import { getConnection } from '../../lib/db.js';
 import nodemailer from "nodemailer";
 
 export async function POST(req) {
-  const { password, email, isSignUp, step, code } = await req.json();
+  const { password, email, isSignUp,name, companyName, companyWebsite, companyAddress, position, step, code } = await req.json();
   const conn = await getConnection();
   global.verificationCodes = global.verificationCodes || {};
 
@@ -96,7 +96,7 @@ export async function POST(req) {
           return new Response(JSON.stringify({ message: "User already exists" }), { status: 400 });
         }
 
-        const [result] = await conn.execute("INSERT INTO users (email, password) VALUES (?, ?)", [email, password]);
+        const [result] = await conn.execute("INSERT INTO users (email, password, name, companyName, companyWebsite, companyAddress, position) VALUES (?, ?, ?, ?, ?, ?, ?)", [email, password, name, companyName, companyWebsite, companyAddress, position]);
         delete global.verificationCodes[email];
 
         return new Response(JSON.stringify({ user: { id: result.insertId, password, email }, message: "Sign up successful" }), { status: 200 });

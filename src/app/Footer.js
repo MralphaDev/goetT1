@@ -5,7 +5,7 @@ import { SiUsdcoin } from "react-icons/si";
 
 export default function Footer() {
   return (
-    <footer className="w-screen bg-[#28A8DE] from-blue-600 to-blue-500 text-white py-12 mt-50">
+    <footer className="w-screen bg-[url('https://www.nieruf.de/media/fa/fc/75/1727169671/premium-news-background-blue-checked.svg?ts=1727169671')] from-blue-600 to-blue-500 text-white py-12 opacity-85 bg-cover bg-center">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Contact */}
         <div>
@@ -33,7 +33,7 @@ export default function Footer() {
           <FaCcVisa className="hover:text-gray-200 transition" />
           <FaCcMastercard className="hover:text-gray-200 transition" />
           <FaCcAmex className="hover:text-gray-200 transition" />
-          <text className="text-[17px] font-bold" fontFamily="Arial, sans-serif" fill="white">SEPA</text>
+          <div className="text-[17px] font-bold" fontFamily="Arial, sans-serif" fill="white">SEPA</div>
 
 
         </div>

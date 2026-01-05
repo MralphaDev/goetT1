@@ -39,7 +39,9 @@ export async function GET() {
     TemperaturMedium: row.TemperaturMedium,
     TemperaturUmgebung: row.TemperaturUmgebung,
     MaximalerDruck: row.MaximalerDruck,
-    Einbaulage: row.Einbaulage
+    Einbaulage: row.Einbaulage,
+    pdf: row.pdf,
+    video: row.video
   }));
 
   return new Response(JSON.stringify(items), {

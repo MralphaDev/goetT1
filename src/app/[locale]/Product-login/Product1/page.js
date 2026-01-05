@@ -62,7 +62,7 @@ const YourPage =  () => {
     let filters1 = ["DN1.0 G1/8",'DN1.5 G1/4','DN2.0 G1/4','DN3.0 G1/4','DN3.5 G1/4','DN4.5 G1/4','DN5.2 G1/4','DN5.5 G1/2','DN7.0 G1/2','DN10 G1/2','DN15 G1/2','DN16 G3/4','DN20 G3/4','DN25 G:1','DN32 G1-1/4','DN40 G1-1/2','DN50 G:2']
     let filters2 = ["2/2 Wege","3/2 Wege","lift-check-non-return-valve","2-to-8 channel combiner board"]
     let filters3 = ["12V-DC","24V-DC","24V-AC","48V-AC","110V-AC","230V-AC"]
-    let filters4 = ["Brass","Bronze",'1.4301','1.4403','1.4408']
+    let filters4 = ["Brass","Bronze","1_4301","1_4403","1_4408"]
     let filters5 = ['EPDM','FKM','FPM','NBR','PTFE','PU','PEEK','PCTFE','KALREZ']
     let filters6 = ['spring chamber ventilation','NC','NO']
     let filters7 = ['direct-operated', 'servo-operated', 'force-operated','pneumatic-control','spring-actuated'];
@@ -197,6 +197,8 @@ const YourPage =  () => {
         setTempFilters7(filters7)
         setTempFilters8(filters8)
         setTempFilters9(filters9)
+        setTempFilters8(filters10)
+        setTempFilters9(filters11)
 
     };
 
@@ -388,7 +390,7 @@ const resetQuantity = (name) => {
                                
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                    Solenoid
+                                    {t('Solenoid')}
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -405,7 +407,7 @@ const resetQuantity = (name) => {
                                
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                    pressure-actuated
+                                    {t('Pressure-actuated')}
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -416,7 +418,7 @@ const resetQuantity = (name) => {
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://goetvalves.eu/image/c26.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                liquidnitrogen-non-return 
+                                    {t('Liqnitrogen-non-return')}
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -427,7 +429,7 @@ const resetQuantity = (name) => {
                                 <img className='h-32  hover:scale-105 transition-transform duration-200' src="https://goetvalves.eu/image/filter2.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                    liquidnitrogen filter
+                                    {t('Liqnitrogenfilter')}
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -438,7 +440,7 @@ const resetQuantity = (name) => {
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://goetvalves.eu/image/safety1.png"></img>
                             </div>
                                 <div className='flex justify-center items-center text-gray-400'>
-                                    safety valves
+                                    {t('SafetyValve')}
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -502,7 +504,7 @@ const resetQuantity = (name) => {
                                         onChange={()=>handleSelect(category)} 
                                         checked={selectedFilters.includes(category)}
                                         className="mr-2" />
-                                {category}
+                                {t(category)}
                                 </label>
                             ))}
                             </div>
@@ -536,7 +538,7 @@ const resetQuantity = (name) => {
                                         onChange={()=>handleSelect(category)} 
                                         checked={selectedFilters.includes(category)}
                                         className="mr-2" />
-                                {category}
+                                {t(category)}
                                 </label>
                             ))}
                             </div>
@@ -578,7 +580,7 @@ const resetQuantity = (name) => {
                                         onChange={()=>handleSelect(category)} 
                                         checked={selectedFilters.includes(category)}
                                         className="mr-2" />
-                                {category}
+                                {t(category)}
                                 </label>
                             ))}
                             </div>
@@ -595,7 +597,7 @@ const resetQuantity = (name) => {
                                         onChange={()=>handleSelect(category)} 
                                         checked={selectedFilters.includes(category)}
                                         className="mr-2" />
-                                {category}
+                                {t(category)}
                                 </label>
                             ))}
                             </div>
@@ -628,7 +630,7 @@ const resetQuantity = (name) => {
                            <div className="overflow-y-auto mr-10">
                                 <div className="flex flex-col w-[300px]">
                                     <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                        {t("type")}
+                                        {t("Typ")}
                                     </div>
                                     {tempFilters9.map((category,id)=>(
                                         <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
@@ -644,7 +646,7 @@ const resetQuantity = (name) => {
 
                             <div className="flex flex-col w-[300px] mr-10">
                                 <div className="w-full mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                    {"KV-value"}
+                                    {t("KV-Wert")}
                                 </div>
 
                                 <input
@@ -665,7 +667,7 @@ const resetQuantity = (name) => {
                             <div className="overflow-y-auto mr-10">
                                 <div className="flex flex-col w-[300px]">
                                     <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                        {"medium"}
+                                        {t("Medium")}
                                     </div>
                                     {tempFilters10.map((category,id)=>(
                                         <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
@@ -673,7 +675,7 @@ const resetQuantity = (name) => {
                                                 onChange={()=>handleSelect(category)} 
                                                 checked={selectedFilters.includes(category)}
                                                 className="mr-2" />
-                                        {category}
+                                        {t(category)}
                                         </label>
                                     ))}
                                 </div>
@@ -739,7 +741,7 @@ const resetQuantity = (name) => {
                             
                                             <svg
                                                 className="absolute mt-[10px] ml-[13%] hover:cursor-pointer"
-                                                onClick={() => { handleModalOpen(idx); }}
+                                                //onClick={() => { handleModalOpen(idx); }}
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 xmlnsXlink="http://www.w3.org/1999/xlink"
                                                 x="0"
@@ -760,7 +762,7 @@ const resetQuantity = (name) => {
                                              src={item.src} 
                                              alt="Description of image" 
                                              className="w-[55%] h-[80%] ml-[10%] mt-[13%] object-contain hover:cursor-pointer"
-                                             onClick={() => { handleModalOpen(idx) }}
+                                             //onClick={() => { handleModalOpen(idx) }}
                                             />
 
                                         </div>
@@ -772,13 +774,18 @@ const resetQuantity = (name) => {
 
                                             <div className="w-full h-full">
                                                 <div className="w-full h-1/4 border-b-[5px] border-white flex">
-                                                    <div className="pl-[10px] pt-[5px] w-1/2 border-r-[5px] border-white">Nennweite:{item.Nennweite}</div>
-                                                    <div className="pl-[10px] pt-[5px] w-1/2 w-1/2 ">Spannung:{item.Spannung}</div>
+                                                    <div className="pl-[10px] pt-[5px] w-1/2 border-r-[5px] border-white">{t('Nennweite')}:{item.Nennweite}</div>
+                                                    <div className="pl-[10px] pt-[5px] w-1/2 w-1/2 ">{t('Spannung')}:{item.Spannung}</div>
                                                 </div>
 
                                                 <div className="w-full h-1/4 border-b-[5px] border-white flex">
-                                                        <div className="pl-[10px] pt-[5px] w-1/2 w-1/2 border-r-[5px] border-white">Maximaler Druck:{item.MaximalerDruck}</div>
-                                                        <div className="pl-[10px] pt-[5px] w-1/2 w-1/2  border-white">Schaltfunktion:{item.Schaltfunktion}</div>
+                                                        <div className="pl-[10px] pt-[5px] w-1/2 w-1/2 border-r-[5px] border-white">{t('Druck')}:{item.MaximalerDruck}</div>
+                                                        <div className="pl-[10px] pt-[5px] w-1/2 w-1/2  border-white">{t('Schaltfunktion')}:{item.Schaltfunktion}</div>
+                                                </div>
+
+                                                 <div className="w-full h-1/4  border-white flex">
+                                                        <div className="pl-[10px] pt-[5px] w-1/2 w-1/2 border-r-[5px] border-white">{t('Material')}:{t(item.Material)}</div>
+                                                        <div className="pl-[10px] pt-[5px] w-1/2 w-1/2  border-white">{t('Typ')}:{item.Typ}</div>
                                                 </div>
 
                                                 <div className="w-full h-1/3 border-white flex">
@@ -822,11 +829,11 @@ const resetQuantity = (name) => {
 
                                                     {isLoggedIn ? `${item.price}` : 
 
-                                                    <Link href={loginPath} className="text-[20px]">LOGIN TO PURCHASE</Link>
+                                                    <Link href={loginPath}  style={{ fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }} className="text-[20px] text-customBlue">{t("LOGIN TO PURCHASE")}</Link>
                                                     
                                                     }
                                                     </div>
-                                                    <div className="text-gray-500">Exklusive 19 % Mehrwertsteuer</div>
+                                                    <div className="text-gray-500">{t("Exklusive 19 % Mehrwertsteuer")}</div>
                                                 </div>
 
                                             </div>
@@ -834,11 +841,11 @@ const resetQuantity = (name) => {
                                             <div className="flex items-center pl-[20%]">
                                                     <div>
                                                         <div className="mt-4">
-                                                            <span className="">Lieferzeit: </span><a href="#" className="text-blue-500">ab Lager</a>
+                                                            <span className="">{t("Lieferzeit:")} </span><a href="#" className="text-blue-500">{t("ab Lager")}</a>
                                                         </div>
 
                                                         <div className="mt-2 flex">
-                                                            <span>Expressversand*:</span>
+                                                            <span>{t("Expressversand*:")}</span>
                                                             <svg className="w-5 h-5 text-blue-500 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                                                             </svg>
@@ -849,10 +856,11 @@ const resetQuantity = (name) => {
 
                                             <div className="mt-6 flex ">
                                                 <Link className="flex justify-center w-3/5 bg-[#0F4C71] text-white rounded mb-2 mr-5" style={{ transform: 'skewX(-10deg)' }} href={`../Product-login/Product1/${item.id}`} >
-                                                    <button className="bg- text-white py-2">View on Detail page</button>
+                                                    <button className="bg- text-white py-2">{t("View on Detail page")}</button>
                                                 </Link>
                                             
-                                                <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Absperrklappe-AK01-AK02.pdf">
+                                                {isLoggedIn && (
+                                                <a href={item?.pdf}>
                                                 
                                                 <button 
                                                     className="py-1 px-3 rounded flex justify-center items-center"
@@ -866,7 +874,7 @@ const resetQuantity = (name) => {
                                                     Datenblatt
                                                 </button>
 
-                                                </a>
+                                                </a>)}
                                                 
                                             </div>
 
@@ -892,7 +900,7 @@ const resetQuantity = (name) => {
                         Close
                         </button>
                             <div ref={modalRef} className="w-full h-full" style={{ position: 'relative' }}>
-                            {/* Make sure to set styles for the canvas */}
+                            
                                  
                             </div>
                     </div>

@@ -1,8 +1,59 @@
 {
-    "HomePage": {
-      "title": "Hallo Welt",
-      "about": "Gehen zum About page"
+     "header": {
+    "Goetvalve": "Goetvalve",
+    "Company": "Firma",
+    "Products": "Produkte",
+    "Applications": "Anwendungen",
+    "ServiceSupport": "Service & Support",
+    "Contact": "Kontakt",
+    "Go": "Los"
+
+  },
+  "HomePage": {
+    "hero_title": "KRYOGENVENTILE",
+    "hero_subtitle": "Im Dienst der\nIndustrie",
+    "hero_description":
+      "Magnetventile, druckgesteuerte Ventile,\nRückschlagventile, Kryofilter\nund Sicherheitsventile",
+    "Product": "Produkt",
+    "Application": "Anwendung",
+    "Support": "Support",
+    "Description": "Entdecken Sie unsere Lösungen und Dienstleistungen, die auf Ihre Bedürfnisse zugeschnitten sind.",
+     "titleWord1": "Präzision",
+    "titleWord2": "Zuverlässigkeit",
+    "titleWord3": "Effizienz",
+    "samplePara1": "Jedes Magnetventil wird nach höchsten Standards entwickelt, um unter allen Betriebsbedingungen zuverlässig zu arbeiten.",
+    "samplePara2": "Robustes und wartungsfreundliches Design minimiert Ausfallzeiten und steigert die Produktivität.",
+    "samplePara3": "Energieeffiziente und umweltfreundliche Materialien zeigen unser Engagement für nachhaltige Industrie.",
+    "samplePara4": "Wir bieten praxisorientierte Lösungen für die weltweite Industrie, die Sicherheit, Präzision und langfristige Zuverlässigkeit gewährleisten.",
+    "Entdecken": "Entdecken Sie mehr"
     },
+
+    "ContactUs": {
+    "ContactUsTitle": "Kontakt",
+    "AsianAddress": "Asiatische Lageradresse: 058727 150 South Bridge Road #02 Fookhai, Singapur (Mo – Fr 10:00 – 17:00)",
+    "EuropeanAddress": "Europäische Lageradresse: Karl-Lange-Str. 49,44791 Bochum, Deutschland (Mo – Fr 9:00 – 15:00)",
+    "EmailSGP": "sgp@goetvalves.eu",
+    "EmailEU": "info@goetvalves.eu",
+    "HelpText": "Wir helfen Ihnen gerne! Kontaktieren Sie uns per E-Mail oder Kontaktformular und wir melden uns so schnell wie möglich zurück.",
+    "YourName": "Ihr Name",
+    "YourEmail": "Ihre E-Mail",
+    "YourMessage": "Ihre Nachricht",
+    "SendMessage": "Nachricht senden",
+    "SubmissionSuccess": "Danke! Ihre Nachricht wurde gesendet."
+  },
+  "Applications": {
+    "PageTitle": "ANWENDUNGEN",
+    "CheckOut": "SCHAUEN SIE SICH AN",
+    "OurApplications": "UNSERE ANWENDUNGEN",
+    "Images": {
+      "C1": "Verwendet in Produktionslinien für reines Wasser und Getränke, Befüllung und Versiegelung von Stickstoffflaschen",
+      "C2": "Verwendet zum Befüllen von Flüssigstickstofftanks",
+      "C3": "Verwendet in Tunnel-Typ Flüssigstickstoff-Schnellgefriergeräten",
+      "C4": "Angewendet zur automatischen Steuerung von Flüssigstickstoffleitungen",
+      "C5": "Verwendet zur Kühlung von CNC-Maschinen",
+      "C6": "Lebensmittel-Schnellgefrierer"
+    }
+  },
 
     "AboutPage":{
       "title": "Über uns",
@@ -23,6 +74,20 @@
       "contact": "Kontakt"
     },
     
+    "service": {
+    "PageTitle": "SERVICE & SUPPORT",
+    "IntroText": "Entdecken Sie unsere maßgeschneiderten Dienstleistungen und Support, um einen reibungslosen Betrieb sicherzustellen.",
+    "MainImageAlt": "Service & Support Bild",
+    "FAQs": "FAQs - Spule & Strom",
+    "FAQsDesc": "Finden Sie Antworten auf häufige Fragen zu Spule und Strom.",
+    "ServiceMaintenance": "Service, Wartung und Inbetriebnahme",
+    "ServiceMaintenanceDesc": "Professioneller Support für Installation, Wartung und Inbetriebnahme Ihrer Geräte.",
+    "Commissioning": "Inbetriebnahmeservices",
+    "CommissioningDesc": "Wir stellen sicher, dass Ihre Systeme betriebsbereit, getestet und voll funktionsfähig sind.",
+    "GenericTextTitle": "Warum uns wählen?",
+    "GenericTextDesc": "Unser Team liefert zuverlässige Lösungen mit professionellem Service und schneller Reaktion.",
+    "BigRightTitle": "SERVICE & SUPPORT"
+  },
 
     "Product1": {
     "title":"Magnetventil",
@@ -37,9 +102,56 @@
     "Steurung": "Steurung",
     "Druck": "Druck",
     "Typ":"Typ",
+    "KV-Wert": "KV-Wert",
+   "Medium": "Medium",
+    "2/2 Wege": "2/2 Wege",
+  "3/2 Wege": "3/2 Wege",
+  "lift-check-non-return-valve": "Hub-Rückschlagventil",
+  "2-to-8 channel combiner board": "2- bis 8-Kanal Kombinationsplatine",
+  "Brass": "Messing",
+  "Messing" : "Messing",
+  "Bronze": "Bronze",
+"1_4301": "1.4301",
+  "1_4403": "1.4403",
+  "1_4408": "1.4408",
+  "1_4401": "1.4401",
+  "EPDM": "EPDM",
+  "FKM": "FKM",
+  "FPM": "FPM",
+  "NBR": "NBR",
+  "PTFE": "PTFE",
+  "PU": "PU",
+  "PEEK": "PEEK",
+  "PCTFE": "PCTFE",
+  "KALREZ": "KALREZ",
+  "spring chamber ventilation": "Federkammerbelüftung",
+  "NC": "NC",
+  "NO": "NO",
+  "direct-operated": "direktgesteuert",
+  "servo-operated": "servo-gesteuert",
+  "force-operated": "kraftgesteuert",
+  "pneumatic-control": "pneumatische Steuerung",
+  "spring-actuated": "federbetätigt",
+   "Liquid-carbon-dioxide": "Flüssiges Kohlendioxid",
+  "Liquid-helium": "Flüssiges Helium",
+  "Liquid-nitrogen": "Flüssiger Stickstoff",
+  "Liquid-argon": "Flüssiges Argon",
+  "Liquid-oxygen": "Flüssiger Sauerstoff",
     "Buynow": "jetzt kaufen",
     "DeliveryTime":"Lieferzeit",
-    "type":"Typ"
+    "type":"Typ",
+    "Solenoid": "Magnetventil",
+  "Pressure-actuated": "Druckgesteuert",
+  "Liqnitrogen-non-return": "Flüssigstickstoff-Rückschlagventil",
+  "Liqnitrogenfilter": "Flüssigstickstofffilter",
+  "SafetyValve": "Sicherheitsventil",
+  "LOGIN TO PURCHASE": "Zum Kauf einloggen",
+    "Exklusive 19 % Mehrwertsteuer": "Exklusive 19 % Mehrwertsteuer",
+    "Lieferzeit:": "Lieferzeit:",
+    "ab Lager": "ab Lager",
+    "Expressversand*:": "Expressversand*:",
+    "View on Detail page": "Auf Detailseite anzeigen"
+  
   },
 
   "Pressureactuated":{
@@ -107,9 +219,53 @@
     "Typ": "Typ",
     "Buynow": "Jetzt kaufen",
     "DeliveryTime": "Lieferzeit"
-}
+},
 
-
+  "ProductDetail":{
+    "name": "Name",
+    "serialNum": "Seriennummer",
+    "Typ": "Typ",
+    "Hersteller": "Hersteller",
+    "Bauform": "Bauform",
+    "Nennweite": "Nennweite",
+    "Anschluss": "Anschluss",
+    "Anschlussart": "Anschlussart",
+    "Bauart": "Bauart",
+    "KVWert": "KV-Wert",
+    "Schaltfunktion": "Schaltfunktion",
+    "Steuerung": "Steuerung",
+    "Material": "Material",
+    "Dichtung": "Dichtung",
+    "Spannung": "Spannung",
+    "Spannungstoleranz": "Spannungstoleranz",
+    "Leistungsaufnahme": "Leistungsaufnahme",
+    "Einschaltdauer": "Einschaltdauer",
+    "Schutzart": "Schutzart",
+    "Medium": "Medium",
+    "TemperaturMedium": "Mediumtemperatur",
+    "TemperaturUmgebung": "Umgebungstemperatur",
+    "MaximalerDruck": "Maximaler Druck",
+    "Einbaulage": "Einbaulage",
+    "video": "Video"
+  },
+  "PurchaseTab": {
+    "buyNow": "Jetzt kaufen",
+    "viewDatenblatt": "Datenblatt anzeigen",
+    "lieferzeit": "Lieferzeit:",
+    "aufLagerVersand3_5Tagen": "Auf Lager – Versand innerhalb von 3–5 Tagen",
+    "nichtAufLagerBestellungAufAnfrage": "Nicht auf Lager – Bestellung auf Anfrage (Offline-Bestellung)",
+    "versandkostenInfo": "Die Versandkosten werden je nach Gewicht und Entfernung separat kalkuliert.",
+    "erwarteteLieferung2Wochen": "Erwartete Lieferung bis innerhalb 2 Wochen nach Bestellungsdatum",
+    "lieferzeitenHinweis": "*Angegebene Lieferzeiten gelten für Mo.- Fr. ohne Berücksichtigung von Feiertagen.",
+    "umtausch": "Umtausch",
+    "goetvalveUmtausch": "GoetValve Umtausch",
+    "garantie": "Garantie",
+    "garantie12M": "12 M. Garantie",
+    "zertifiziert": "Zertifiziert",
+    "inklMwst": "inkl. Mwst.",
+    "deliveryNotice": "*Angegebene Lieferzeiten gelten für Mo.–Fr. ohne Berücksichtigung von Feiertagen."
+  
+  }
   
 
   }

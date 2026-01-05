@@ -1,8 +1,76 @@
 {
-    "HomePage": {
-      "title": "Hello world!",
-      "about": "Go to the about page"
-    },
+  "header":{
+    "Goetvalve": "Goetvalve",
+    "Company": "Company",
+    "Products": "Products",
+    "Applications": "Applications",
+    "ServiceSupport": "Service & Support",
+    "Contact": "Contact",
+    "Go":"Go"
+  },
+
+  "Applications": {
+    "PageTitle": "APPLICATIONS",
+    "CheckOut": "CHECK OUT",
+    "OurApplications": "OUR APPLICATIONS",
+    "Images": {
+      "C1": "Used in production line of pure water and beverage liquid nitrogen filling and sealing bottles",
+      "C2": "Used in liquid nitrogen tank filling",
+      "C3": "Used in tunnel type liquid nitrogen quick-freezing machine",
+      "C4": "Applied to automatic control of liquid nitrogen pipeline",
+      "C5": "Used in CNC machine tool cooling",
+      "C6": "Food quick freezer"
+    }
+  },
+  
+  "ContactUs": {
+    "ContactUsTitle": "Contact Us",
+    "AsianAddress": "Asian inventory address: 058727 150 South Bridge Road #02 Fookhai, Singapore (Mo – Fr 10:00 – 17:00)",
+    "EuropeanAddress": "European inventory address: Karl-Lange-Str. 49,44791 Bochum, Germany (Mo – Fr 9:00 – 15:00)",
+    "EmailSGP": "sgp@goetvalves.eu",
+    "EmailEU": "info@goetvalves.eu",
+    "HelpText": "We’re here to help! Reach out via email or contact form and we’ll get back to you as soon as possible.",
+    "YourName": "Your Name",
+    "YourEmail": "Your Email",
+    "YourMessage": "Your Message",
+    "SendMessage": "Send Message",
+    "SubmissionSuccess": "Thank you! Your message has been sent."
+  },
+
+  "service": {
+    "PageTitle": "SERVICE & SUPPORT",
+    "IntroText": "Discover our tailored services and support to keep your operations running smoothly.",
+    "MainImageAlt": "Service & Support Image",
+    "FAQs": "FAQs - Coil & Current",
+    "FAQsDesc": "Find answers to common questions about coil and current handling.",
+    "ServiceMaintenance": "Service, Maintenance and Commissioning",
+    "ServiceMaintenanceDesc": "Professional support for installation, maintenance, and commissioning of your equipment.",
+    "Commissioning": "Commissioning Services",
+    "CommissioningDesc": "We ensure your systems are operational, tested, and fully functional.",
+    "GenericTextTitle": "Why Choose Us?",
+    "GenericTextDesc": "Our team delivers reliable solutions with professional service and rapid response.",
+    "BigRightTitle": "SERVICE & SUPPORT"
+  },
+
+  "HomePage": {
+        "hero_title": "CRYOGENIC VALVES",
+        "hero_subtitle": "Serving the\nindustry",
+        "hero_description":
+          "Solenoid valves, Pressure-actuated valves,\nnon-return valves, cryogenic filters\nand safety valves",
+          "Product": "Product",
+          "Application": "Application",
+          "Support": "Support",
+          "Description": "Discover our solutions and services tailored to your needs.",
+          "titleWord1": "Precision",
+    "titleWord2": "Reliability",
+    "titleWord3": "Efficiency",
+    "samplePara1": "Each solenoid valve is engineered to the highest standards, ensuring stable operation under all industrial conditions.",
+    "samplePara2": "Durable and maintenance-friendly design minimizes downtime and maximizes productivity.",
+    "samplePara3": "Energy-efficient and eco-friendly materials reflect our commitment to sustainable industry.",
+    "samplePara4": "We provide practical solutions for global industries, making safety, precision, and long-term reliability standard.",
+    "Entdecken": "Discover more"
+      
+      },
 
     "AboutPage":{
       "title": "about us",
@@ -36,9 +104,57 @@
         "Steurung": "Control",
         "Druck": "Pressure",
         "Typ":"Type",
+        "KV-Wert": "KV Value",
+        "Medium": "Medium",
+        "2/2 Wege": "2/2 way",
+  "3/2 Wege": "3/2 way",
+  "lift-check-non-return-valve": "lift check non-return valve",
+  "2-to-8 channel combiner board": "2-to-8 channel combiner board",
+  "Brass": "Brass",
+  "Bronze": "Bronze",
+  "Messing" : "Brass",
+"1_4301": "1.4301",
+  "1_4403": "1.4403",
+  "1_4408": "1.4408",
+    "1_4401": "1.4401",
+  "EPDM": "EPDM",
+  "FKM": "FKM",
+  "FPM": "FPM",
+  "NBR": "NBR",
+  "PTFE": "PTFE",
+  "PU": "PU",
+  "PEEK": "PEEK",
+  "PCTFE": "PCTFE",
+  "KALREZ": "KALREZ",
+  "spring chamber ventilation": "spring chamber ventilation",
+  "NC": "NC",
+  "NO": "NO",
+  "direct-operated": "direct-operated",
+  "servo-operated": "servo-operated",
+  "force-operated": "force-operated",
+  "pneumatic-control": "pneumatic-control",
+  "spring-actuated": "spring-actuated",
+  "Liquid-carbon-dioxide": "Liquid carbon dioxide",
+  "Liquid-helium": "Liquid helium",
+  "Liquid-nitrogen": "Liquid nitrogen",
+  "Liquid-argon": "Liquid argon",
+  "Liquid-oxygen": "Liquid oxygen",
         "Buynow": "buy now",
         "DeliveryTime":"Delivery time:",
-        "type":"Type"
+        "type":"Type",
+        "Solenoid": "Solenoid",
+        "Pressure-actuated": "Pressure-actuated",
+        "Liqnitrogen-non-return": "Liqnitrogen-non-return-valve",
+        "Liqnitrogenfilter": "Liqnitrogenfilter",
+        "SafetyValve": "SafetyValve",
+            "LOGIN TO PURCHASE": "Login to purchase",
+    "Exklusive 19 % Mehrwertsteuer": "Excluding 19% VAT",
+    "Lieferzeit:": "Delivery time:",
+    "ab Lager": "From stock",
+    "Expressversand*:": "Express shipping*:",
+    "View on Detail page": "View on detail page"
+        
+        
       },
       "Pressureactuated": {
         "title": "Pressure Actuated Valve",
@@ -103,10 +219,54 @@
         "Typ": "Type",
         "Buynow": "buy now",
         "DeliveryTime": "Delivery Time"
-      }
+      },
+      "ProductDetail": {
+
+        "name": "Name",
+        "serialNum": "Serial Number",
+        "Typ": "Type",
+        "Hersteller": "Manufacturer",
+        "Bauform": "Design",
+        "Nennweite": "Nominal Diameter",
+        "Anschluss": "Connection",
+        "Anschlussart": "Connection Type",
+        "Bauart": "Construction Type",
+        "KVWert": "KV Value",
+        "Schaltfunktion": "Switch Function",
+        "Steuerung": "Control",
+        "Material": "Material",
+        "Dichtung": "Seal",
+        "Spannung": "Voltage",
+        "Spannungstoleranz": "Voltage Tolerance",
+        "Leistungsaufnahme": "Power Consumption",
+        "Einschaltdauer": "Duty Cycle",
+        "Schutzart": "Protection Class",
+        "Medium": "Medium",
+        "TemperaturMedium": "Medium Temperature",
+        "TemperaturUmgebung": "Ambient Temperature",
+        "MaximalerDruck": "Max Pressure",
+        "Einbaulage": "Installation Position",
+        "video": "Video"
+      },
+      
+  "PurchaseTab": {
+    "buyNow": "Buy Now",
+    "viewDatenblatt": "View Datasheet",
+    "lieferzeit": "Delivery Time:",
+    "aufLagerVersand3_5Tagen": "In Stock – Shipping within 3–5 days",
+    "nichtAufLagerBestellungAufAnfrage": "Out of Stock – Order on Request (Offline Order)",
+    "versandkostenInfo": "Shipping costs are calculated separately depending on weight and distance.",
+    "erwarteteLieferung2Wochen": "Expected delivery within 2 weeks from order date",
+    "lieferzeitenHinweis": "*Specified delivery times apply Mon.–Fri., excluding public holidays.",
+    "umtausch": "Exchange",
+    "goetvalveUmtausch": "GoetValve Exchange",
+    "garantie": "Warranty",
+    "garantie12M": "12-Month Warranty",
+    "zertifiziert": "Certified",
+    "inklMwst": "incl. VAT",
+    "deliveryNotice": "*Stated delivery times apply from Monday to Friday, excluding public holidays."
+  }
 
 
-    
-    
 
   }

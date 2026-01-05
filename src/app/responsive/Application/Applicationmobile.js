@@ -8,12 +8,12 @@ import { Russo_One } from 'next/font/google';
 const russo = Russo_One({ subsets: ['latin'], weight: '400' });
 
 const cards = [
-  { href: '/de/Product-login/Product1', img: 'http://www.goetvalve.eu/uploadfiles/c1.jpg', label: 'Production Line' },
-  { href: '/de/Applications', img: 'http://www.goetvalve.eu/uploadfiles/c2.jpg', label: 'Tank Filling' },
-  { href: '/de/Service', img: 'http://www.goetvalve.eu/uploadfiles/c3.jpg', label: 'Quick-Freezing Machine' },
-  { href: '/de/Service', img: 'http://www.goetvalve.eu/uploadfiles/c4.jpg', label: 'Pipeline Control' },
-  { href: '/de/Service', img: 'http://www.goetvalve.eu/uploadfiles/c5.jpg', label: 'CNC Cooling' },
-  { href: '/de/Service', img: 'http://www.goetvalve.eu/uploadfiles/c6.jpg', label: 'Food Quick Freezer' },
+  { href: '/de/Product-login/Product1', img: 'http://www.goetvalves.eu/image/c1.jpg', label: 'Production Line' },
+  { href: '/de/Applications', img: 'http://www.goetvalves.eu/image/c2.jpg', label: 'Tank Filling' },
+  { href: '/de/Service', img: 'http://www.goetvalves.eu/image/c3.jpg', label: 'Quick-Freezing Machine' },
+  { href: '/de/Service', img: 'http://www.goetvalves.eu/image/c4.jpg', label: 'Pipeline Control' },
+  { href: '/de/Service', img: 'http://www.goetvalves.eu/image/c5.jpg', label: 'CNC Cooling' },
+  { href: '/de/Service', img: 'http://www.goetvalves.eu/image/c6.jpg', label: 'Food Quick Freezer' },
 ];
 
 export default function ApplicationMobile() {

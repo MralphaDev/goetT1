@@ -5,8 +5,10 @@ import Link from 'next/link'
 import ContactPage from '../../[locale]/Contact/page'
 import homeValve from '../../../../public/img/homeValve.png'
 import home2 from '../../../../public/img/home2.png'
+import { useTranslations } from 'use-intl'
 
 function HomePagePC() {
+  const t = useTranslations('HomePage')
   const sectionsCount = 5
   const [current, setCurrent] = useState(0)
   const controls = useAnimation()
@@ -126,7 +128,7 @@ function HomePagePC() {
     className="absolute left-[5%] top-1/5  text-white  z-20"   
   >
     <h1 style={{ fontFamily: 'Russo One' }} className="text-[5rem] leading-snug uppercase">
-      CRYOGENIC VALVES <br />
+      {t("hero_title")}  <br />
       
     </h1>
     <div className="relative flex bg-transparent text-white  py-8">
@@ -142,11 +144,18 @@ function HomePagePC() {
       {/* 右边文字内容 */}
       <div className="ml-6 flex flex-col space-y-10">
         <h2 className="text-7xl font-bold text-[#4FA1CA]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-          Serving the <br/>industry
+          <div className="whitespace-pre-line">
+            {t("hero_subtitle")}
+          </div>
+
         </h2>
-        <p className="text-[22px] font-light max-w-2xl" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-         Solenoid valves, Pressure-actuated valves, <br/> non-returnvalves , cryogenic filter <br/> and safety valves 
-        </p>
+        <p
+        className="text-[22px] font-light max-w-2xl whitespace-pre-line"
+        style={{ fontFamily: 'Montserrat, sans-serif' }}
+      >
+        {t("hero_description")}
+      </p>
+
       </div>
     </div>
 
@@ -176,23 +185,35 @@ function HomePagePC() {
         {/* SECTION 2 - Text & Image */}
         <section ref={ref} className="h-screen w-full bg-white flex overflow-hidden">
           <div className="w-2/3 p-8 flex flex-col justify-center h-full space-y-4 pl-[5%] pr-[5%]">
-            <motion.h2 custom={0} initial="hidden" animate={textControls} variants={textVariants} className="text-5xl font-bold">
-              TECHNOLOGIE BRAUCHT <br />
-              <span className="text-lightBlue">KONTROLLE</span>
-            </motion.h2>
+              <motion.h2
+                custom={0}
+                initial="hidden"
+                animate={textControls}
+                variants={textVariants}
+                className="text-5xl font-bold"
+              >
+                {t('titleWord1')} · {t('titleWord2')} <br />
+                <span className="text-lightBlue">{t('titleWord3')}</span>
+              </motion.h2>
 
-            {[1,2,3,4].map((i) => (
-              <motion.p key={i} custom={i} initial="hidden" animate={textControls} variants={textVariants} className="text-base text-gray-700 text-justify w-4/5">
-                {/* Replace with your actual text */}
-                Sample text paragraph {i}
-              </motion.p>
-            ))}
+              {[1, 2, 3, 4].map((i) => (
+                <motion.p
+                  key={i}
+                  custom={i}
+                  initial="hidden"
+                  animate={textControls}
+                  variants={textVariants}
+                  className="font-medium text-gray-600 text-justify w-4/5"
+                >
+                  {t(`samplePara${i}`)}
+                </motion.p>
+              ))}
           </div>
 
           <div className="w-3/5 h-full relative flex items-center justify-center pr-[2%]">
-            <img src="https://www.cemegroup.com/Content/images/assets/ceme_tecnologia.jpg" alt="Ceme Technology" className="w-full h-full object-cover rounded-lg" />
+            <img src="https://www.goetvalves.eu/image/homeCoil.jpg" alt="Ceme Technology" className="w-full h-full object-cover rounded-lg" />
             <motion.div custom={5} initial="hidden" animate={textControls} variants={textVariants} className="flex justify-center items-center absolute bottom-[40%] right-[30vw] w-[369px] h-[85px] group" style={{ backgroundColor: "#4FA1CA", boxShadow: "0 10px 30px rgba(0, 0, 0, 0.6)" }}>
-              <Link href="/de/Company" className="relative text-white text-[27px] z-10">Entdecken Sie mehr</Link>
+              <Link href="/de/Company" className="relative text-white text-[27px] z-10">{t('Entdecken')}</Link>
             </motion.div>
           </div>
         </section>
@@ -200,17 +221,17 @@ function HomePagePC() {
         {/* SECTION 3 - Products */}
         <section ref={productRef} className="h-screen w-full flex overflow-hidden bg-gray-50">
           <motion.div initial="hidden" animate={productControls} variants={fadeUp} className="flex flex-col justify-center p-8 bg-gray-900 text-white w-full md:w-1/3 h-full space-y-6">
-            <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight drop-shadow-md"><span className="text-blue-400">Product</span></h2>
-            <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight drop-shadow-md text-gray-200">Application</h2>
-            <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight drop-shadow-md">Support</h2>
-            <p className="mt-6 text-gray-300 text-lg leading-relaxed max-w-sm">Discover our solutions and services tailored to your needs.</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight drop-shadow-md"><span className="text-blue-400">{t('Product')}</span></h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight drop-shadow-md text-gray-200">{t('Application')}</h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight drop-shadow-md">{t('Support')}</h2>
+            <p className="mt-6 text-gray-300 text-lg leading-relaxed max-w-sm">{t('Description')}</p>
           </motion.div>
 
           <motion.div initial="hidden" animate={productControls} className="flex flex-col items-start justify-center w-2/3 p-6 gap-6 bg-white">
             <div className="flex items-end gap-6 w-full h-3/4">
-              {[{ href: '/de/Product-login/Product1', src: 'http://www.goetvalve.eu/images/cc1.jpg', title: 'Products' },
-                { href: '/de/Applications', src: 'http://www.goetvalve.eu/images/cc2.jpg', title: 'Applications' },
-                { href: '/de/Service', src: 'http://www.goetvalve.eu/images/cc3.jpg', title: 'Service' }].map((item,index)=>(
+              {[{ href: '/de/Product-login/Product1', src: 'http://www.goetvalves.eu/image/cc1.jpg', title: t("Product") },
+                { href: '/de/Applications', src: 'http://www.goetvalves.eu/image/cc2.jpg', title: t("Application") },
+                { href: '/de/Service', src: 'http://www.goetvalves.eu/image/cc3.jpg', title: t("Support") }].map((item,index)=>(
                 <motion.div key={index} custom={index} variants={fadeUp} className="flex-1 flex flex-col items-center">
                   <div className="w-full h-4/5 rounded-2xl shadow-xl hover:shadow-2xl border border-gray-200 overflow-hidden flex flex-col transition-transform transform hover:-translate-y-2">
                     <Link href={item.href} className="flex-1 w-full">

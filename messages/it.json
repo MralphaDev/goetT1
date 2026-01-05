@@ -1,8 +1,61 @@
-{
+{   
+  "header": {
+    "Goetvalve": "Goetvalve",
+    "Company": "Azienda",
+    "Products": "Prodotti",
+    "Applications": "Applicazioni",
+    "ServiceSupport": "Assistenza & Supporto",
+    "Contact": "Contatto",
+    "Go": "Vai"
+  },
     "HomePage": {
-      "title": "Ciao mondo!",
-      "about": "Vai alla pagina 'Chi siamo'"
+      "hero_title": "VALVOLE CRIOGENICHE",
+    "hero_subtitle": "Al servizio\ndell'industria",
+    "hero_description":
+      "Valvole a solenoide, valvole a pressione,\nvalvole di non ritorno, filtri criogenici\ne valvole di sicurezza",
+    "Product": "Prodotto",
+    "Application": "Applicazione",
+    "Support": "Supporto",
+    "Description": "Scopri le nostre soluzioni e servizi su misura per le tue esigenze.",
+     "titleWord1": "Precisione",
+    "titleWord2": "Affidabilità",
+    "titleWord3": "Efficienza",
+    "samplePara1": "Ogni valvola elettromagnetica è progettata secondo i più alti standard, garantendo un funzionamento stabile in tutte le condizioni industriali.",
+    "samplePara2": "Design robusto e facile da manutenere, per ridurre al minimo i tempi di fermo e massimizzare la produttività.",
+    "samplePara3": "Materiali eco-compatibili ed efficienti dal punto di vista energetico riflettono il nostro impegno per un’industria sostenibile.",
+    "samplePara4": "Forniamo soluzioni pratiche per l’industria globale, rendendo sicurezza, precisione e affidabilità a lungo termine uno standard.",
+      "Entdecken": "Scopri di più"
+
+  
     },
+
+    "Applications": {
+    "PageTitle": "APPLICAZIONI",
+    "CheckOut": "DÀ UN'OCCHIATA",
+    "OurApplications": "ALLE NOSTRE APPLICAZIONI",
+    "Images": {
+      "C1": "Utilizzato nelle linee di produzione di acqua pura e bevande, riempimento e sigillatura di bottiglie di azoto liquido",
+      "C2": "Utilizzato per il riempimento dei serbatoi di azoto liquido",
+      "C3": "Utilizzato nei congelatori rapidi a tunnel per azoto liquido",
+      "C4": "Applicato al controllo automatico delle tubazioni di azoto liquido",
+      "C5": "Utilizzato per il raffreddamento di macchine utensili CNC",
+      "C6": "Congelatore rapido per alimenti"
+    }
+  },
+  
+    "ContactUs": {
+    "ContactUsTitle": "Contattaci",
+    "AsianAddress": "Indirizzo magazzino asiatico: 058727 150 South Bridge Road #02 Fookhai, Singapore (Lun – Ven 10:00 – 17:00)",
+    "EuropeanAddress": "Indirizzo magazzino europeo: Karl-Lange-Str. 49,44791 Bochum, Germania (Lun – Ven 9:00 – 15:00)",
+    "EmailSGP": "sgp@goetvalves.eu",
+    "EmailEU": "info@goetvalves.eu",
+    "HelpText": "Siamo qui per aiutarti! Contattaci via email o modulo di contatto e ti risponderemo il prima possibile.",
+    "YourName": "Il tuo nome",
+    "YourEmail": "La tua email",
+    "YourMessage": "Il tuo messaggio",
+    "SendMessage": "Invia messaggio",
+    "SubmissionSuccess": "Grazie! Il tuo messaggio è stato inviato."
+  },
   
     "AboutPage": {
       "title": "Chi siamo",
@@ -23,6 +76,21 @@
       "contact": "Contatto",
       "type":"Tipo"
     },
+
+    "service": {
+    "PageTitle": "SERVIZIO & SUPPORTO",
+    "IntroText": "Scopri i nostri servizi e supporti personalizzati per mantenere le tue operazioni senza problemi.",
+    "MainImageAlt": "Immagine Servizio & Supporto",
+    "FAQs": "FAQ - Bobina & Corrente",
+    "FAQsDesc": "Trova risposte alle domande comuni sulla gestione di bobina e corrente.",
+    "ServiceMaintenance": "Servizio, Manutenzione e Messa in Funzione",
+    "ServiceMaintenanceDesc": "Supporto professionale per l'installazione, manutenzione e messa in funzione dei tuoi dispositivi.",
+    "Commissioning": "Servizi di Messa in Funzione",
+    "CommissioningDesc": "Garantiamo che i tuoi sistemi siano operativi, testati e completamente funzionanti.",
+    "GenericTextTitle": "Perché sceglierci?",
+    "GenericTextDesc": "Il nostro team fornisce soluzioni affidabili con servizio professionale e risposta rapida.",
+    "BigRightTitle": "SERVICE & SUPPORT"
+  },
   
     "Product1": {
       "finder": "FILTROPRODOTTI",
@@ -37,8 +105,53 @@
       "Steurung": "Controllo",
       "Druck": "Pressione",
       "Typ": "Tipo",
-      "Buynow": "Compra ora",
-      "DeliveryTime": "Tempo di consegna:"
+      "KV-Wert": "Valore KV",
+  "Medium": "Medio","2/2 Wege": "2/2 vie",
+  "3/2 Wege": "3/2 vie",
+  "lift-check-non-return-valve": "valvola di ritegno a sollevamento",
+  "2-to-8 channel combiner board": "scheda combinatrice 2-8 canali",
+  "Brass": "Ottone",
+  "Bronze": "Bronzo",
+"1_4301": "1.4301",
+  "1_4403": "1.4403",
+  "1_4408": "1.4408",
+    "1_4401": "1.4401",
+  "Messing" : "Ottone",
+  "EPDM": "EPDM",
+  "FKM": "FKM",
+  "FPM": "FPM",
+  "NBR": "NBR",
+  "PTFE": "PTFE",
+  "PU": "PU",
+  "PEEK": "PEEK",
+  "PCTFE": "PCTFE",
+  "KALREZ": "KALREZ",
+  "spring chamber ventilation": "ventilazione camera a molla",
+  "NC": "NC",
+  "NO": "NO",
+  "direct-operated": "a comando diretto",
+  "servo-operated": "a comando servo",
+  "force-operated": "a comando di forza",
+  "pneumatic-control": "controllo pneumatico",
+  "spring-actuated": "azionato a molla",
+  "Liquid-carbon-dioxide": "anidride carbonica liquida",
+  "Liquid-helium": "elio liquido",
+  "Liquid-nitrogen": "azoto liquido",
+  "Liquid-argon": "argon liquido",
+  "Liquid-oxygen": "ossigeno liquido",
+  "Buynow": "Compra ora",
+  "DeliveryTime": "Tempo di consegna:",
+   "Solenoid": "Elettrovalvola",
+  "Pressure-actuated": "Azionato a pressione",
+  "Liqnitrogen-non-return": "Valvola di ritegno azoto liquido",
+  "Liqnitrogenfilter": "Filtro azoto liquido",
+  "SafetyValve": "Valvola di sicurezza",
+        "LOGIN TO PURCHASE": "Accedi per acquistare",
+    "Exklusive 19 % Mehrwertsteuer": "Esclusi 19% IVA",
+    "Lieferzeit:": "Tempi di consegna:",
+    "ab Lager": "Disponibile da magazzino",
+    "Expressversand*:": "Spedizione espresso*:",
+    "View on Detail page": "Visualizza sulla pagina dettagli"
     },
     "Pressureactuated": {
       "title": "Valvola azionata a pressione",
@@ -55,6 +168,7 @@
       "Typ": "Tipo",
       "Buynow": "acquista ora",
       "DeliveryTime": "Tempi di consegna"
+      
     },
     "liqniro": {
   "title": "Valvola di non ritorno per azoto liquido",
@@ -103,9 +217,49 @@
     "Typ": "Tipo",
     "Buynow": "Acquista ora",
     "DeliveryTime": "Tempo di consegna"
-}
-
-
-
+},
+  "ProductDetail":{
+   "name": "Nome",
+    "serialNum": "Numero di Serie",
+    "Typ": "Tipo",
+    "Hersteller": "Produttore",
+    "Bauform": "Design",
+    "Nennweite": "Diametro Nominale",
+    "Anschluss": "Connessione",
+    "Anschlussart": "Tipo di Connessione",
+    "Bauart": "Tipo di Costruzione",
+    "KVWert": "Valore KV",
+    "Schaltfunktion": "Funzione di Commutazione",
+    "Steuerung": "Controllo",
+    "Material": "Materiale",
+    "Dichtung": "Guarnizione",
+    "Spannung": "Tensione",
+    "Spannungstoleranz": "Tolleranza di Tensione",
+    "Leistungsaufnahme": "Assorbimento di Potenza",
+    "Einschaltdauer": "Ciclo di Lavoro",
+    "Schutzart": "Classe di Protezione",
+    "Medium": "Fluido",
+    "TemperaturMedium": "Temperatura del Fluido",
+    "TemperaturUmgebung": "Temperatura Ambiente",
+    "MaximalerDruck": "Pressione Massima",
+    "Einbaulage": "Posizione di Installazione",
+    "video": "Video"
+  },
+   "PurchaseTab": {
+    "buyNow": "Acquista Ora",
+    "viewDatenblatt": "Visualizza Scheda Tecnica",
+    "lieferzeit": "Tempo di Consegna:",
+    "aufLagerVersand3_5Tagen": "Disponibile – Spedizione entro 3–5 giorni",
+    "nichtAufLagerBestellungAufAnfrage": "Non Disponibile – Ordine su Richiesta (Ordine Offline)",
+    "versandkostenInfo": "I costi di spedizione sono calcolati separatamente in base a peso e distanza.",
+    "erwarteteLieferung2Wochen": "Consegna prevista entro 2 settimane dalla data dell'ordine",
+    "lieferzeitenHinweis": "*I tempi di consegna indicati valgono da lun. a ven., esclusi i giorni festivi.",
+    "umtausch": "Cambio",
+    "goetvalveUmtausch": "Cambio GoetValve",
+    "garantie": "Garanzia",
+    "garantie12M": "Garanzia di 12 mesi",
+    "zertifiziert": "Certificato",
+    "inklMwst": "IVA inclusa",
+    "deliveryNotice": "*I tempi di consegna indicati si applicano dal lunedì al venerdì, esclusi i giorni festivi."
   }
-  
+}

@@ -6,10 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import BurgerMenu from './responsive/home/BurgerMenu';
 import Loggout from '../app/[locale]/Product-login/loggout'
+import { useTranslations } from 'use-intl';
 
 export default function Header() {
   const [items, setItems] = useState([]);
-
+  const t = useTranslations('header');
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
     useEffect(() => {
@@ -46,12 +47,12 @@ export default function Header() {
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const inputRef = useRef(null);
   const links = [
-    { name: "Goetvalve", href: `/${locale}/` },
-    { name: "Company", href: `/${locale}/Company` },
-    { name: "Products", href: `/${locale}/Product-login/Product1` },
-    { name: "Applications", href: `/${locale}/Applications` },
-    { name: "Service&Support", href: `/${locale}/Service` },
-    { name: "Contact", href: `/${locale}/Contact` },
+    { name: t("Goetvalve"), href: `/${locale}/` },
+    { name: t("Company"), href: `/${locale}/Company` },
+    { name: t("Products"), href: `/${locale}/Product-login/Product1` },
+    { name: t("Applications"), href: `/${locale}/Applications` },
+    { name: t("ServiceSupport"), href: `/${locale}/Service` },
+    { name: t("Contact"), href: `/${locale}/Contact` },
   ];
 
 // Update suggestions as user types
@@ -153,7 +154,7 @@ const handleSearch = (e) => {
             whileHover={{ scale: 1.1, boxShadow: "0 0 20px rgba(59,130,246,0.6)" }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            Go
+            {t("Go")}
           </motion.button>
 
           {/* Autocomplete Suggestions */}

@@ -15,12 +15,15 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import ProductDetail from '@/src/app/responsive/product/ProductDetail';
 //paypal
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
+import { useTranslations } from 'next-intl';
 
 function page({params}) {
+  const  t  = useTranslations('ProductDetail');
+  const t2 = useTranslations('PurchaseTab')
   const unwrappedParams = use(params); // 这一步是关键
   const [items, setItems] = useState([]);
   const paramid = items.findIndex(item => item.id === Number(unwrappedParams.id));  //// 找到当前 URL param(传进来是数据库产品 id) 对应的产品在 items 数组里的位置（index），方便安全访问
+  const item = items.find(i => i.id === Number(unwrappedParams.id));
   const [view, setView] = useState("description");
   const containerRef = useRef(null);
   const [showMessage, setShowMessage] = useState(false);
@@ -32,6 +35,11 @@ function page({params}) {
   const [isMobile, setIsMobile] = useState(false)
 
    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+   console.log("item:", item);
+console.log("video:", item?.video);
+
+
 
    // 找 items 里对应的 index
 const indextest = items.findIndex(item => item.id === Number(unwrappedParams.id));
@@ -154,7 +162,7 @@ console.log("indextest:",indextest)
   }
 
   // 渲染前安全判断
-  if( !items[paramid]) return <div>Loading...</div>; //这一步能解决异步问题的bug,不然item还没反回来就报错了。item要等到fetch完才有值
+  if( !item) return <div>Loading...</div>; //这一步能解决异步问题的bug,不然item还没反回来就报错了。item要等到fetch完才有值
 
   return (
     <div>
@@ -163,14 +171,14 @@ console.log("indextest:",indextest)
         <div className="flex flex-col pt-30 px-6 max-w-xl mx-auto space-y-8 font-sans">
         {/* Product Title */}
         <div className="space-y-1">
-            <h1 className="text-3xl font-bold text-gray-900 leading-snug">{items[paramid].name}</h1>
-            <p className="text-sm text-gray-500 tracking-wide">Typ: {items[paramid].serialNum}</p>
+            <h1 className="text-3xl font-bold text-gray-900 leading-snug">{item?.name}</h1>
+            <p className="text-sm text-gray-500 tracking-wide">Typ: {item?.serialNum}</p>
         </div>
 
         {/* Video */}
         <div className="relative w-full overflow-hidden rounded-3xl shadow-xl">
             <video className="w-full h-auto rounded-3xl object-cover" controls muted>
-            <source src={`/p${parseInt(paramid) + 1}.mp4`} type="video/mp4" />
+            <source src={item?.video||null} type="video/mp4" />
             </video>
             <div className="absolute bottom-3 left-3 bg-white/70 px-3 py-1 rounded-full text-xs font-medium text-gray-700">Preview</div>
         </div>
@@ -180,10 +188,10 @@ console.log("indextest:",indextest)
             <h2 className="text-xl font-semibold text-gray-900 mb-5">Product Details</h2>
             <div className="grid grid-cols-2 gap-y-4 gap-x-4">
             {Object.entries(items[paramid])
-                .filter(([key]) => !['priceNum','src'].includes(key))
+                .filter(([key]) => !['priceNum','src','id','pdf','price','category','video'].includes(key))
                 .map(([key,value]) => (
                 <div key={key} className="flex flex-col">
-                    <span className="text-gray-500 text-xs font-medium uppercase tracking-wider">{key}</span>
+                    <span className="text-gray-500 text-xs font-medium uppercase tracking-wider">{t(key)}</span>
                     <span className="text-gray-900 font-semibold">{value}</span>
                 </div>
                 ))}
@@ -191,10 +199,12 @@ console.log("indextest:",indextest)
         </div>
 
         {/* Price */}
-        <div className="text-center">
-            <p className="text-3xl font-bold text-gray-900">{items[paramid].price} €</p>
-            <p className="text-xs text-gray-400 mt-1 tracking-wide">incl. VAT</p>
-        </div>
+        {isLoggedIn && (
+        <div>
+            <p className="text-3xl font-bold text-gray-900">{item?.price}</p>
+            <p className="text-xs text-gray-400 mt-1 tracking-wide">{t2('inklMwst')}</p>
+        </div>)}
+
         </div>
 
 
@@ -208,14 +218,14 @@ console.log("indextest:",indextest)
             {/* Left Side Div */}
             <div className="ml-[5%] w-3/5 h-auto mr-[10%]">
                 {/* Title and Serial Number */}
-                <div className="mt-[20px] mb-[20px] text-[30px] font-bold text-lightBlue">Typ: {items[paramid].serialNum}</div>
+                <div className="mt-[20px] mb-[20px] text-[30px] font-bold text-lightBlue">Typ: {item?.serialNum}</div>
                 {/* Product Name */}
                 <div className="mb-[50px] text-[20px] font-sans text-[#2B3136]">{items[paramid].name}</div>
                 {/* Video */}
                 <div className="mt-4">
-                <video controls loop muted className="w-full h-full">
+                <video  autoPlay loop muted className="w-full h-full">
                     {/*console.log(params.id)*/}
-                    <source src={`/p${parseInt(paramid)+1}.mp4`} type="video/mp4" />
+                    <source src={item?.video||null} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
                 </div>
@@ -238,30 +248,36 @@ console.log("indextest:",indextest)
                     </div>
 
 
-                    <div className="pl-[30px] text-black pr-6">
+                    <div className="pl-[30px] text-[#0F4C71] pr-6">
                         <div
-                        className={`cursor-pointer ${
-                            isLoggedIn
-                            ? "text-3xl font-bold"
-                            : "text-lg font-semibold text-gray-800"
-                        }`}
-                        onClick={() => {
-                            if (isLoggedIn) {
-                            window.location.href = "/en/login";
-                            }
-                        }}
-                        >
-                        {isLoggedIn
-                            ? items[paramid].price
-                            : "Login to purchase"}
-                        </div>
+  className={`cursor-pointer inline-flex items-center justify-center rounded-xl px-6 py-3 transition-all duration-300 backdrop-blur-sm
+    ${
+      isLoggedIn
+        ? "text-3xl font-bold text-gray-900"
+        : "text-lg font-medium text-customBlue  bg-customBlue/5 hover:bg-customBlue/10 hover:border-customBlue/70"
+    }`}
+  style={{
+    fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  }}
+  onClick={() => {
+    if (!isLoggedIn) {
+      window.location.href = "/en/login";
+    }
+  }}
+>
+  {isLoggedIn ? items[paramid].price : "Login to purchase"}
+</div>
+
 
                         
                         {/* Price including VAT */}
                         <div className="text-xs font-light text-gray-500 mt-1">
-                        {isLoggedIn
-                            ? `${(parseFloat(items[paramid].price) * 1.19).toFixed(2)} € inkl. Mwst.`
-                            : ""}
+                        {isLoggedIn && (
+                        <div>
+                            {(parseFloat(items[paramid].price) * 1.19).toFixed(2)} € {t2('inklMwst')}
+                        </div>
+                        )}
+
                         </div>
                     </div>
 
@@ -276,36 +292,37 @@ console.log("indextest:",indextest)
                             onClick={() => setIsOpen(true)}
                             className="mb-[20px] w-2/3 py-2 rounded-lg bg-gradient-to-r from-[#B0D6EC] to-[#E5F0F6] text-black flex items-center justify-center shadow-md hover:bg-gradient-to-r hover:from-[#9AC9E3] hover:to-[#CFE6F1] transition duration-300 ease-in-out"
                         >
-                            Buy Now
+                            {t2('buyNow')}
                         </button>
                         )}
 
 
-                    <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Absperrklappe-AK01-AK02.pdf" className="w-full">
+                    {isLoggedIn && (
+                    <a href={item?.pdf} className="w-full">
                         <button className="w-2/3 py-2 rounded-lg bg-gradient-to-r from-[#B0D6EC] to-[#E5F0F6] text-black flex items-center justify-center shadow-md hover:bg-gradient-to-r hover:from-[#9AC9E3] hover:to-[#CFE6F1] transition duration-300 ease-in-out">
-                        <span className="font-medium text-sm">View Datenblatt</span>
+                        <span className="font-medium text-sm">{t2('viewDatenblatt')}</span>
                         </button>
-                    </a>
+                    </a>)}
                 </div>
 
 
 
                     {/* Lieferzeit and Expressversand */}
                     <div className="ml-2 flex flex-col  mt-[50px] text-sm font-light">
-                        <div>Lieferzeit: <span className="text-lightBlue"> 3-5 Tage</span></div>
-                        <div className="cursor-pointer">Expressversand</div>
+                        <div>{t2('lieferzeit')} </div> <br />
+                        <div className="text-lightBlue"> {t2('aufLagerVersand3_5Tagen')}</div>
+                        <div className="text-lightBlue"> {t2('nichtAufLagerBestellungAufAnfrage')}</div><br />
+                        <div className="cursor-pointer"> {t2('versandkostenInfo')}</div>
                     </div>
 
                 
                 
-                
-
                 {/* Textbox */}
                 <div className="text-sm mt-4 p-2 font-light leading-relaxed">
-                    Versand am: <span className="text-lightBlue"> Freitag, 11. Oktober</span><br /><br />
-                    Garantierte Lieferung bis <span className="text-lightBlue"> Montag, 14. Oktober, 12 Uhr.</span> <br /><br />
-                    Bestellen Sie innerhalb <span className="text-lightBlue">19 Stunden 52 Minuten per Expressversand.</span><br /><br />
-                    <span className="text-xs">*Angegebene Lieferzeiten gelten für Mo.- Fr. ohne Berücksichtigung von Feiertagen.</span>
+                    {/*Versand am: <span className="text-lightBlue"> innerhalb 2 Wochen nach Bestellungsdatum</span><br /><br />*/}
+                    {t2('erwarteteLieferung2Wochen')} <br /><br />
+                    {/*Bestellen Sie innerhalb <span className="text-lightBlue">19 Stunden 52 Minuten per Expressversand.</span><br /><br />*/}
+                    <span className="text-xs">{t2('deliveryNotice')}</span>
 
                 </div>
 
@@ -345,7 +362,7 @@ console.log("indextest:",indextest)
 
         </div>
         <div className="flex justify-center">
-            <div className="flex justify-center mr-[7%] ml-[1.5%] mt-[5%] mb-[30px] pb-[20px] space-x-20 w-screen border-b border-gray-300 shadow-md">
+            <div className="flex justify-left mr-[7%] pl-[32%] mt-[5%] mb-[30px] pb-[20px] space-x-20 w-screen border-b border-gray-300 shadow-md">
                 <span
                     onClick={() => setView("description")}
                     className="text-[20px] text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
@@ -363,12 +380,12 @@ console.log("indextest:",indextest)
 
                 </span>
 
-                <span
+                {/*<span
                     onClick={() => setView("viewer")}
                     className="text-[20px] text-[#2B3136] cursor-pointer hover:text-lightBlue transition duration-200"
                 >
                     <span  className="text-[40px]">🧊</span> 3D viewer
-                </span>
+                </span>*/}
 
 
                 <span
@@ -389,7 +406,7 @@ console.log("indextest:",indextest)
                     <img 
                         src={items[paramid].src} 
                         alt={items[paramid].name} 
-                        className="w-[100px] h-[150px] rounded-lg shadow-md mb-[50px]" 
+                        className="w-[150px] h-[200px] rounded-lg shadow-md mb-[30px]" 
                     />
                     <h2 className="text-lg text-gray-800 mb-[20px] pl-[20px]">{items[paramid].name}</h2>
                 </div>
@@ -400,13 +417,15 @@ console.log("indextest:",indextest)
                         <tbody>
                         
                         {Object.entries(items[paramid])
-                            .filter(([key,value]) => !['priceNum', 'src','price','category','id'].includes(key) && value !== "" && value != null) // Filter out keys you want to skip
-                            .map(([key, value], index) => (
-                                <tr className={`h-[25px] w-[280px] text-[#212529] ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`} key={key}>
-                                    <td className="text-[16.8px] font-semibold font-montserrat p-[5px] text-customBlue">{key}</td>
-                                    <td className=" text-[16.8px] font-montserrat p-[10px]">{value}</td>
-                                </tr>
-                        ))}
+                                .filter(([key,value]) => !['priceNum', 'src','price','category','id','pdf'].includes(key) && value !== "" && value != null)
+                                .map(([key, value], index) => (
+                                    <tr className={`h-[25px] w-[280px] text-[#212529] ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`} key={key}>
+                                        <td className="text-[16.8px] font-semibold font-montserrat p-[5px] text-customBlue">
+                                            {t(key)} {/* 自动根据语言切换 */}
+                                        </td>
+                                        <td className="text-[16.8px] font-montserrat p-[10px]">{value}</td>
+                                    </tr>
+                            ))}
 
                         </tbody>
                     </table>
@@ -437,8 +456,9 @@ console.log("indextest:",indextest)
    <div className="mt-[5%] mb-[10%]">
    <div className="flex justify-center mx-auto my-8 w-[50%]">
        {/* 3D Modell Section */}
+  
        <div className="flex flex-col items-center w-[45%] h-[300px] p-6 bg-white border border-gray-300 rounded-lg shadow-md text-center mr-[15%]">
-           <a href="https://www.nieruf.de/nieruf/cad-files/MV04_DN8_1-4%20Zoll.STEP" download>
+           <a href="" download>
                <img
                    src="https://www.nieruf.de/bundles/nierufproductdownloads/assets/icon/cad-file.svg?1728456486"
                    alt="3D Modell"
@@ -449,17 +469,25 @@ console.log("indextest:",indextest)
            </a>
        </div>
 
-       {/* Datenblatt Section */}
+       {/* Datenblatt Section  https://www.nieruf.de/bundles/nierufproductdownloads/assets/icon/datasheet.svg?1728456486*/}
+        
        <div className="flex flex-col items-center w-[45%] h-[300px] p-6 bg-white border border-gray-300 rounded-lg shadow-md text-center">
-           <a href="https://www.nieruf.de/nieruf/datasheets/de_de/Magnetventil-MV04.pdf" download>
-               <img
-                   src="https://www.nieruf.de/bundles/nierufproductdownloads/assets/icon/datasheet.svg?1728456486"
-                   alt="Datenblatt"
-                   className="w-[100px] h-[100px]"
-               />
-               <h3 className="text-xl text-customBlue font-semibold">Datenblatt</h3>
-               <p className="text-gray-600 mt-2">PDF - 467.26 KiB</p>
-           </a>
+            {item?.pdf && (
+            <a
+                href={isLoggedIn ? item.pdf : "/en/login"}
+                target={isLoggedIn ? "_blank" : "_self"}
+                download={isLoggedIn}
+            >
+                <img
+                src="https://www.nieruf.de/bundles/nierufproductdownloads/assets/icon/datasheet.svg?1728456486"
+                alt="Datenblatt"
+                className="w-[100px] h-[100px]"
+                />
+                <h3 className="text-xl text-customBlue font-semibold">Datenblatt</h3>
+                <p className="text-gray-600 mt-2">PDF - 467.26 KiB</p>
+            </a>
+            )}
+
        </div>
    </div>
 </div>)}

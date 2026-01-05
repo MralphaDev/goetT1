@@ -8,6 +8,12 @@ html{
 
 }
 
+img,video {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
