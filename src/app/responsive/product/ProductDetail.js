@@ -106,7 +106,7 @@ function Page({ params }) {
               <table className="w-full text-sm text-gray-700">
                 <tbody>
                   {Object.entries(items[paramid])
-                    .filter(([key]) => !['priceNum','src'].includes(key))
+                    .filter(([key]) => !['priceNum','src','price','video','pdf'].includes(key))
                     .map(([key,value]) => (
                       <tr key={key} className="border-b">
                         <td className="font-medium text-customBlue p-2">{key}</td>
@@ -135,7 +135,7 @@ function Page({ params }) {
 
           {/* Price */}
           <div className="p-4 bg-gray-50 rounded-lg text-center">
-            <span className="text-2xl font-bold">{totalValue} €</span>
+            {/*<span className="text-2xl font-bold">{totalValue} €</span>*/}
             <p className="text-xs text-gray-500 mt-1">inkl. MwSt.</p>
           </div>
 

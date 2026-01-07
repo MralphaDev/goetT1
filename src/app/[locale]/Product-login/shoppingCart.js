@@ -5,9 +5,12 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ShoppingCart({
-  cart = [],
+   cart = [],
+  increaseQuantity,
+  decreaseQuantity,
+  resetQuantity,
   overlayOpen: propOverlayOpen,
-  setOverlayOpen: propSetOverlayOpen,
+  setOverlayOpen: propSetOverlayOpen
 }) {
   // Internal overlay state fallback
   const [internalOverlayOpen, setInternalOverlayOpen] = useState(false);
@@ -18,50 +21,17 @@ export default function ShoppingCart({
 
   // Track user click on cart icon
   const [showCartContent, setShowCartContent] = useState(false);
-
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [localCart, setLocalCart] = useState([]);
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
   const checkoutPath = `/${locale}/Product-login/checkout`;
 
-  // Load login + cart state
-  useEffect(() => {
-    if (typeof window === "undefined") return;
 
-    const logged = localStorage.getItem("loggedIn") === "true";
-    setIsLoggedIn(logged);
-
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setLocalCart(storedCart);
-  }, [cart]);
 
   //if (!isLoggedIn) return null;
 
-  const totalItems = localCart.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  const removeFromCart = (name) => {
-    const updated = localCart.filter((item) => item.name !== name);
-    setLocalCart(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
-  };
 
-  const increaseQuantity = (name) => {
-    const updated = localCart.map((item) =>
-      item.name === name ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    setLocalCart(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
-  };
-
-  const decreaseQuantity = (name) => {
-    const updated = [...localCart];
-    const idx = updated.findIndex((i) => i.name === name);
-    if (idx < 0) return;
-    if (updated[idx].quantity > 1) updated[idx].quantity -= 1;
-    setLocalCart(updated);
-    localStorage.setItem("cart", JSON.stringify(updated));
-  };
 
   return (
     <>
@@ -135,12 +105,12 @@ export default function ShoppingCart({
 
               {/* Items Container */}
               <div className="flex-1 overflow-y-auto pr-2 space-y-4">
-                {localCart.length === 0 ? (
+                {cart.length === 0 ? (
                   <p className="text-gray-600 text-center py-12 text-lg">
                     Your cart is empty 😶
                   </p>
                 ) : (
-                  localCart.map((item) => (
+                  cart.map((item) => (
                     <motion.div
                       key={item.name}
                       initial={{ opacity: 0, y: 10 }}
@@ -173,6 +143,12 @@ export default function ShoppingCart({
                         >
                           +
                         </button>
+                        <button
+                          onClick={() => resetQuantity(item.name)}
+                          className="ml-2 text-red-500 font-bold"
+                        >
+                          ×
+                        </button>
                       </div>
                     </motion.div>
                   ))
@@ -180,7 +156,7 @@ export default function ShoppingCart({
               </div>
 
               {/* Checkout */}
-              {localCart.length > 0 && (
+              {cart.length > 0 && (
                 <Link href={checkoutPath} className="mt-6 w-full">
                   <motion.button
                     whileHover={{ scale: 1.03 }}

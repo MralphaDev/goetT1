@@ -41,35 +41,81 @@ import Loggout from '../loggout'
 const YourPage =  () => {
 
     const t = useTranslations('Product1'); // Load "Category" namespace
-    const [items, setItems] = useState([]);
 
+
+    const [items, setItems] = useState([]);
     const [selectedFilters,setSelectedFilters] = useState([])
     const [filteredItems,setFilterItems] = useState([])
+
+
     //////both usestate need to be placed above useeffect for it to show! else wont work
     const [selectedValue, setSelectedValue] = useState(15);  //KV 
 
-    useEffect(() => {
-    fetch("/api/products")
-        .then(res => res.json())
-        .then(data => {
-        setItems(data);          // 更新 items
-        setFilterItems(data);  // 更新 filteredItems
-        });
-    }, []);
 
-    console.log('itemsreceived',items)
-    //filtering criteria 
-    let filters1 = ["DN1.0 G1/8",'DN1.5 G1/4','DN2.0 G1/4','DN3.0 G1/4','DN3.5 G1/4','DN4.5 G1/4','DN5.2 G1/4','DN5.5 G1/2','DN7.0 G1/2','DN10 G1/2','DN15 G1/2','DN16 G3/4','DN20 G3/4','DN25 G:1','DN32 G1-1/4','DN40 G1-1/2','DN50 G:2']
-    let filters2 = ["2/2 Wege","3/2 Wege","lift-check-non-return-valve","2-to-8 channel combiner board"]
-    let filters3 = ["12V-DC","24V-DC","24V-AC","48V-AC","110V-AC","230V-AC"]
-    let filters4 = ["Brass","Bronze","1_4301","1_4403","1_4408"]
-    let filters5 = ['EPDM','FKM','FPM','NBR','PTFE','PU','PEEK','PCTFE','KALREZ']
-    let filters6 = ['spring chamber ventilation','NC','NO']
-    let filters7 = ['direct-operated', 'servo-operated', 'force-operated','pneumatic-control','spring-actuated'];
-    let filters8 = ['Max.10bar','Max.20bar','Max.30bar','Max.40bar','Max.50bar','Max.100bar','Max.150bar','Max.250bar','Max.500bar','>500bar']
-    let filters9 = ['Solenoid','Pressure-actuated','Liqnitrogen-non-return','Liqnitrogenfilter','SafetyValve']
-    let filters10 = ["Liquid-carbon-dioxide","Liquid-helium","Liquid-nitrogen","Liquid-argon",'Liquid-oxygen']; // medium
-    let filters11 = ['10µm','20µm','40µm','100µm'] //filter
+// ====== FILTERS DATA ======
+let filters1 = [
+  { id: 1, label: "DN1.0 G1/8" }, { id: 2, label: "DN1.5 G1/4" }, { id: 3, label: "DN2.0 G1/4" },
+  { id: 4, label: "DN3.0 G1/4" }, { id: 5, label: "DN3.5 G1/4" }, { id: 6, label: "DN4.5 G1/4" },
+  { id: 7, label: "DN5.2 G1/4" }, { id: 8, label: "DN5.5 G1/2" }, { id: 9, label: "DN7.0 G1/2" },
+  { id: 10, label: "DN10 G1/2" }, { id: 11, label: "DN15 G1/2" }, { id: 12, label: "DN16 G3/4" },
+  { id: 13, label: "DN20 G3/4" }, { id: 14, label: "DN25 G:1" }, { id: 15, label: "DN32 G1-1/4" },
+  { id: 16, label: "DN40 G1-1/2" }, { id: 17, label: "DN50 G:2" }
+];
+
+let filters2 = [
+  { id: 101, label: "2/2 Wege" }, { id: 102, label: "3/2 Wege" },
+  { id: 103, label: "lift-check-non-return-valve" }, { id: 104, label: "2-to-8 channel combiner board" }
+];
+
+let filters3 = [
+  { id: 201, label: "12V-DC" }, { id: 202, label: "24V-DC" }, { id: 203, label: "24V-AC" },
+  { id: 204, label: "48V-AC" }, { id: 205, label: "110V-AC" }, { id: 206, label: "230V-AC" }
+];
+
+let filters4 = [
+  { id: 301, label: "Brass" }, { id: 302, label: "Bronze" }, { id: 303, label: "1_4301" },
+  { id: 304, label: "1_4403" }, { id: 305, label: "1_4408" }
+];
+
+let filters5 = [
+  { id: 401, label: "EPDM" }, { id: 402, label: "FKM" }, { id: 403, label: "FPM" }, 
+  { id: 404, label: "NBR" }, { id: 405, label: "PTFE" }, { id: 406, label: "PU" }, 
+  { id: 407, label: "PEEK" }, { id: 408, label: "PCTFE" }, { id: 409, label: "KALREZ" }
+];
+
+let filters6 = [
+  { id: 501, label: "spring chamber ventilation" }, { id: 502, label: "NC" }, { id: 503, label: "NO" }
+];
+
+let filters7 = [
+  { id: 601, label: "direct-operated" }, { id: 602, label: "servo-operated" }, 
+  { id: 603, label: "force-operated" }, { id: 604, label: "pneumatic-control" }, 
+  { id: 605, label: "spring-actuated" }
+];
+
+let filters8 = [
+  { id: 701, label: "Max.10bar" }, { id: 702, label: "Max.20bar" }, { id: 703, label: "Max.30bar" },
+  { id: 704, label: "Max.40bar" }, { id: 705, label: "Max.50bar" }, { id: 706, label: "Max.100bar" },
+  { id: 707, label: "Max.150bar" }, { id: 708, label: "Max.250bar" }, { id: 709, label: "Max.500bar" },
+  { id: 710, label: ">500bar" }
+];
+
+let filters9 = [
+  { id: 801, label: "Solenoid" }, { id: 802, label: "Pressure-actuated" },
+  { id: 803, label: "Liqnitrogen-non-return" }, { id: 804, label: "Liqnitrogenfilter" }, 
+  { id: 805, label: "SafetyValve" }
+];
+
+let filters10 = [
+  { id: 901, label: "Liquid-carbon-dioxide" }, { id: 902, label: "Liquid-helium" }, 
+  { id: 903, label: "Liquid-nitrogen" }, { id: 904, label: "Liquid-argon" }, 
+  { id: 905, label: "Liquid-oxygen" }
+];
+
+let filters11 = [
+  { id: 1001, label: "10µm" }, { id: 1002, label: "20µm" }, { id: 1003, label: "40µm" }, { id: 1004, label: "100µm" }
+];
+
 
     //filter states
     const [tempFilters, setTempFilters] = useState(filters1) // Initialize with all filters1
@@ -84,6 +130,13 @@ const YourPage =  () => {
     const [tempFilters10,setTempFilters10] = useState(filters10)// Initialize with all filters10
     const [tempFilters11,setTempFilters11] = useState(filters11)// Initialize with all filters10
 
+
+    //Pathname and locale
+    const pathname = usePathname(); // ✅ inside component
+    const segments = pathname.split("/"); // ["", "en", "Product-login", "Product1"] Split the path and take only the first segment after /
+    const locale = segments[1]; // "en", "de", "it"
+    const loginPath = `/${locale}/login`; // "/en/login"
+
     //login state
     const [ID,setID] = useState()
     const [isLoggedIn, setIsLoggedIn] = useState(true); // State to track login status, TESTING MOBILE FORNOW
@@ -95,6 +148,17 @@ const YourPage =  () => {
     const [device, setDevice] = useState('pc'); // 'pc' | 'tablet' | 'mobile'
 
     const [currentMode,setCurrentMode] = useState('Solenoid')
+
+    useEffect(() => {
+    fetch("/api/products")
+        .then(res => res.json())
+        .then(data => {
+        setItems(data);          // 更新 items
+        setFilterItems(data);  // 更新 filteredItems
+        });
+    }, []);
+
+    //console.log('itemsreceived',items)
 
     useEffect(() => {
         const handleResize = () => {
@@ -110,13 +174,6 @@ const YourPage =  () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    //Pathname and locale
-    const pathname = usePathname(); // ✅ inside component
-    const segments = pathname.split("/"); // ["", "en", "Product-login", "Product1"] Split the path and take only the first segment after /
-    const locale = segments[1]; // "en", "de", "it"
-    const loginPath = `/${locale}/login`; // "/en/login"
-
-
     useEffect(() => {
         const checkUserSignedIn = async () => {
                 const loggedIn = localStorage.getItem("loggedIn") === "true";
@@ -128,58 +185,70 @@ const YourPage =  () => {
     }, []); // Empty dependency array to run only on mount
 
     //----------------------------------------------FILTER HANDLER-------------------------------------------------//
-    // Filter selection handler
-    const handleSelect = (selectedCategory) => {
-        if (selectedFilters.includes(selectedCategory)) {
-            let filters = selectedFilters.filter((el) => el !== selectedCategory);
-            setSelectedFilters(filters);
-            setTempFilters(filters1)
-            setTempFilters2(filters2)
-            setTempFilters3(filters3)
-            setTempFilters4(filters4)
-            setTempFilters5(filters5)
-            setTempFilters6(filters6)
-            setTempFilters7(filters7)
-            setTempFilters8(filters8)
-            setTempFilters9(filters9)
-            setTempFilters10(filters10)
-            setTempFilters11(filters11)
-        }else{
-            // select logic
-            // clone current filters
-            let updatedFilters = [...selectedFilters];
+// ====== FILTER HANDLER ======
 
-            // ✅ make sure only one item per filter group is active (remove previous existing filter)
-            if (filters1.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters1.includes(f));
-            if (filters2.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters2.includes(f));
-            if (filters3.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters3.includes(f));
-            if (filters4.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters4.includes(f));
-            if (filters5.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters5.includes(f));
-            if (filters6.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters6.includes(f));
-            if (filters7.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters7.includes(f));
-            if (filters8.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters8.includes(f));
-            if (filters9.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters9.includes(f));
-            if (filters10.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters9.includes(f));
-            if (filters11.includes(selectedCategory)) updatedFilters = updatedFilters.filter(f => !filters9.includes(f));
+// Filter selection handler
+const handleSelect = (selectedCategoryId) => {
+    // 如果已选中，则取消选择并重置所有 tempFilters
+    if (selectedFilters.includes(selectedCategoryId)) {
+        const filters = selectedFilters.filter(el => el !== selectedCategoryId);
+        setSelectedFilters(filters);
 
-            updatedFilters.push(selectedCategory);
-            setSelectedFilters(updatedFilters);
+        // 重置所有 tempFilters
+        setTempFilters(filters1);
+        setTempFilters2(filters2);
+        setTempFilters3(filters3);
+        setTempFilters4(filters4);
+        setTempFilters5(filters5);
+        setTempFilters6(filters6);
+        setTempFilters7(filters7);
+        setTempFilters8(filters8);
+        setTempFilters9(filters9);
+        setTempFilters10(filters10);
+        setTempFilters11(filters11);
 
-            // update temp filters
-            if (filters1.includes(selectedCategory)) setTempFilters([selectedCategory]);
-            if (filters2.includes(selectedCategory)) setTempFilters2([selectedCategory]);
-            if (filters3.includes(selectedCategory)) setTempFilters3([selectedCategory]);
-            if (filters4.includes(selectedCategory)) setTempFilters4([selectedCategory]);
-            if (filters5.includes(selectedCategory)) setTempFilters5([selectedCategory]);
-            if (filters6.includes(selectedCategory)) setTempFilters6([selectedCategory]);
-            if (filters7.includes(selectedCategory)) setTempFilters7([selectedCategory]);
-            if (filters8.includes(selectedCategory)) setTempFilters8([selectedCategory]);
-            if (filters9.includes(selectedCategory)) setTempFilters9([selectedCategory]);
-            if (filters10.includes(selectedCategory)) setTempFilters10([selectedCategory]);
-            if (filters11.includes(selectedCategory)) setTempFilters11([selectedCategory]);
-        }
-        
+        return; // 早退出
     }
+
+    // 添加新选择
+    let updatedFilters = [...selectedFilters];
+
+    // 定义所有 filter group
+    const allFilters = [filters1, filters2, filters3, filters4, filters5, filters6, filters7, filters8, filters9, filters10, filters11];
+
+    // 找到选择的 filter 所属组，并清理该组中原来的选择
+    allFilters.forEach(group => {
+        if (group.some(f => f.id === selectedCategoryId)) {
+            updatedFilters = updatedFilters.filter(f => !group.some(ff => ff.id === f));
+        }
+    });
+
+    // 添加新选择
+    updatedFilters.push(selectedCategoryId);
+    setSelectedFilters(updatedFilters);
+
+    // 更新对应 tempFilters 只显示该组的选择
+    allFilters.forEach((group, index) => {
+        if (group.some(f => f.id === selectedCategoryId)) {
+            const selectedFilterObj = group.find(f => f.id === selectedCategoryId);
+            switch (index) {
+                case 0: setTempFilters([selectedFilterObj]); break;
+                case 1: setTempFilters2([selectedFilterObj]); break;
+                case 2: setTempFilters3([selectedFilterObj]); break;
+                case 3: setTempFilters4([selectedFilterObj]); break;
+                case 4: setTempFilters5([selectedFilterObj]); break;
+                case 5: setTempFilters6([selectedFilterObj]); break;
+                case 6: setTempFilters7([selectedFilterObj]); break;
+                case 7: setTempFilters8([selectedFilterObj]); break;
+                case 8: setTempFilters9([selectedFilterObj]); break;
+                case 9: setTempFilters10([selectedFilterObj]); break;
+                case 10: setTempFilters11([selectedFilterObj]); break;
+            }
+        }
+    });
+};
+
+
 
     const handleCategorySelect = (category) => {
         handleSelect(category);
@@ -197,32 +266,43 @@ const YourPage =  () => {
         setTempFilters7(filters7)
         setTempFilters8(filters8)
         setTempFilters9(filters9)
-        setTempFilters8(filters10)
-        setTempFilters9(filters11)
+        setTempFilters10(filters10)
+        setTempFilters11(filters11)
 
     };
-
-    const itemFilter = () => {
-        if (selectedFilters.length > 0) {
-            // Filter items where all selected filters must be present in the item's category
-            let filteredList = items.filter(item =>
-                selectedFilters.every(selectedCategory => 
-                    item.category.includes(selectedCategory)
-                )
+const itemFilter = () => {
+    if (selectedFilters.length > 0) {
+        const filteredList = items.filter(item => {
+            let categoryIds = [];
+            try {
+                categoryIds = JSON.parse(item.category); // 先解析 JSON 字符串
+            } catch (e) {
+                console.error("Invalid category JSON for item", item.id, item.category);
+            }
+            // 确保 categoryIds 是数组，再判断每个 selectedId 是否都存在
+            return selectedFilters.every(selectedId =>
+                categoryIds.includes(selectedId)
             );
-            setFilterItems(filteredList);
-        } else {
-            setFilterItems([...items]);
-        }
-    };
+        });
+        setFilterItems(filteredList);
+    } else {
+        setFilterItems([...items]);
+    }
+};
+
+
+
 
     // Use effect to trigger filter handler
     useEffect(()=> {
         itemFilter();
+        console.log("SelectedFilters:", selectedFilters);
         
     },
     [selectedFilters])
     //------------------------------------------------------------------------------------------------------------//
+
+
 
     //----------------------------------------------Modal HANDLER-------------------------------------------------//
     //use effect for modal of 3D model with THREE.JS
@@ -305,59 +385,44 @@ const YourPage =  () => {
     //------------------------------------------------------------------------------------------------------------//
 
 
-    //------------------------------------------------Product enties handlers ------------------------------------//
+    //------------------------------------------------Product list handlers ------------------------------------//
 
-    // Single source of truth
-const [cart, setCart] = useState([]);
+            // Single source of truth
+        const [cart, setCart] = useState([]);
 
-// get quantity from cart directly
-const getQuantity = (name) => {
-  const item = cart.find((i) => i.name === name);
-  return item ? item.quantity : 0;
-};
-const [inCart, setInCart] = useState(false);
+        //const [inCart, setInCart] = useState(false);
 
-  const handleClick = (item) => {
-    if (inCart) {
-      resetQuantity(item.name);
-      setInCart(false);
-    } else {
-      increaseQuantity(item.name);
-      setInCart(true);
-    }
-  };
+        // 增加数量
+        const increaseQuantity = (name) => {
+        const price = items.find(i => i.name === name).price;
 
-// add to cart
-const increaseQuantity = (name) => {
-  const price = items.find((i) => i.name === name).price;
-  const updated = [...cart];
-  const idx = updated.findIndex(i => i.name === name);
-  if (idx >= 0) {
-    updated[idx].quantity += 1;
-  } else {
-    updated.push({ name, quantity: 1, price });
-  }
-  setCart(updated);
-  localStorage.setItem("cart", JSON.stringify(updated));
-};
+        const updated = cart.some(i => i.name === name)
+            ? cart.map(i =>
+                i.name === name ? { ...i, quantity: i.quantity + 1 } : i
+            )
+            : [...cart, { name, quantity: 1, price }];
 
-// decrease cart
-const decreaseQuantity = (name) => {
-  const updated = [...cart];
-  const idx = updated.findIndex(i => i.name === name);
-  if (idx >= 0) {
-    updated[idx].quantity -= 1;
-    if (updated[idx].quantity <= 0) updated.splice(idx, 1);
-  }
-  setCart(updated);
-  localStorage.setItem("cart", JSON.stringify(updated));
-};
+        setCart(updated);
+        localStorage.setItem("cart", JSON.stringify(updated));
+        };
 
-const resetQuantity = (name) => {
-  const updated = cart.filter(i => i.name !== name); // remove the item completely
-  setCart(updated);
-  localStorage.setItem("cart", JSON.stringify(updated));
-};
+        // 减少数量，减到0自动删除
+        const decreaseQuantity = (name) => {
+        const updated = cart
+            .map(i => i.name === name ? { ...i, quantity: i.quantity - 1 } : i)
+            .filter(i => i.quantity > 0); // 数量 <=0 自动删除
+
+        setCart(updated);
+        localStorage.setItem("cart", JSON.stringify(updated));
+        };
+
+        // 直接删除某项
+        const resetQuantity = (name) => {
+        const updated = cart.filter(i => i.name !== name);
+        setCart(updated);
+        localStorage.setItem("cart", JSON.stringify(updated));
+        };
+
 
 
     return (
@@ -380,7 +445,7 @@ const resetQuantity = (name) => {
                         >
 
                         <SwiperSlide>
-                            <div onClick={() => {handleCategorySelect("Solenoid");setCurrentMode("Solenoid")}}>
+                            <div onClick={() => {handleCategorySelect(801);setCurrentMode("Solenoid")}}>
                             <div className='flex justify-center cursor-pointer'>
                                 <Link href={`/${locale}/Product-login/Product1`}>
                                     <img className='ml-5 h-32 hover:scale-105 transition-transform duration-200' 
@@ -397,7 +462,7 @@ const resetQuantity = (name) => {
                         
                         
                         <SwiperSlide>
-                            <div  onClick={() => {handleCategorySelect('Pressure-actuated');setCurrentMode("Pressure-actuated")}}>
+                            <div  onClick={() => {handleCategorySelect(802);setCurrentMode("Pressure-actuated")}}>
                             <div className='flex justify-center cursor-pointer'>
                                 <Link href={`/${locale}/Product-login/Product1`}>
                                     <img className='h-32 hover:scale-105 transition-transform duration-200' 
@@ -413,7 +478,7 @@ const resetQuantity = (name) => {
                         </SwiperSlide>
 
                         <SwiperSlide>
-                            <div onClick={() => {handleCategorySelect("Liqnitrogen-non-return");setCurrentMode("Liqnitrogen-non-return")}}>
+                            <div onClick={() => {handleCategorySelect(803);setCurrentMode("Liqnitrogen-non-return")}}>
                             <div className='flex justify-center cursor-pointer'>
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://goetvalves.eu/image/c26.png"></img>
                             </div>
@@ -423,7 +488,7 @@ const resetQuantity = (name) => {
                             </div>
                         </SwiperSlide>
                         
-                        <SwiperSlide onClick={() => {handleCategorySelect("Liqnitrogenfilter");setCurrentMode("Liqnitrogenfilter")}}>
+                        <SwiperSlide onClick={() => {handleCategorySelect(804);setCurrentMode("Liqnitrogenfilter")}}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
                                 <img className='h-32  hover:scale-105 transition-transform duration-200' src="https://goetvalves.eu/image/filter2.png"></img>
@@ -434,7 +499,7 @@ const resetQuantity = (name) => {
                             </div>
                         </SwiperSlide>
 
-                        <SwiperSlide onClick={() => {handleCategorySelect("SafetyValve");setCurrentMode("SafetyValve")}}>
+                        <SwiperSlide onClick={() => {handleCategorySelect(805);setCurrentMode("SafetyValve")}}>
                             <div>
                             <div className='flex justify-center cursor-pointer'>
                                 <img className='h-32 hover:scale-105 transition-transform duration-200' src="https://goetvalves.eu/image/safety1.png"></img>
@@ -450,7 +515,7 @@ const resetQuantity = (name) => {
                     </Swiper>        
             </div>
 
-            <Categorydsc tempFilters9={tempFilters9}/>
+            <Categorydsc currentMode={currentMode}/>
 
             {/*product filtering section*/}
             <div className="h-auto w-auto pb-[20px] shadow-lg mb-20">
@@ -476,228 +541,251 @@ const resetQuantity = (name) => {
                         <div className="flex justify-left text-hind text-14px pb-20">
 
                         <div className="flex flex-col w-[300px] mr-10">
-                            <div className="mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                        <div className="mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
                             {t("Nennweite")}
-                            {}
-                            </div>
-                            <div className="overflow-y-auto h-[120px] w-[100%]">
-                            {tempFilters.map((category,id)=>(
-                                <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input type="checkbox"
-                                        onChange={()=>handleSelect(category)} 
-                                        checked={selectedFilters.includes(category)}
-                                        className="mr-2" />
-                                {category}
-                                </label>
-                            ))}
-                            </div>
                         </div>
+                        <div className="overflow-y-auto h-[120px] w-[100%]">
+                            {tempFilters.map((filterObj) => (
+                            <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                type="checkbox"
+                                onChange={() => handleSelect(filterObj.id)} 
+                                checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                className="mr-2"
+                                />
+                                {filterObj.label}
+                            </label>
+                            ))}
+                        </div>
+                        </div>
+
 
                         <div className="text-hind w-[300px] mr-10">
-                            <div className="flex flex-col">
+                        <div className="flex flex-col">
                             <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                {t("Baumform")}
+                            {t("Baumform")}
                             </div>
-                            {tempFilters2.map((category,id)=>(
-                                <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input type="checkbox"
-                                        onChange={()=>handleSelect(category)} 
-                                        checked={selectedFilters.includes(category)}
-                                        className="mr-2" />
-                                {t(category)}
-                                </label>
+                            {tempFilters2.map((filterObj) => (
+                            <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                type="checkbox"
+                                onChange={() => handleSelect(filterObj.id)} 
+                                checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                className="mr-2"
+                                />
+                                {t(filterObj.label)}
+                            </label>
                             ))}
-                            </div>
                         </div>
+                        </div>
+
 
                         { currentMode == 'Solenoid' && (<div className="overflow-y-auto w-[300px] mr-10">
-                            <div className="flex flex-col">
+                        <div className="flex flex-col">
                             <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                {t("Spannung")}
+                            {t("Spannung")}
                             </div>
-                            {tempFilters3.map((category,id)=>(
-                                <label key={id} className="flex items-center mb-2 w-32 font-[200] text-[14px]">
-                                <input type="checkbox"
-                                        onChange={()=>handleSelect(category)} 
-                                        checked={selectedFilters.includes(category)}
-                                        className="mr-2" />
-                                {category}
-                                </label>
+                            {tempFilters3.map((filterObj) => (
+                            <label key={filterObj.id} className="flex items-center mb-2 w-32 font-[200] text-[14px]">
+                                <input
+                                type="checkbox"
+                                onChange={() => handleSelect(filterObj.id)}
+                                checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                className="mr-2"
+                                />
+                                {filterObj.label}
+                            </label>
                             ))}
-                            </div>
-                        </div>)}
+                        </div>
+                        </div>
+                        )}
 
                         <div className="overflow-y-auto w-[300px] mr-20">
-                            <div className="flex flex-col">
-                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center" >
-                                {t("Material")}
+                        <div className="flex flex-col">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                            {t("Material")}
                             </div>
-                            {tempFilters4.map((category,id)=>(
-                                <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input type="checkbox"
-                                        onChange={()=>handleSelect(category)} 
-                                        checked={selectedFilters.includes(category)}
-                                        className="mr-2" />
-                                {t(category)}
-                                </label>
+                            {tempFilters4.map((filterObj) => (
+                            <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                type="checkbox"
+                                onChange={() => handleSelect(filterObj.id)}
+                                checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                className="mr-2"
+                                />
+                                {t(filterObj.label)}
+                            </label>
                             ))}
-                            </div>
                         </div>
+                        </div>
+
 
                         </div>
                         {/*second row */}
                         <div className="flex justify-center text-hind text-14px">
 
+                        <div className="w-[300px] max-h-[200px] mr-10">
+                        <div className="w-[100%] mb-2  pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center " >
+                            {t("Dichtung")}
+                        </div>
+                        <div className="overflow-y-auto max-h-[120px] flex flex-col">
+                            {tempFilters5.map((filterObj) => (
+                            <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                type="checkbox"
+                                onChange={() => handleSelect(filterObj.id)}
+                               checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                className="mr-2"
+                                />
+                                {filterObj.label}
+                            </label>
+                            ))}
+                        </div>
+                        </div>
+
+                        <div className="overflow-y-auto mr-10">
+                        <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                            {t("Schaltfunktion")}
+                            </div>
+                            {tempFilters6.map((filterObj) => (
+                            <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                type="checkbox"
+                                onChange={() => handleSelect(filterObj.id)}
+                                checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                className="mr-2"
+                                />
+                                {t(filterObj.label)}
+                            </label>
+                            ))}
+                        </div>
+                        </div>
+
                         <div className="mr-10">
-                            <div className="w-[300px] max-h-[200px]">
-                                <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                {t("Dichtung")}
-                                </div>
-                                <div className="overflow-y-auto max-h-[120px] flex flex-col">
-                                {tempFilters5.map((category, id) => (
-                                    <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                    <input
-                                        type="checkbox"
-                                        onChange={() => handleSelect(category)}
-                                        checked={selectedFilters.includes(category)}
-                                        className="mr-2"
-                                    />
-                                    {category}
-                                    </label>
-                                ))}
-                                </div>
+                        <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                            {t("Steurung")}
+                            </div>
+                            {tempFilters7.map((filterObj) => (
+                            <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                type="checkbox"
+                                onChange={() => handleSelect(filterObj.id)}
+                                checked={selectedFilters.includes(filterObj.id)}
+                                className="mr-2"
+                                />
+                                {t(filterObj.label)}
+                            </label>
+                            ))}
+                        </div>
+                        </div>
+
+                        <div className="mr-20 mb-30">
+                        <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                            {t("Druck")}
+                            </div>
+                            <div className="overflow-y-auto max-h-[120px] flex flex-col">
+                            {tempFilters8.map((filterObj) => (
+                                <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                    type="checkbox"
+                                    onChange={() => handleSelect(filterObj.id)}
+                                    checked={selectedFilters.includes(filterObj.id)}
+                                    className="mr-2"
+                                />
+                                {filterObj.label}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
+                        </div>
+
+                        </div>
+
+                        {/*3rd row */}
+                        <div className="flex justify-left text-hind text-14px">
+                        <div className="overflow-y-auto mr-10">
+                            <div className="flex flex-col w-[300px]">
+                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Typ")}
+                            </div>
+                            {tempFilters9.map((filterObj) => (
+                                <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                    type="checkbox"
+                                    onChange={() => handleSelect(filterObj.id)}
+                                   checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                    className="mr-2"
+                                />
+                                {filterObj.label}
+                                </label>
+                            ))}
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col w-[300px] mr-10">
+                            <div className="w-full mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                            {t("KV-Wert")}
+                            </div>
+
+                            <input
+                            type="range"
+                            min={0}
+                            max={15}
+                            step={0.1}
+                            value={selectedValue}
+                            onChange={(e) => setSelectedValue(parseFloat(e.target.value))}
+                            className="w-full"
+                            />
+
+                            <div className="text-center mt-2">
+                            Selected: {"<= " + selectedValue.toFixed(1) + "m³/h"}
                             </div>
                         </div>
 
                         <div className="overflow-y-auto mr-10">
                             <div className="flex flex-col w-[300px]">
                             <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                {t("Schaltfunktion")}
+                                {t("Medium")}
                             </div>
-                            {tempFilters6.map((category,id)=>(
-                                <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input type="checkbox"
-                                        onChange={()=>handleSelect(category)} 
-                                        checked={selectedFilters.includes(category)}
-                                        className="mr-2" />
-                                {t(category)}
+                            {tempFilters10.map((filterObj) => (
+                                <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                <input
+                                    type="checkbox"
+                                    onChange={() => handleSelect(filterObj.id)}
+                                    checked={selectedFilters.includes(filterObj.id)}
+                                    className="mr-2"
+                                />
+                                {t(filterObj.label)}
                                 </label>
                             ))}
                             </div>
                         </div>
 
-                        <div className="mr-10">
+                        {currentMode === 'liqnitrofilter' && (
+                            <div className="overflow-y-auto mr-10">
                             <div className="flex flex-col w-[300px]">
-                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                {t("Steurung")}
-                            </div>
-                            {tempFilters7.map((category,id)=>(
-                                <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input type="checkbox"
-                                        onChange={()=>handleSelect(category)} 
-                                        checked={selectedFilters.includes(category)}
-                                        className="mr-2" />
-                                {t(category)}
+                                <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {"filter"}
+                                </div>
+                                {tempFilters11.map((filterObj) => (
+                                <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                    <input
+                                    type="checkbox"
+                                    onChange={() => handleSelect(filterObj.id)}
+                                    checked={selectedFilters.includes(filterObj.id)}
+                                    className="mr-2"
+                                    />
+                                    {filterObj.label}
                                 </label>
-                            ))}
-                            </div>
-                        </div>
-
-                        <div className="mr-20 mb-30">
-                            <div className="flex flex-col w-[300px]">
-                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center ">
-                                {t("Druck")}
-                            </div>
-                            <div className="overflow-y-auto max-h-[120px] flex flex-col">
-                                {tempFilters8.map((category,id)=>(
-                                    <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                    <input type="checkbox"
-                                            onChange={()=>handleSelect(category)} 
-                                            checked={selectedFilters.includes(category)}
-                                            className="mr-2" />
-                                    {category}
-                                    </label>
                                 ))}
                             </div>
                             </div>
+                        )}
                         </div>
 
-
-
-                        </div>
-                        {/*3rd row */}
-                        <div className="flex justify-left text-hind text-14px">
-                           <div className="overflow-y-auto mr-10">
-                                <div className="flex flex-col w-[300px]">
-                                    <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                        {t("Typ")}
-                                    </div>
-                                    {tempFilters9.map((category,id)=>(
-                                        <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                        <input type="checkbox"
-                                                onChange={()=>handleSelect(category)} 
-                                                checked={selectedFilters.includes(category)}
-                                                className="mr-2" />
-                                        {category}
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col w-[300px] mr-10">
-                                <div className="w-full mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                    {t("KV-Wert")}
-                                </div>
-
-                                <input
-                                    type="range"
-                                    min={0}
-                                    max={15}
-                                    step={0.1}
-                                    value={selectedValue}        // 绑定状态
-                                    onChange={(e) => setSelectedValue(parseFloat(e.target.value))}
-                                    className="w-full"
-                                />
-
-                                <div className="text-center mt-2">
-                                    Selected: {"<= "+selectedValue.toFixed(1)+"m³/h"}
-                                </div>
-                            </div>
-                            
-                            <div className="overflow-y-auto mr-10">
-                                <div className="flex flex-col w-[300px]">
-                                    <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                        {t("Medium")}
-                                    </div>
-                                    {tempFilters10.map((category,id)=>(
-                                        <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                        <input type="checkbox"
-                                                onChange={()=>handleSelect(category)} 
-                                                checked={selectedFilters.includes(category)}
-                                                className="mr-2" />
-                                        {t(category)}
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-
-                            { currentMode == 'liqnitrofilter' && (<div className="overflow-y-auto mr-10">
-                                <div className="flex flex-col w-[300px]">
-                                    <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                                        {"filter"}
-                                    </div>
-                                    {tempFilters11.map((category,id)=>(
-                                        <label key={id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                        <input type="checkbox"
-                                                onChange={()=>handleSelect(category)} 
-                                                checked={selectedFilters.includes(category)}
-                                                className="mr-2" />
-                                        {category}
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>)}
-                        </div>
 
                         
                     </div>
@@ -715,9 +803,14 @@ const resetQuantity = (name) => {
             </div>
 
             {/*Shopping cart icon on the middle right*/}
-            <ShoppingCart cart={cart}/>
+            <ShoppingCart
+                cart={cart}
+                increaseQuantity={increaseQuantity}
+                decreaseQuantity={decreaseQuantity}
+                resetQuantity={resetQuantity}
+                />
+
             
-           
             {/*Product listing section*/}
             <div> 
                 {filteredItems
@@ -768,7 +861,7 @@ const resetQuantity = (name) => {
                                         </div>
 
                                         <div className="w-[50%] h-[100%]  border-gray-500 bg-lightBlue shadow-lg text-white" style={{ transform: 'skewX(-10deg)' }}>
-                                            <div className="text-hind text-[13px] pl-[15px] pt-[10px] pb-[10px] border-b-[5px] border-white">
+                                            <div className="text-hind text-[19px] pl-[15px] pt-[10px] pb-[10px] border-b-[5px] border-white">
                                                 {item.name}
                                             </div>
 
@@ -798,30 +891,28 @@ const resetQuantity = (name) => {
 
                                         <div className="w-[30%] h-[100%] z-9 pt-[1%]">
                                             <div className="pl-[20%]">
-                                                {isLoggedIn && (
+                                                {isLoggedIn && (() => {
+                                                const exists = cart.some(i => i.name === item.name);
+
+                                                return (
                                                     <div className="flex mb-4">
-                                                        <div className="flex ">
-                                                                <button
-                                                                onClick={() => {
-                                                                    const exists = cart.find(i => i.name === item.name);
-                                                                    if (exists) {
-                                                                    resetQuantity(item.name);
-                                                                    } else {
-                                                                    increaseQuantity(item.name);
-                                                                    }
-                                                                }}
-                                                                className={`w-[120px] h-[40px] rounded-lg font-medium text-sm transition-colors duration-200
-                                                                    ${cart.find(i => i.name === item.name)
-                                                                    ? "bg-red-500 text-white hover:bg-red-600"
-                                                                    : "bg-blue-400 text-white hover:bg-blue-700"}`}
-                                                                >
-                                                                {cart.find(i => i.name === item.name) ? "Remove item" : "Add to Cart"}
-                                                                </button>
+                                                    <button
+                                                        onClick={() =>
+                                                        exists
+                                                            ? resetQuantity(item.name)
+                                                            : increaseQuantity(item.name)
+                                                        }
+                                                        className={`w-[120px] h-[40px] rounded-lg font-medium text-sm transition-colors duration-200
+                                                        ${exists
+                                                            ? "bg-red-500 text-white hover:bg-red-600"
+                                                            : "bg-blue-400 text-white hover:bg-blue-700"}`}
+                                                    >
+                                                        {exists ? "Remove item" : "Add to Cart"}
+                                                    </button>
+                                                    </div>
+                                                );
+                                                })()}
 
-                                                            </div>
-                                                        </div>
-
-                                                )}
 
         
                                                 <div>

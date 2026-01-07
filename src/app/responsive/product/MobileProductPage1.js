@@ -205,7 +205,7 @@ const MobileProductPage1 = () => {
                             </div>
                             <div className="text-blue-600 font-bold">{item.name}</div>
                             <div className="flex justify-between mt-2">
-                                <span>{isLoggedIn ? `${item.price}` : <Link href={loginPath}>Login to view</Link>}</span>
+                                {/*<span>{isLoggedIn ? `${item.price}` : <Link href={loginPath}>Login to view</Link>}</span>*/}
                                 {isLoggedIn && (
                                     <button
                                         onClick={() => handleCartClick(item)}

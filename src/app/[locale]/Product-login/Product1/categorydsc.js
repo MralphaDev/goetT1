@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 
-function CategoryDsc({ tempFilters9 }) {
-  const activeCategory = String(tempFilters9 || 'Solenoid'); 
+function CategoryDsc({ currentMode}) {
+  const activeCategory = String(currentMode || 'Solenoid'); 
 
   const namespaceMap = {
     Solenoid: 'Product1',
