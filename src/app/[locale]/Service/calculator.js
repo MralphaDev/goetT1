@@ -76,24 +76,36 @@ function Calculator() {
                   </p>
                   <p className="text-sm mb-4">To calculate KV value, the flow Q, density ρ1 and pressure drop Δp must be known.</p>
                   <div className="space-y-3 w-full">
-                    <input 
+                    <div className='w-full'>
+                       <input 
                       type="number" placeholder="Q (m³/h)" 
                       value={kvCard.Q} 
                       onChange={e => setKvCard({...kvCard, Q: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">m³/h</span>
+
+                    </div>
+                   
+                    <div className='w-full'>  
                     <input 
                       type="number" placeholder="ρ1 (kg/m³)" 
                       value={kvCard.rho} 
                       onChange={e => setKvCard({...kvCard, rho: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">kg/m³</span>
+                    </div>
+
+                    <div className='w-full'>
                     <input 
                       type="number" placeholder="Δp (bar)" 
                       value={kvCard.dp} 
                       onChange={e => setKvCard({...kvCard, dp: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">bar</span>
+                    </div>
                   </div>
                   <button 
                     onClick={calcKV}
@@ -118,24 +130,34 @@ function Calculator() {
                   </p>
                   <p className="text-sm mb-4">To calculate flow Q, KV value, density ρ1, and pressure drop Δp must be known.</p>
                   <div className="space-y-3 w-full">
-                    <input 
-                      type="number" placeholder="KV (m³/h)" 
-                      value={flowCard.KV} 
-                      onChange={e => setFlowCard({...flowCard, KV: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
-                    />
+                    <div className='w-full'>
+                      <input 
+                        type="number" placeholder="KV (m³/h)" 
+                        value={flowCard.KV} 
+                        onChange={e => setFlowCard({...flowCard, KV: e.target.value})}
+                        className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      />
+                      <span className="text-lg text-white/70 ml-2">m³/h</span>
+                    </div>
+                    <div className='w-full'>
                     <input 
                       type="number" placeholder="ρ1 (kg/m³)" 
                       value={flowCard.rho} 
                       onChange={e => setFlowCard({...flowCard, rho: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">kg/m³</span>
+                    </div>
+                    <div className='w-full'>
+
                     <input 
                       type="number" placeholder="Δp (bar)" 
                       value={flowCard.dp} 
                       onChange={e => setFlowCard({...flowCard, dp: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">bar</span>
+                    </div>
                   </div>
                   <button 
                     onClick={calcFlow}
@@ -160,24 +182,33 @@ function Calculator() {
                   </p>
                   <p className="text-sm mb-4">To calculate Δp, KV value, density ρ1, and flow Q must be known.</p>
                   <div className="space-y-3 w-full">
+                    <div className='w-full'>
                     <input 
                       type="number" placeholder="KV (m³/h)" 
                       value={dpCard.KV} 
                       onChange={e => setDpCard({...dpCard, KV: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">m³/h</span>
+                    </div>
+                    <div className='w-full'>
                     <input 
                       type="number" placeholder="ρ1 (kg/m³)" 
                       value={dpCard.rho} 
                       onChange={e => setDpCard({...dpCard, rho: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">kg/m³</span>
+                    </div>
+                    <div className='w-full'>
                     <input 
                       type="number" placeholder="Q (m³/h)" 
                       value={dpCard.Q} 
                       onChange={e => setDpCard({...dpCard, Q: e.target.value})}
-                      className="w-full p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
+                      className="w-[80%] p-3 rounded border border-white/50 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-[#28A8DE]"
                     />
+                    <span className="text-lg text-white/70 ml-2">m³/h</span>
+                    </div>
                   </div>
                   <button 
                     onClick={calcDP}

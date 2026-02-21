@@ -63,7 +63,7 @@ function page() {
           <div className="relative flex flex-2 items-start">
             <img
               src="https://goetvalves.eu/image/7100dc-29.png"
-              className="object-contain h-[70%] mt-50 mx-auto ml-60 z-20"
+              className="object-contain h-[70%] mt-50 mx-auto ml-60 z-5"
             />
               <img
               src="https://goetvalves.eu/image/7100dc-29.png"

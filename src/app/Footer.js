@@ -9,13 +9,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Contact */}
         <div>
-          <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-          <p className="text-sm font-bold mb-4">Asian inventory address<br/> 058727 150 South Bridge Road #02 Fookhai, Singapore</p>
-          <p className="text-sm font-bold mb-4">(Mo – Fr 10:00 – 17:00)</p>
-          <p className="text-sm font-bold mb-4">European inventory address<br/> Karl-Lange-Str. 49,44791 Bochum, Germany</p>
-          <p className="text-sm font-bold mb-4">(Mo – Fr 9:00 – 15:00)</p>
-          <p className="text-sm font-bold mb-4">Email1: sgp@goetvalves.eu</p>
-          <p className="text-sm font-bold mb-4">Email2: info@goetvalves.eu</p>
+          <h3 className="text-2xl font-bold mb-4">Contact Us</h3>
+          <p className="text-sm font-thin mb-4"><span className="font-bold">Asian inventory address</span><br/> 058727 150 South Bridge Road #02 Fookhai, Singapore</p>
+          <p className="text-sm font-thin mb-2">(Mo – Fr 10:00 – 17:00)</p>
+           <p className="text-sm font-thin mb-4">Email1: sgp@goetvalves.eu</p>
+          <p className="text-sm font-thin mb-4"><span className="font-bold">European inventory address</span><br/> Karl-Lange-Str. 49,44791 Bochum, Germany</p>
+          <p className="text-sm font-thin mb-2">(Mo – Fr 9:00 – 15:00)</p>
+          <p className="text-sm font-thin mb-4">Email2: info@goetvalves.eu</p>
          
           <div className="flex gap-3 mt-4 text-white">
             <a href="#" className="hover:text-gray-200 transition"><FaFacebookF /></a>

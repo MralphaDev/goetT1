@@ -188,11 +188,12 @@ const handleSearch = (e) => {
               {link.name}
             </Link>
           ))}
+          
+           {isLoggedIn && <Loggout />}
         </nav>
       </div>
         
 
-           {isLoggedIn && <Loggout />}
 
     </header>
   );

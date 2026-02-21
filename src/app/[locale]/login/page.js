@@ -28,7 +28,7 @@ export default function Home() {
 
   const showPopup = (message, type = "success") => {
     setPopup({ message, type });
-    setTimeout(() => setPopup(null), 3000);
+    setTimeout(() => setPopup(null), 1000);
   };
 
   const handleSubmit = async () => {
@@ -36,6 +36,26 @@ export default function Home() {
       showPopup("there are missing fields", "error");
       return;
     }
+
+if (isSignUp && companyWebsite) {
+  // 提取公司网站的域名（去掉 http:// https:// www.）
+  const websiteDomain = companyWebsite
+    .replace(/^https?:\/\//, "")
+    .replace(/^www\./, "")
+    .split("/")[0]  // 去掉路径
+    .toLowerCase();
+
+  // 提取 email 的域名（@ 后面部分）
+  const emailDomain = email.split("@")[1]?.toLowerCase();
+
+  if (emailDomain !== websiteDomain) {
+    showPopup("please enter correct company email or company website", "error");
+    return;
+  }
+}
+
+
+   
 
     const body = { password, email, isSignUp, step, name, companyName, companyWebsite, companyAddress, position };
     if (isSignUp && step === 2) body.code = code;
@@ -100,14 +120,16 @@ export default function Home() {
   return (
     <div className="font-sans min-h-screen p-8 pb-20 relative flex flex-col items-center justify-center bg-white overflow-hidden">
       {popup && (
-        <div
-          className={`absolute top-15 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded shadow ${
-            popup.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"
-          }`}
-        >
-          {popup.message}
-        </div>
-      )}
+  <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div
+      className={`max-w-md w-11/12 px-6 py-4 rounded-lg shadow-lg text-center text-lg font-semibold 
+        ${popup.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"}
+      `}
+    >
+      {popup.message}
+    </div>
+  </div>
+)}
 
       <AnimatePresence mode="wait">
         {!loggedIn ? (
@@ -153,65 +175,55 @@ export default function Home() {
 
             <h2 className="text-lg font-semibold">{isSignUp ? "Sign Up" : "Sign In"}</h2>
 
-            <input
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border px-3 py-2 rounded w-64"
-              disabled={step === 2}
-            />
-            <input
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="border px-3 py-2 rounded w-64"
-              disabled={step === 2}
-            />
-            {isSignUp && (
-              <input
-              placeholder="your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="border px-3 py-2 rounded w-64"
-              disabled={step === 2}
-            />
-            )}
-              {isSignUp && (
-              <input
-              placeholder="your company name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              className="border px-3 py-2 rounded w-64"
-              disabled={step === 2}
-            />
-            )}
-            {isSignUp && (
-              <input
-              placeholder="your company website"
-              value={companyWebsite}
-              onChange={(e) => setCompanyWebsite(e.target.value)}
-              className="border px-3 py-2 rounded w-64"
-              disabled={step === 2}
-            />
-            )}
-              {isSignUp && (
-              <input
-              placeholder="your company address"
-              value={companyAddress}
-              onChange={(e) => setCompanyAddress(e.target.value)}
-              className="border px-3 py-2 rounded w-64"
-              disabled={step === 2}
-            />
-            )}
-
-              {isSignUp && (
-              <input
-              placeholder="your position in company"
-              value={position}
-              onChange={(e) => setPosition(e.target.value)}
-              className="border px-3 py-2 rounded w-64"
-              disabled={step === 2}
-            />
+            {step !== 2 && (
+              <>
+                <input
+                  placeholder="YourCompanyEmail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border px-3 py-2 rounded w-64"
+                />
+                <input
+                  placeholder="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border px-3 py-2 rounded w-64"
+                />
+                {isSignUp && (
+                  <>
+                    <input
+                      placeholder="your name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="border px-3 py-2 rounded w-64"
+                    />
+                    <input
+                      placeholder="your company name"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      className="border px-3 py-2 rounded w-64"
+                    />
+                    <input
+                      placeholder="your company website"
+                      value={companyWebsite}
+                      onChange={(e) => setCompanyWebsite(e.target.value)}
+                      className="border px-3 py-2 rounded w-64"
+                    />
+                    <input
+                      placeholder="your company address"
+                      value={companyAddress}
+                      onChange={(e) => setCompanyAddress(e.target.value)}
+                      className="border px-3 py-2 rounded w-64"
+                    />
+                    <input
+                      placeholder="your position in company"
+                      value={position}
+                      onChange={(e) => setPosition(e.target.value)}
+                      className="border px-3 py-2 rounded w-64"
+                    />
+                  </>
+                )}
+              </>
             )}
 
             {isSignUp && step === 2 && (

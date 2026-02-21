@@ -50,6 +50,8 @@ const YourPage =  () => {
 
     //////both usestate need to be placed above useeffect for it to show! else wont work
     const [selectedValue, setSelectedValue] = useState(15);  //KV 
+    const [selectedDN, setSelectedDN] = useState(50); // default max DN
+    const [selectedDruck, setSelectedDruck] = useState(1000); // default max
 
 
 // ====== FILTERS DATA ======
@@ -64,7 +66,7 @@ let filters1 = [
 
 let filters2 = [
   { id: 101, label: "2/2 Wege" }, { id: 102, label: "3/2 Wege" },
-  { id: 103, label: "lift-check-non-return-valve" }, { id: 104, label: "2-to-8 channel combiner board" }
+  { id: 103, label: "lift-check-non-return-valve" }, { id: 104, label: "2-to-8 channel combiner board" },{ id: 105, label: "AngleTypeSafetyValve" }
 ];
 
 let filters3 = [
@@ -74,13 +76,14 @@ let filters3 = [
 
 let filters4 = [
   { id: 301, label: "Brass" }, { id: 302, label: "Bronze" }, { id: 303, label: "1_4301" },
-  { id: 304, label: "1_4403" }, { id: 305, label: "1_4408" }
+  { id: 304, label: "1_4403" }, { id: 305, label: "1_4408" }, { id: 306, label: "1_4404" }, 
+  { id: 307, label: "1_4307" },{ id: 308, label: "1_4401" }
 ];
 
 let filters5 = [
   { id: 401, label: "EPDM" }, { id: 402, label: "FKM" }, { id: 403, label: "FPM" }, 
   { id: 404, label: "NBR" }, { id: 405, label: "PTFE" }, { id: 406, label: "PU" }, 
-  { id: 407, label: "PEEK" }, { id: 408, label: "PCTFE" }, { id: 409, label: "KALREZ" }
+  { id: 407, label: "PEEK" }, { id: 408, label: "PCTFE" }, { id: 409, label: "KALREZ" }, { id: 410, label: "Indium" },{ id: 411, label: "HNBR" }
 ];
 
 let filters6 = [
@@ -109,7 +112,7 @@ let filters9 = [
 let filters10 = [
   { id: 901, label: "Liquid-carbon-dioxide" }, { id: 902, label: "Liquid-helium" }, 
   { id: 903, label: "Liquid-nitrogen" }, { id: 904, label: "Liquid-argon" }, 
-  { id: 905, label: "Liquid-oxygen" }
+  { id: 905, label: "Liquid-oxygen" },{ id: 906, label: "Steam" },{ id: 907, label: "NeutralGas" },{ id: 908, label: "NeutralLiquid" },{ id: 909, label: "LightOil" }
 ];
 
 let filters11 = [
@@ -544,8 +547,8 @@ const itemFilter = () => {
                         <div className="mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
                             {t("Nennweite")}
                         </div>
-                        <div className="overflow-y-auto h-[120px] w-[100%]">
-                            {tempFilters.map((filterObj) => (
+                        <div className="overflow-y-auto h-[120px] w-[100%] ">
+                            {/*tempFilters.map((filterObj) => (
                             <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
                                 <input
                                 type="checkbox"
@@ -555,7 +558,36 @@ const itemFilter = () => {
                                 />
                                 {filterObj.label}
                             </label>
-                            ))}
+                            ))*/}
+                            <input
+                            type="range"
+                            min={0}
+                            max={50}
+                            step={0.1}
+                            value={selectedDN}
+                            onChange={(e) => 
+                            
+                            {
+                            const val = Number(e.target.value);
+                            setSelectedDN(parseFloat(e.target.value)); 
+                            e.target.style.setProperty(
+                            '--percent',
+                            `${(val / 50) * 100}%` // update filled %
+                            );}}
+                            className="
+                                w-full
+                                h-2
+                                bg-gray-200
+                                rounded-lg
+                                appearance-none
+                                cursor-pointer
+                                accent-[#0F4C71]
+                                range-dn
+                            "
+                            />
+                            <div className="text-center mt-2 text-sm text-gray-700">
+                            ≤ DN {selectedDN.toFixed(1)} 
+                            </div>
                         </div>
                         </div>
 
@@ -600,22 +632,24 @@ const itemFilter = () => {
                         </div>
                         )}
 
-                        <div className="overflow-y-auto w-[300px] mr-20">
-                        <div className="flex flex-col">
+                        <div className=" w-[300px] mr-20">
+                        <div className="flex flex-col ">
                             <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
                             {t("Material")}
                             </div>
-                            {tempFilters4.map((filterObj) => (
-                            <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input
-                                type="checkbox"
-                                onChange={() => handleSelect(filterObj.id)}
-                                checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
-                                className="mr-2"
-                                />
-                                {t(filterObj.label)}
-                            </label>
-                            ))}
+                            <div className="overflow-y-auto max-h-[120px] flex flex-col">
+                                {tempFilters4.map((filterObj) => (
+                                    <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px] ">
+                                        <input
+                                        type="checkbox"
+                                        onChange={() => handleSelect(filterObj.id)}
+                                        checked={selectedFilters.includes(filterObj.id)} // ✅ 只判断 id
+                                        className="mr-2"
+                                        />
+                                        {t(filterObj.label)}
+                                    </label>
+                                    ))}
+                            </div>
                         </div>
                         </div>
 
@@ -682,24 +716,25 @@ const itemFilter = () => {
                         </div>
 
                         <div className="mr-20 mb-30">
-                        <div className="flex flex-col w-[300px]">
-                            <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
-                            {t("Druck")}
+                            <div className="flex flex-col w-[300px]">
+                            <div className="w-full mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
+                                {t("Druck")}
                             </div>
-                            <div className="overflow-y-auto max-h-[120px] flex flex-col">
-                            {tempFilters8.map((filterObj) => (
-                                <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input
-                                    type="checkbox"
-                                    onChange={() => handleSelect(filterObj.id)}
-                                    checked={selectedFilters.includes(filterObj.id)}
-                                    className="mr-2"
-                                />
-                                {filterObj.label}
-                                </label>
-                            ))}
+
+                            <input
+                                type="range"
+                                min={0}
+                                max={1000}       // max 1000 bar
+                                step={10}
+                                value={selectedDruck}
+                                onChange={(e) => setSelectedDruck(Number(e.target.value))}
+                                className="w-full"
+                            />
+
+                            <div className="text-center mt-2 text-sm text-gray-700">
+                                Selected: {"<= " + selectedDruck + " bar"}
                             </div>
-                        </div>
+                            </div>
                         </div>
 
                         </div>
@@ -750,17 +785,19 @@ const itemFilter = () => {
                             <div className="w-[100%] mb-2 pt-2 pb-2 bg-[#0F4C71] text-white rounded text-center">
                                 {t("Medium")}
                             </div>
-                            {tempFilters10.map((filterObj) => (
-                                <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
-                                <input
-                                    type="checkbox"
-                                    onChange={() => handleSelect(filterObj.id)}
-                                    checked={selectedFilters.includes(filterObj.id)}
-                                    className="mr-2"
-                                />
-                                {t(filterObj.label)}
-                                </label>
-                            ))}
+                            <div className="overflow-y-auto max-h-[120px] flex flex-col">
+                                {tempFilters10.map((filterObj) => (
+                                    <label key={filterObj.id} className="flex items-center mb-2 font-[200] text-[14px]">
+                                    <input
+                                        type="checkbox"
+                                        onChange={() => handleSelect(filterObj.id)}
+                                        checked={selectedFilters.includes(filterObj.id)}
+                                        className="mr-2"
+                                    />
+                                    {t(filterObj.label)}
+                                    </label>
+                                ))}
+                            </div>
                             </div>
                         </div>
 
@@ -820,6 +857,26 @@ const itemFilter = () => {
                     const kv = parseFloat(item.KVWert); // 自动取前面的数字
                     return !isNaN(kv) && kv <= selectedValue;
                 })
+                .filter(item => {
+                if (!item.Nennweite) return false;
+
+                const dn = parseFloat(
+                    item.Nennweite.replace("DN", "").replace(",", ".")
+                );
+
+                return !isNaN(dn) && dn <= selectedDN;
+                })
+
+                .filter(item => {
+                    if (!item.MaximalerDruck) return false;
+
+                    // extract numeric value from "12,5 bar" or "12 bar"
+                    const val = parseFloat(item.MaximalerDruck.replace(/[^0-9,\.]/g, "").replace(",", "."));
+                    
+                    return !isNaN(val) && val <= selectedDruck;
+                })
+
+
                 .map((item,idx)=>( 
                             <div key={`items-${idx}`} className="">
                                 <div className="pb-[20px] pl-[10%] text-[25px] text-customBlue font-bold">
@@ -868,7 +925,7 @@ const itemFilter = () => {
                                             <div className="w-full h-full">
                                                 <div className="w-full h-1/4 border-b-[5px] border-white flex">
                                                     <div className="pl-[10px] pt-[5px] w-1/2 border-r-[5px] border-white">{t('Nennweite')}:{item.Nennweite}</div>
-                                                    <div className="pl-[10px] pt-[5px] w-1/2 w-1/2 ">{t('Spannung')}:{item.Spannung}</div>
+                                                    <div className="pl-[10px] pt-[5px] w-1/2 w-1/2 ">{t('Steurung')}:{item.Steuerung}</div>
                                                 </div>
 
                                                 <div className="w-full h-1/4 border-b-[5px] border-white flex">

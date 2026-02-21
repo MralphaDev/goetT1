@@ -64,25 +64,31 @@ const handleSubmit = async (e) => {
         <div className="flex flex-col sm:flex-row sm:items-start sm:gap-4 md:gap-6">
           <span className="font-thin sm:flex-1">
             <span className="font-bold">Asian inventory address:</span>{" "}
-            058727 150 South Bridge Road #02 Fookhai, Singapore
+            058727 150 South Bridge Road #02, Singapore
             <br className="md:hidden" />
-            (Mo – Fr 10:00 – 17:00)
+            <br/>(Mo – Fr 10:00 – 17:00)
+            <div className="md:hidden flex items-center gap-2 sm:flex-1">
+            <EnvelopeIcon className="h-4 w-4 sm:h-6 sm:w-6 text-blue-600" />
+            <span className="text-sm sm:text-base">sgp@goetvalves.eu</span>
+          </div>
           </span>
           <span className="font-thin sm:flex-1 mt-2 sm:mt-0">
             <span className="font-bold">European inventory address:</span>{" "}
             Karl-Lange-Str. 49,44791 Bochum, Germany
             <br className="md:hidden" />
-            (Mo – Fr 9:00 – 15:00)
+            <br/>(Mo – Fr 9:00 – 15:00)
           </span>
         </div>
 
         {/* Emails */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:gap-4 md:gap-6">
-          <div className="flex items-center gap-2 sm:flex-1">
+          <div className="hidden sm:flex items-center gap-2 sm:flex-1">
             <EnvelopeIcon className="h-4 w-4 sm:h-6 sm:w-6 text-blue-600" />
-            <span className="text-sm sm:text-base">sgp@goetvalves.eu</span>
+            <span className="text-sm sm:text-base">
+              sgp@goetvalves.eu
+            </span>
           </div>
-          <div className="flex items-center gap-2 sm:flex-1 mt-1 sm:mt-0">
+          <div className="flex items-center gap-2 sm:flex-1 sm:mt-0">
             <EnvelopeIcon className="h-4 w-4 sm:h-6 sm:w-6 text-blue-600" />
             <span className="text-sm sm:text-base">info@goetvalves.eu</span>
           </div>

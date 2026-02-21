@@ -26,18 +26,18 @@ const SignOutButton = ({
   return (
     <>
       {/* Desktop: always show */}
-      <div className="hidden md:block fixed top-8 right-4 z-50">
+      <div className=" hidden md:block z-50 -mt-2">
         <button
-          className="bg-[#28A8DE] text-white py-2 px-4 rounded shadow hover:bg-blue-500 transition duration-300"
+          className="bg-[#28A8DE] text-white py-1 px-2 rounded shadow hover:bg-blue-500 transition duration-300"
           onClick={handleSignOut}
         >
-          Sign out
+          Loggout
         </button>
       </div>
 
       {/* Mobile: show only if overlayOpen */}
       {overlayOpen && (
-        <div className="block md:hidden fixed top-25 right-4 z-50">
+        <div className="block md:hidden fixed top-25 right-2 z-50">
           <button
             className="bg-[#28A8DE] text-white py-2 px-4 rounded shadow hover:bg-blue-500 transition duration-300"
             onClick={handleSignOut}

@@ -2,17 +2,22 @@
 import {React,useState,useEffect,useRef,use} from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Navigation, Pagination, A11y , EffectCoverflow,  Autoplay } from 'swiper/modules';
 import { FileText, Cube, Download } from "lucide-react";
-// Import Swiper styles
+
+import 'swiper/css/effect-coverflow';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+
 import Link from 'next/link'
+
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
 import ProductDetail from '@/src/app/responsive/product/ProductDetail';
+
 //paypal
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useTranslations } from 'next-intl';
@@ -35,6 +40,19 @@ function page({params}) {
   const [isMobile, setIsMobile] = useState(false)
 
    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+   const accessories = [
+  "/101806-A-M8-CONNECTORS.png",
+  "/101809-A-CONNECTORS-1.png",
+  "/102418-A-CG-CONNECTORS.png",
+  "/104418-A-full-wave-rectification-CG-CONNECTORS.png",
+    "/106809.png",
+  "/181002.png",
+  "/241622.png",
+  "/302802-8200.png",
+    "/110602.png",
+];
+ const baseUrl = "https://goetvalves.eu/accesorry";
 
    console.log("item:", item);
 console.log("video:", item?.video);
@@ -229,11 +247,22 @@ console.log("indextest:",indextest)
                     Your browser does not support the video tag.
                 </video>
                 </div>
+
             </div>
 
             {/* Right Side Div */}
-            <div className="w-1/5 flex flex-col space-y-4 mr-[5%] mt-[5%] bg-[#E5F0F6]  text-black rounded-[20px] p-4 ">
-                {/* Selector for number of products */}
+            <div className="flex flex-col space-y-4 mr-[5%] mt-[5%] bg-[#E5F0F6] text-black rounded-[20px] p-4 w-full max-w-[400px] box-border overflow-hidden">
+  {/*
+      Problem:
+      - Using w-1/5 fixed the container to 20% → it does not scale when zoomed.
+      - Inner content could overshoot when zoomed or numbers are large.
+
+      Solution:
+      - Use w-full + max-w-[400px] (or adjust) so the container grows/shrinks with parent/viewport.
+      - box-border ensures padding is included in width.
+      - overflow-hidden prevents inner elements from spilling.
+      - Children (price, VAT, benefits) use flex and break-words to remain compact.
+  */}
                 <div className="flex space-x-4 ml-4 mt-4 mb-[20px]">
                     <div className="flex items-center justify-between mt-4 mb-4">
                         <button onClick={()=>handleDecrease()} className="px-3 py-1 rounded-lg text-black  shadow-md transition duration-300 ease-in-out hover:scale-105">
@@ -248,37 +277,43 @@ console.log("indextest:",indextest)
                     </div>
 
 
-                    <div className="pl-[30px] text-[#0F4C71] pr-6">
+                    <div className="w-full flex flex-col items-start px-4 text-[#0F4C71] box-border overflow-hidden">
+                    {/*
+                        Problem:
+                        - Main price and VAT sometimes overshoot parent on zoom.
+                        - Default content-box causes padding to add extra width.
+                        - Alignment is off when numbers wrap or zoomed.
+
+                        Solution:
+                        - Apply box-border so padding is included in width.
+                        - Use flex-col + items-start to vertically align main price and VAT.
+                        - Use w-full + break-words to prevent overshoot.
+                        - Small gap between prices to keep layout neat.
+                    */}
+                    {isLoggedIn ? (
+                        <div className="flex flex-col items-start w-full gap-1 box-border">
+                        {/* Main price button */}
                         <div
-  className={`cursor-pointer inline-flex items-center justify-center rounded-xl px-6 py-3 transition-all duration-300 backdrop-blur-sm
-    ${
-      isLoggedIn
-        ? "text-3xl font-bold text-gray-900"
-        : "text-lg font-medium text-customBlue  bg-customBlue/5 hover:bg-customBlue/10 hover:border-customBlue/70"
-    }`}
-  style={{
-    fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-  }}
-  onClick={() => {
-    if (!isLoggedIn) {
-      window.location.href = "/en/login";
-    }
-  }}
->
-  {isLoggedIn ? items[paramid].price : "Login to purchase"}
-</div>
+                            className="flex items-center justify-start rounded-xl py-3 transition-all duration-300 backdrop-blur-sm text-3xl font-bold text-gray-900 w-full break-words box-border"
+                            style={{ fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}
+                        >
+                            {items[paramid].price} 
+                        </div>
 
-
-                        
-                        {/* Price including VAT */}
-                        <div className="text-xs font-light text-gray-500 mt-1">
-                        {isLoggedIn && (
-                        <div>
+                        {/* VAT price vertically aligned with main price */}
+                        <span className="text-xs font-light text-gray-500 break-words ml-1 box-border">
                             {(parseFloat(items[paramid].price) * 1.19).toFixed(2)} € {t2('inklMwst')}
+                        </span>
                         </div>
-                        )}
-
+                    ) : (
+                        <div
+                        className="flex items-center justify-center rounded-xl px-4 py-3 transition-all duration-300 backdrop-blur-sm text-lg font-medium text-customBlue bg-customBlue/5 hover:bg-customBlue/10 hover:border-customBlue/70 w-full break-words cursor-pointer box-border"
+                        style={{ fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}
+                        onClick={() => (window.location.href = "/en/login")}
+                        >
+                        Login to purchase
                         </div>
+                    )}
                     </div>
 
                 </div>
@@ -327,27 +362,44 @@ console.log("indextest:",indextest)
                 </div>
 
                 {/* Certificate */}
-                <div className="bg-[#E5F0F6] p-4 rounded-md font-light text-sm mt-4 flex items-center space-x-6">
-                    {/* Umtausch Section */}
-                    <div className="flex items-center space-x-2">
-                        <img src="https://www.nieruf.de/bundles/nierufproductbenefits/assets/icon/exchange.svg?1728456486" alt="Umtausch" className="h-6 w-6" />
-                        <span>GoetValve Umtausch</span>
-                        <span className="text-blue-400 text-xs">i</span>
-                    </div>
+                <div className="bg-[#E5F0F6] p-4 rounded-md font-light text-sm flex flex-wrap items-start gap-4 w-full">
+                {/*
+                    Behavior:
+                    1. flex-wrap → allows sections to go to next line if parent is too narrow.
+                    2. flex-1 min-w-0 → each section can grow/shrink evenly and wrap text.
+                    3. break-words → long words wrap inside their section.
+                    4. items-start → all sections align to top, even if some wrap.
+                */}
 
-                    {/* Garantie Section https://www.nieruf.de/bundles/nierufproductbenefits/assets/icon/warranty.svg?1728456486 */}
-                    <div className="flex items-center space-x-2">
-                        <img src="https://img.freepik.com/premium-vector/12-months-warranty-support-service-icon-vector-stock-illustration_100456-10501.jpg?w=826" alt="Garantie" className="h-6 w-6" />
-                        <span>12 M. Garantie</span>
-                        <span className="text-blue-400 text-xs">i</span>
-                    </div>
+                {/* Umtausch Section */}
+                <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
+                    <img src="https://www.nieruf.de/bundles/nierufproductbenefits/assets/icon/exchange.svg?1728456486" 
+                        alt="Umtausch" 
+                        className="h-6 w-6 flex-shrink-0" 
+                    />
+                    <span className="break-words text-xs">GoetValve Umtausch </span>
                     
-                    {/* Zertifiziert Section */}
-                    <div className="flex items-center space-x-2">
-                        <img src="https://www.nieruf.de/bundles/nierufproductbenefits/assets/icon/certified.svg?1728456486" alt="Zertifiziert" className="h-6 w-6" />
-                        <span>Zertifiziert</span>
-                        <span className="text-blue-400 text-xs">i</span>
-                    </div>
+                </div>
+
+                {/* Garantie Section */}
+                <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
+                    <img src="https://www.nieruf.de/bundles/nierufproductbenefits/assets/icon/warranty.svg?1728456486"
+                        alt="Garantie"
+                        className="h-5 w-5 flex-shrink-0"
+                    />
+                    <span className="break-words text-xs">12 M. Garantie </span>
+                    
+                </div>
+
+                {/* Zertifiziert Section */}
+                <div className="flex items-center space-x-2 flex-1 min-w-[150px]">
+                    <img src="https://www.nieruf.de/bundles/nierufproductbenefits/assets/icon/certified.svg?1728456486" 
+                        alt="Zertifiziert" 
+                        className="h-6 w-6 flex-shrink-0" 
+                    />
+                    <span className="break-words text-xs">Zertifiziert </span>
+                    <span className="text-blue-400 text-xs"></span>
+                </div>
                 </div>
 
 
@@ -357,10 +409,11 @@ console.log("indextest:",indextest)
                     <textarea className="w-full h-16 border border-gray-300 p-2 rounded text-sm font-light" placeholder="Ask about this product"></textarea>
                 </div>
             </div>
-
-
-
         </div>
+
+
+
+
         <div className="flex justify-center">
             <div className="flex justify-left mr-[7%] pl-[32%] mt-[5%] mb-[30px] pb-[20px] space-x-20 w-screen border-b border-gray-300 shadow-md">
                 <span
@@ -396,11 +449,9 @@ console.log("indextest:",indextest)
                 </span>
             </div>
         </div>
-       
 
-                
         {(view === "description")&& (
-            <div className="ml-[7%]  flex ">
+            <div className="ml-[7%] mb-[5vh] flex ">
                 <div className="mr-[10%] flex flex-col items-center h-[5%] w-[300px] p-4 bg-white rounded-lg shadow-lg  font-thin">
                     <p className="text-[30px] text-gray-500  mb-[40px]">{"Type:"+ items[paramid].serialNum}</p> 
                     <img 
@@ -411,7 +462,7 @@ console.log("indextest:",indextest)
                     <h2 className="text-lg text-gray-800 mb-[20px] pl-[20px]">{items[paramid].name}</h2>
                 </div>
 
-                <div className="w-2/3 pb-[200px]">
+                <div className="w-2/3 ">
                     <h2 className="font-bold text-[30px] text-customBlue">🧊Produktdetails</h2>
                     <table className="w-full font-thin">
                         <tbody>
@@ -441,7 +492,7 @@ console.log("indextest:",indextest)
         )}
 
         {view === "viewer" && (
-            <div ref={containerRef} className="ml-[6%] mr-[15%] w-4/5 h-[600px] border-t-2 border-b-2 border-black relative mb-[150px]">
+            <div ref={containerRef} className="ml-[6%] mb-[5vh] mr-[15%] w-4/5 h-[600px] border-t-2 border-b-2 border-black relative mb-[150px]">
                 {showMessage && (
                 <div className={`absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-all duration-200 ${showMessage ? 'opacity-100' : 'opacity-0'}`}>
                     <div className="text-white p-4 rounded shadow-md">
@@ -453,7 +504,7 @@ console.log("indextest:",indextest)
         )}
 
        {view === "download" && (
-   <div className="mt-[5%] mb-[10%]">
+   <div className="mt-[5%] mb-[5vh]">
    <div className="flex justify-center mx-auto my-8 w-[50%]">
        {/* 3D Modell Section */}
   
@@ -491,7 +542,47 @@ console.log("indextest:",indextest)
        </div>
    </div>
 </div>)}
+        
+    {/* Accessories Section */}
 
+<div className="w-full max-w-7xl mx-auto relative mt-[50px] mb-[10vh] min-h-[30vh]">
+
+  {/* Header / Title */}
+<div className="bg-blue-100 px-6 py-3 rounded-md mb-6 w-full flex justify-center shadow-lg">
+  <h2 className="text-black text-2xl sm:text-3xl font-bold">
+    Accessories
+  </h2>
+</div>
+
+  {/* Grid */}
+  <div className="grid grid-rows-3 grid-cols-3 gap-8">
+    {accessories.map((file, index) => {
+      const name = file.replace("/", "").replace(".png", "");
+
+      return (
+        <div
+          key={index}
+          className="
+            flex flex-col items-center justify-center p-4 rounded-xl shadow-lg bg-white
+            transition-transform duration-300
+            hover:scale-105
+            hover:border-4 hover:border-blue-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]
+            active:border-4 active:border-blue-400 active:shadow-[0_0_25px_rgba(59,130,246,0.5)]
+          "
+        >
+          <img
+            src={`${baseUrl}${file}`}
+            alt={name}
+            className="w-36 sm:w-40 h-36 sm:h-40 object-fit rounded-xl shadow-md"
+          />
+          <span className=" font-thin scale-80 sm:text-base font-thin text-black mt-4 text-center break-words">
+            {name}
+          </span>
+        </div>
+      );
+    })}
+  </div>
+</div>
 
     <div className="relative z-20">
           
